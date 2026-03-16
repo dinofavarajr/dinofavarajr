@@ -1,0 +1,107 @@
+---
+const stats = [
+  { value: '101M+', label: 'Views Generated',   emoji: '👀' },
+  { value: '12+',   label: 'Years Creating',     emoji: '📅' },
+  { value: '36K',   label: 'Subscribers',        emoji: '🎬' },
+  { value: '???',   label: 'One Piece Chptrs Read', emoji: '🏴‍☠️', id: 'op-chapters' },
+];
+---
+
+<div class="relative mt-16 mb-2">
+  <div class="w-px h-10 bg-gradient-to-b from-transparent to-primary/20 mx-auto"></div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <div
+      id="stats-bar"
+      class="relative rounded-2xl overflow-hidden border border-dark/8 bg-white/70 backdrop-blur-sm shadow-sm"
+    >
+      <!-- Top accent line -->
+      <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+
+      <div class="grid grid-cols-2 md:grid-cols-4">
+        {stats.map((stat, i) => (
+          <div
+            class={[
+              'stat-item relative flex flex-col items-center justify-center py-8 px-4 text-center',
+              'hover:bg-primary/4 transition-colors duration-300 group',
+              i < stats.length - 1 ? 'border-r border-dark/8' : '',
+              i < 2 ? 'border-b border-dark/8 md:border-b-0' : '',
+            ].join(' ')}
+          >
+            <span class="text-[1.5rem] mb-2 group-hover:scale-110 transition-transform duration-200 select-none">
+              {stat.emoji}
+            </span>
+            <span
+              class="stat-number font-display text-[2rem] leading-none text-dark tabular-nums"
+              data-value={stat.value}
+              id={stat.id ?? undefined}
+            >
+              {stat.value}
+            </span>
+            <span class="mt-2 text-[11px] font-medium uppercase tracking-widest text-dark/45">
+              {stat.label}
+            </span>
+          </div>
+        ))}
+      </div>
+
+      <!-- Bottom accent -->
+      <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-periwinkle/30 to-transparent"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  function animateNumber(el: Element, target: string) {
+    const hasPlus = target.includes('+');
+    const hasK    = target.includes('K');
+    const hasM    = target.includes('M');
+    const raw     = parseFloat(target.replace(/[^0-9.]/g, ''));
+    const dur     = 7000;
+    const start   = performance.now();
+
+    const fmt = (n: number): string => {
+      const r = Math.round(n);
+      if (hasM) return r + 'M' + (hasPlus ? '+' : '');
+      if (hasK) return r + 'K' + (hasPlus ? '+' : '');
+      return String(r) + (hasPlus ? '+' : '');
+    };
+
+    const tick = (now: number) => {
+      const elapsed  = now - start;
+      const progress = Math.min(elapsed / dur, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3); // ease-out cubic
+      el.textContent = fmt(eased * raw);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+
+    el.textContent = fmt(0);
+    requestAnimationFrame(tick);
+  }
+
+  // Fetch live One Piece chapter count from Jikan (MyAnimeList)
+  // Update this number manually when a new chapter drops
+  const OP_CHAPTER = '1176';
+  const el = document.getElementById('op-chapters');
+  if (el) {
+    el.dataset.value = OP_CHAPTER;
+    animateNumber(el, OP_CHAPTER);
+  }
+
+  const bar = document.getElementById('stats-bar');
+  if (bar) {
+    const observer = new IntersectionObserver(
+      entries => {
+        if (entries[0].isIntersecting) {
+          bar.querySelectorAll<HTMLElement>('.stat-number').forEach(el => {
+            const val = el.dataset.value;
+            if (val && val !== '???') animateNumber(el, val);
+          });
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(bar);
+  }
+</script>

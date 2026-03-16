@@ -1,0 +1,182 @@
+---
+import { Image } from 'astro:assets';
+import dinoPhoto from '../assets/dino-photo.jpg';
+---
+
+<section class="relative overflow-hidden pt-12 pb-4 md:pt-20">
+  <!-- Ambient background blobs -->
+  <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+    <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/10 blur-[100px]"></div>
+    <div class="absolute top-40 -right-20 w-[400px] h-[400px] rounded-full bg-periwinkle/15 blur-[80px]"></div>
+    <div class="absolute bottom-0 left-1/3 w-[260px] h-[260px] rounded-full bg-mint/8 blur-[72px]"></div>
+  </div>
+
+  <div class="max-w-6xl mx-auto px-6">
+    <div class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-12 lg:gap-20 items-center">
+
+      <!-- ── Text column ── -->
+      <div class="space-y-7 hero-text">
+
+        <!-- Eyebrow -->
+        <div class="flex items-center gap-3">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
+            Orlando, FL&nbsp;·&nbsp;Making videos since 2012
+          </span>
+        </div>
+
+        <!-- Headline — multi-line with italic purple "Disney obsessive." -->
+        <h1 class="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.07] tracking-tight text-dark">
+          YouTube Creator.<br/>
+          <em class="italic text-primary">Disney Investigator.</em><br/>
+          Video Strategist.
+        </h1>
+
+        <!-- Subhead with rotating fun facts -->
+        <p class="text-[1.05rem] font-light leading-relaxed text-dark/65 max-w-[480px]">
+          I build repeatable (and viral) video formats for brands and creators...
+          <span id="rotating-fact" class="text-dark/80 font-normal transition-opacity duration-500"></span>
+        </p>
+
+        <!-- CTAs -->
+        <div class="flex flex-wrap gap-3 pt-1">
+          <a
+            href="#work"
+            class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/30 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+          >
+            Work with me
+            <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+          <a
+            href="#disney"
+            class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-dark/20 text-dark font-medium text-sm hover:border-primary hover:text-primary hover:bg-primary/5 transition-all duration-200"
+          >
+            Watch my videos
+          </a>
+        </div>
+
+        <!-- Micro social proof -->
+        <div class="flex items-center gap-4 pt-1">
+          <div class="flex -space-x-1.5">
+            {['#6B5CE7','#A89FF5','#3BFFB3','#8B7FEF','#C4BCFF'].map(c => (
+              <div
+                class="w-7 h-7 rounded-full border-2 border-off-white"
+                style={`background: ${c}`}
+              ></div>
+            ))}
+          </div>
+          <p class="text-xs font-medium text-dark/50">
+            36K+ subscribers · trusted by Disney fans everywhere
+          </p>
+        </div>
+      </div>
+
+      <!-- ── Photo column ── -->
+      <div class="relative hero-photo">
+        <div class="relative z-10">
+          <!-- Main photo frame -->
+          <div
+            class="aspect-[4/5] rounded-2xl overflow-hidden bg-gradient-to-br from-periwinkle/30 via-primary/20 to-mint/15 border border-white/40 shadow-2xl shadow-primary/15"
+          >
+            <Image
+              src={dinoPhoto}
+              alt="Dino Favara Jr."
+              class="w-full h-full object-cover object-[center_20%]"
+            />
+          </div>
+
+          <!-- Park badge -->
+          <div class="absolute -top-4 -right-5 bg-dark text-off-white rounded-2xl px-4 py-2.5 shadow-xl flex items-center gap-2.5">
+            <span class="text-xl">🎢</span>
+            <div>
+              <p class="text-xs font-medium leading-tight">100+ park visits</p>
+              <p class="text-[10px] text-off-white/50">and still going</p>
+            </div>
+          </div>
+
+          <!-- Views badge -->
+          <div class="absolute -bottom-4 -left-5 bg-white rounded-2xl px-4 py-2.5 shadow-xl border border-dark/6 flex items-center gap-2.5">
+            <span class="text-xl">📺</span>
+            <div>
+              <p class="text-xs font-medium text-dark leading-tight">101M+ Views</p>
+              <p class="text-[10px] text-dark/45">across all platforms</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Decorative rings -->
+        <div class="absolute -inset-5 -z-10 rounded-3xl border border-primary/10"></div>
+        <div class="absolute -inset-9 -z-10 rounded-3xl border border-primary/5"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Rotating fun facts
+  const facts = [
+    "outside of that, I've been buying the same pair of black Authentic Vans every two years like clockwork.",
+    "outside of that, I replace my Birkenstocks on a strict two-year rotation.",
+    "outside of that, I'm pretty sure I have undiagnosed ADD.",
+    "outside of that, I've been posting videos since 2010 (starting on Facebook before it was cool).",
+    "outside of that, I do MURPH every Memorial Day.",
+    "outside of that, I run a Thanksgiving 5K every year. Current PR is 25:24.",
+    "outside of that, I've ordered the exact same Blaze Pizza for 10 years straight.",
+    "outside of that, my wife and I got our marriage license signed at the Disney Springs Blaze Pizza.",
+    "outside of that, I once biked 300 miles in under 30 hours for a college fundraiser and survived.",
+    "outside of that, I randomly ran into John Travolta on a street in Savannah in 2022. No security, no explanation.",
+    "outside of that, my left knee is permanently numb from learning back tucks the hard way.",
+    "outside of that, I read the Bible aloud to my son (almost) every day. 23 books and 281 chapters in.",
+    "outside of that, I've read every chapter of One Piece and would love to talk to you about it.",
+    "outside of that, I'm probably making homemade guac and watching Georgia Football.",
+    "outside of that, I make the best Avocado Toast you've ever had in your life.",
+    "outside of that, my wife and I love Survivor.",
+  ];
+
+  const el = document.getElementById('rotating-fact');
+  if (el) {
+    let index = Math.floor(Math.random() * facts.length);
+
+    const show = (text: string) => {
+      el.style.opacity = '0';
+      setTimeout(() => {
+        el.textContent = text;
+        el.style.opacity = '1';
+      }, 500);
+    };
+
+    show(facts[index]);
+
+    let count = 0;
+    const next = () => {
+      index = (index + 1) % facts.length;
+      count++;
+      show(facts[index]);
+      setTimeout(next, count < 3 ? 5000 : 9000);
+    };
+    setTimeout(next, 5000);
+  }
+
+  // Staggered entrance
+  const text  = document.querySelector('.hero-text') as HTMLElement | null;
+  const photo = document.querySelector('.hero-photo') as HTMLElement | null;
+
+  [text, photo].forEach((el, i) => {
+    if (!el) return;
+    el.style.opacity = '0';
+    el.style.transform = `translateY(${i === 0 ? 28 : 36}px)`;
+    el.style.transition = `opacity 0.65s ease ${i * 0.15}s, transform 0.65s ease ${i * 0.15}s`;
+  });
+
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      [text, photo].forEach(el => {
+        if (!el) return;
+        el.style.opacity = '1';
+        el.style.transform = 'translateY(0)';
+      });
+    });
+  });
+</script>

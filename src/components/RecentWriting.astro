@@ -1,0 +1,129 @@
+---
+const posts = [
+  {
+    category: 'Creativity',
+    tag:      'bg-primary/10 text-primary',
+    title:    'The 10-Year Rule: Why Everything I Made Before 2022 Was Practice',
+    excerpt:  'Every creator I admire has a version of this story. The work you made when no one was watching was the only way to get to the work that mattered.',
+    date:     'March 2026',
+    readTime: '6 min read',
+    href:     '#',
+  },
+  {
+    category: 'Disney',
+    tag:      'bg-periwinkle/20 text-primary',
+    title:    'What 100 Park Visits Taught Me About Storytelling',
+    excerpt:  'Disney doesn\'t build rides. They build emotional arcs with concrete floors. After a hundred visits I finally understand what they\'re actually doing.',
+    date:     'February 2026',
+    readTime: '8 min read',
+    href:     '#',
+  },
+  {
+    category: 'Growth',
+    tag:      'bg-dark/8 text-dark/70',
+    title:    'Going from 0 to 36K Subscribers Without Gaming the Algorithm',
+    excerpt:  'I never posted daily. I never chased trends. Here\'s the slower, messier, more honest version of how a channel actually grows.',
+    date:     'January 2026',
+    readTime: '5 min read',
+    href:     '#',
+  },
+];
+---
+
+<section id="writing" class="py-8 pb-20 max-w-6xl mx-auto px-6">
+  <!-- Section header -->
+  <div class="flex items-end justify-between mb-10">
+    <div>
+      <p class="text-sm font-medium tracking-widest uppercase text-primary/70 mb-2">From the blog</p>
+      <h2 class="font-display text-[clamp(1.8rem,3.5vw,2.6rem)] text-dark leading-tight">
+        Recent writing
+      </h2>
+    </div>
+    <a
+      href="#writing"
+      class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-3 transition-all duration-200"
+    >
+      All posts
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+  </div>
+
+  <!-- Post list -->
+  <div class="space-y-4" id="writing-list">
+    {posts.map((post, i) => (
+      <a
+        href={post.href}
+        class="writing-item group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 p-6 rounded-2xl border border-dark/8 bg-white/50 hover:bg-white hover:border-primary/20 hover:shadow-md hover:-translate-y-0.5 transition-all duration-250"
+        data-delay={i * 80}
+      >
+        <!-- Left: category + title + excerpt -->
+        <div class="flex-1 min-w-0">
+          <span class={`inline-block text-xs font-medium px-2.5 py-0.5 rounded-full mb-3 ${post.tag}`}>
+            {post.category}
+          </span>
+          <h3 class="font-display text-[1.1rem] leading-snug text-dark mb-2 group-hover:text-primary transition-colors duration-200">
+            {post.title}
+          </h3>
+          <p class="text-sm font-light text-dark/55 leading-relaxed line-clamp-2">
+            {post.excerpt}
+          </p>
+        </div>
+
+        <!-- Right: meta + arrow -->
+        <div class="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-2 flex-shrink-0">
+          <div class="text-right">
+            <p class="text-xs font-medium text-dark/40">{post.date}</p>
+            <p class="text-xs text-dark/30">{post.readTime}</p>
+          </div>
+          <div class="w-9 h-9 rounded-full border border-dark/12 flex items-center justify-center text-dark/30 group-hover:border-primary group-hover:text-primary group-hover:bg-primary/5 transition-all duration-200">
+            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </div>
+        </div>
+      </a>
+    ))}
+  </div>
+
+  <!-- Mobile "all posts" -->
+  <div class="mt-6 text-center sm:hidden">
+    <a
+      href="#writing"
+      class="inline-flex items-center gap-2 text-sm font-medium text-primary"
+    >
+      See all posts
+      <svg class="w-4 h-4" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M3 8h10M9 4l4 4-4 4"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<script>
+  const items = document.querySelectorAll<HTMLElement>('.writing-item');
+  const obs = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el    = entry.target as HTMLElement;
+          const delay = Number(el.dataset.delay ?? 0);
+          setTimeout(() => {
+            el.style.opacity    = '1';
+            el.style.transform  = 'translateY(0)';
+          }, delay);
+          obs.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.08, rootMargin: '0px 0px -30px 0px' }
+  );
+
+  items.forEach(el => {
+    el.style.opacity    = '0';
+    el.style.transform  = 'translateY(20px)';
+    el.style.transition = 'opacity 0.45s ease, transform 0.45s ease';
+    obs.observe(el);
+  });
+</script>

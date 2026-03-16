@@ -1,0 +1,235 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import KitForm from '../components/KitForm.astro';
+
+// Fetch and parse the 5 most recent posts from the RSS feed
+interface Post {
+  title: string;
+  link: string;
+  pubDate: string;
+  description: string;
+}
+
+let posts: Post[] = [];
+
+try {
+  const res = await fetch('https://dinofavarajr.kit.com/posts.rss', {
+    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Astro/RSS-parser)' },
+  });
+
+  if (res.ok) {
+    const xml = await res.text();
+
+    // Extract <item> blocks
+    const itemMatches = xml.matchAll(/<item>([\s\S]*?)<\/item>/g);
+
+    for (const match of itemMatches) {
+      if (posts.length >= 5) break;
+      const item = match[1];
+
+      // Helper: extract tag content, handling CDATA
+      const extract = (tag: string, src: string): string => {
+        const re = new RegExp(`<${tag}[^>]*>(?:<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>|([^<]*))</${tag}>`, 'i');
+        const m = src.match(re);
+        if (!m) return '';
+        return (m[1] ?? m[2] ?? '').trim();
+      };
+
+      const rawTitle = extract('title', item);
+      const rawLink  = extract('link', item) || (() => {
+        const m = item.match(/<link>(.*?)<\/link>/i);
+        return m ? m[1].trim() : '';
+      })();
+      const rawDate  = extract('pubDate', item);
+      const rawDesc  = extract('description', item) || extract('content:encoded', item);
+
+      // Strip HTML tags and truncate description
+      const stripped = rawDesc
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ')
+        .trim();
+      const excerpt = stripped.length > 160
+        ? stripped.slice(0, 157) + '…'
+        : stripped;
+
+      // Format date
+      let pubDate = '';
+      try {
+        pubDate = new Date(rawDate).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        });
+      } catch {
+        pubDate = rawDate;
+      }
+
+      posts.push({
+        title: rawTitle,
+        link: rawLink,
+        pubDate,
+        description: excerpt,
+      });
+    }
+  }
+} catch (err) {
+  // Fall back to empty array — handled in template
+  posts = [];
+}
+---
+
+<Layout
+  title="Writing — Dino Favara Jr."
+  description="Essays, newsletters, and short-form ideas from Dino Favara Jr. Subscribe to The Yearbook or Short Form Secrets."
+>
+  <Nav />
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="relative overflow-hidden pt-14 pb-10">
+      <!-- Ambient blobs -->
+      <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/10 blur-[100px]"></div>
+        <div class="absolute top-40 -right-20 w-[400px] h-[400px] rounded-full bg-periwinkle/15 blur-[80px]"></div>
+        <div class="absolute bottom-0 left-1/3 w-[260px] h-[260px] rounded-full bg-mint/8 blur-[72px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
+            Essays &amp; Newsletters
+          </span>
+        </div>
+        <h1 class="font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.06] tracking-tight text-dark">
+          Writing
+        </h1>
+        <p class="mt-4 text-[1.05rem] font-light text-dark/60 max-w-xl">
+          Two newsletters. A bunch of posts. All trying to say something worth reading.
+        </p>
+      </div>
+    </section>
+
+    <!-- ── Newsletter Cards ── -->
+    <section class="py-10 max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+        <!-- Card 1: The Yearbook -->
+        <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm p-8 flex flex-col gap-5 shadow-sm">
+          <!-- Top accent line -->
+          <div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-primary to-periwinkle"></div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary tracking-wide">
+              Personal · Life · Creativity
+            </span>
+          </div>
+
+          <div>
+            <h2 class="font-display text-2xl text-dark mb-2">The Yearbook</h2>
+            <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
+              Lessons on life, creativity, and growing up — written for my kids to find someday.
+            </p>
+          </div>
+
+          <div class="mt-auto space-y-4">
+            <KitForm
+              formId="9211740"
+              buttonStyle="purple"
+              instanceId="yearbook-writing-form"
+            />
+            <a
+              href="https://theyearbook.beehiiv.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="inline-block text-sm text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
+            >
+              Browse past issues →
+            </a>
+          </div>
+        </div>
+
+        <!-- Card 2: Short Form Secrets -->
+        <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm p-8 flex flex-col gap-5 shadow-sm">
+          <div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-mint to-periwinkle"></div>
+
+          <div class="flex flex-wrap items-center gap-3">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-dark/8 text-dark/70 tracking-wide">
+              Video · Strategy · Growth
+            </span>
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-mint/20 text-dark/80 tracking-wide">
+              470+ subscribers
+            </span>
+          </div>
+
+          <div>
+            <h2 class="font-display text-2xl text-dark mb-2">Short Form Secrets</h2>
+            <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
+              The exact methods to grow your audience with short-form video — no fluff.
+            </p>
+          </div>
+
+          <div class="mt-auto">
+            <KitForm
+              formId="3880843"
+              buttonStyle="purple"
+              instanceId="sfs-form"
+            />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── Recent Posts ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-10">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">
+          From the archive
+        </span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-10">Recent posts</h2>
+
+      {posts.length > 0 ? (
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {posts.map(post => (
+            <a
+              href={post.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="group rounded-2xl border border-dark/8 bg-white/50 p-6 flex flex-col gap-4 hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300"
+            >
+              <span class="inline-block self-start px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary tracking-wide">
+                The Yearbook
+              </span>
+              <h3 class="font-display text-lg text-dark leading-snug group-hover:text-primary transition-colors">
+                {post.title}
+              </h3>
+              {post.description && (
+                <p class="text-sm font-light text-dark/60 leading-relaxed flex-1">
+                  {post.description}
+                </p>
+              )}
+              <div class="flex items-center justify-between mt-auto pt-2">
+                <time class="text-xs text-dark/40 font-medium">{post.pubDate}</time>
+                <span class="text-xs font-medium text-primary group-hover:underline">Read →</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      ) : (
+        <div class="rounded-2xl border border-dark/8 bg-white/40 p-12 text-center">
+          <span class="text-4xl block mb-4">✍️</span>
+          <p class="font-display text-xl text-dark mb-2">Posts coming soon</p>
+          <p class="text-sm font-light text-dark/50">
+            Subscribe above to get the first ones in your inbox.
+          </p>
+        </div>
+      )}
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

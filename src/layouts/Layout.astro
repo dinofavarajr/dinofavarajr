@@ -1,0 +1,50 @@
+---
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = 'Dino Favara Jr. — Storyteller, Creator, Disney Nerd',
+  description = 'Disney content creator, storyteller, and digital creative with 101M+ views and 12+ years making things that feel like something.',
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <title>{title}</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300;1,9..40,400&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-off-white font-body text-dark antialiased">
+    <slot />
+  </body>
+</html>
+
+<style is:global>
+  :root {
+    --primary:    #6B5CE7;
+    --periwinkle: #A89FF5;
+    --mint:       #3BFFB3;
+    --dark:       #1A1523;
+    --off-white:  #F7F5FF;
+  }
+
+  /* Smooth scroll offset for sticky nav */
+  html { scroll-padding-top: 80px; }
+
+  /* Selection color */
+  ::selection {
+    background: #6B5CE7;
+    color: #F7F5FF;
+  }
+</style>

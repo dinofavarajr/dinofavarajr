@@ -1,0 +1,151 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+import KitForm from '../components/KitForm.astro';
+---
+
+<Layout
+  title="About — Dino Favara Jr."
+  description="I'm Dino — a YouTube creator, video strategist, and Disney investigator based in Orlando, FL. 101M+ views, 12+ years of content."
+>
+  <Nav />
+
+  <main>
+    <!-- ── Hero ── -->
+    <section class="relative overflow-hidden pt-14 pb-12">
+      <!-- Ambient blobs -->
+      <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/10 blur-[100px]"></div>
+        <div class="absolute top-40 -right-20 w-[400px] h-[400px] rounded-full bg-periwinkle/15 blur-[80px]"></div>
+        <div class="absolute bottom-0 left-1/3 w-[260px] h-[260px] rounded-full bg-mint/8 blur-[72px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
+            Orlando, FL · Creator since 2012
+          </span>
+        </div>
+        <h1 class="font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.07] tracking-tight text-dark max-w-3xl">
+          I make videos, build audiences, and <em class="italic text-primary not-italic">occasionally</em> survive every ride at Walt Disney World.
+        </h1>
+      </div>
+    </section>
+
+    <!-- ── The Quick Version ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Intro</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-6">The quick version</h2>
+        <div class="space-y-4 text-[1.05rem] font-light text-dark/70 leading-relaxed">
+          <p>
+            I'm Dino — a YouTube creator, video strategist, and Disney investigator based in Orlando, FL. I've been making content since 2012 and somehow accumulated 101M+ views along the way.
+          </p>
+          <p>
+            I help brands and creators build repeatable video systems that actually grow. Not one-off viral moments — durable engines.
+          </p>
+          <p>
+            Outside of work, I'm a husband, dad, One Piece reader, and guy who takes Disney very seriously.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── The Longer Story ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Background</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-8">The longer story</h2>
+        <div class="space-y-6">
+          <div class="rounded-xl border border-dashed border-primary/25 bg-primary/4 p-6">
+            <p class="text-[0.95rem] font-light text-dark/50 leading-relaxed italic">
+              (Your origin story goes here — where you grew up, how you got into video, what drives you. Replace this placeholder with your real story.)
+            </p>
+          </div>
+          <div class="rounded-xl border border-dashed border-primary/25 bg-primary/4 p-6">
+            <p class="text-[0.95rem] font-light text-dark/50 leading-relaxed italic">
+              (Faith, family, and the things that shaped who you are. This is the part people actually remember — be honest here.)
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 5 Things ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">The short list</span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-10">5 things you should know about me</h2>
+
+      <div class="space-y-5 max-w-2xl">
+        {[
+          { n: 1, text: 'I follow Jesus.' },
+          { n: 2, text: 'Married to Jenny, dad to Dino III and River.' },
+          { n: 3, text: "I've been creating YouTube content since 2012 and generated 101M+ views." },
+          { n: 4, text: 'I have 100+ Disney park visits and strong opinions about all of them.' },
+          { n: 5, text: 'Cherry Dr. Pepper Zero is objectively the best drink.' },
+        ].map(item => (
+          <div class="flex items-start gap-5 group">
+            <span class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary font-display text-lg flex items-center justify-center group-hover:bg-primary group-hover:text-off-white transition-all duration-200">
+              {item.n}
+            </span>
+            <p class="text-[1.05rem] font-light text-dark/75 leading-relaxed pt-2">
+              {item.text}
+            </p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- ── How to Work With Me ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="max-w-xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Collab</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-4">How to work with me</h2>
+        <p class="text-[1.05rem] font-light text-dark/65 leading-relaxed mb-8">
+          If you're a brand or creator looking to grow on video, I'd love to talk.
+        </p>
+        <a
+          href="/work"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-primary text-primary font-medium text-sm hover:bg-primary hover:text-off-white transition-all duration-200"
+        >
+          See my work →
+        </a>
+      </div>
+    </section>
+
+    <!-- ── Follow the Journey ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="max-w-xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Newsletter</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-4">Follow the journey</h2>
+        <p class="text-[1.05rem] font-light text-dark/65 leading-relaxed mb-8">
+          The Yearbook is where I write about life, creativity, and growing up — raw, honest, and written for my kids to find someday. No pitch. Just the real stuff.
+        </p>
+        <KitForm
+          formId="9211740"
+          instanceId="about-yearbook-form"
+          buttonStyle="purple"
+        />
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>

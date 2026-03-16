@@ -1,0 +1,122 @@
+---
+interface Props {
+  formId: string;
+  buttonText?: string;
+  buttonStyle?: 'purple' | 'mint';
+  inputDark?: boolean;
+  instanceId: string;
+}
+
+const {
+  formId,
+  buttonText = 'Subscribe free',
+  buttonStyle = 'purple',
+  inputDark = false,
+  instanceId,
+} = Astro.props;
+
+const buttonClasses =
+  buttonStyle === 'mint'
+    ? 'bg-mint hover:bg-mint/90 font-medium px-6 py-3 rounded-full text-sm transition-all duration-200 active:scale-95 whitespace-nowrap'
+    : 'bg-primary text-off-white hover:bg-primary/90 font-medium px-6 py-3 rounded-full text-sm transition-all duration-200 active:scale-95 whitespace-nowrap';
+
+const inputClasses = inputDark
+  ? 'bg-white/8 border border-white/15 text-off-white placeholder:text-off-white/35 rounded-full px-5 py-3 text-sm w-full focus:outline-none focus:border-white/40 transition-colors'
+  : 'bg-white border border-dark/15 text-dark placeholder:text-dark/35 rounded-full px-5 py-3 text-sm w-full focus:outline-none focus:border-primary/40 transition-colors';
+---
+
+<div id={`${instanceId}-wrapper`}>
+  <form
+    id={instanceId}
+    class="flex flex-col sm:flex-row gap-3 w-full"
+    novalidate
+  >
+    <input
+      type="email"
+      name="email_address"
+      placeholder="your@email.com"
+      required
+      autocomplete="email"
+      class={inputClasses}
+    />
+    {buttonStyle === 'mint' ? (
+      <button
+        type="submit"
+        class={buttonClasses}
+        style="color:#1A1523"
+      >
+        {buttonText}
+      </button>
+    ) : (
+      <button
+        type="submit"
+        class={buttonClasses}
+      >
+        {buttonText}
+      </button>
+    )}
+  </form>
+
+  <div
+    id={`${instanceId}-success`}
+    class="hidden py-3 px-5 rounded-xl bg-mint/15 border border-mint/25 text-sm font-medium text-dark"
+  >
+    You're in! Check your inbox. ✨
+  </div>
+
+  <div
+    id={`${instanceId}-error`}
+    class="hidden py-3 px-5 rounded-xl bg-red-50 border border-red-200 text-sm font-medium text-red-700"
+  >
+    Something went wrong. Try again?
+  </div>
+</div>
+
+<script define:vars={{ instanceId, formId }}>
+  const form = document.getElementById(instanceId);
+  const successMsg = document.getElementById(`${instanceId}-success`);
+  const errorMsg = document.getElementById(`${instanceId}-error`);
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const emailInput = form.querySelector('input[name="email_address"]');
+      const email = emailInput ? emailInput.value.trim() : '';
+
+      if (!email) return;
+
+      const submitBtn = form.querySelector('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Subscribing…';
+      }
+
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      try {
+        const res = await fetch(
+          `https://app.kit.com/forms/${formId}/subscriptions`,
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email_address: email }),
+          }
+        );
+
+        if (res.ok) {
+          form.classList.add('hidden');
+          if (successMsg) successMsg.classList.remove('hidden');
+        } else {
+          throw new Error(`Status ${res.status}`);
+        }
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Subscribe free';
+        }
+        if (errorMsg) errorMsg.classList.remove('hidden');
+      }
+    });
+  }
+</script>

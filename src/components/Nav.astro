@@ -1,0 +1,122 @@
+---
+const navLinks = [
+  { label: 'About',   href: '/about'   },
+  { label: 'Work',    href: '/work'    },
+  { label: 'Writing', href: '/writing' },
+  { label: 'Now',     href: '/now'     },
+];
+---
+
+<header id="site-nav" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300">
+  <!-- Frosted glass bar -->
+  <div class="nav-inner mx-auto max-w-6xl px-6 h-[72px] flex items-center justify-between">
+
+    <!-- Logo / Wordmark -->
+    <a href="/" class="flex items-center gap-2.5 group" aria-label="Dino Favara Jr. — Home">
+      <span class="text-2xl select-none" aria-hidden="true">🦕</span>
+      <span class="font-display text-[1.15rem] tracking-tight text-dark group-hover:text-primary transition-colors">
+        Dino Favara Jr.
+      </span>
+    </a>
+
+    <!-- Desktop nav -->
+    <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation">
+      {navLinks.map(link => (
+        <a
+          href={link.href}
+          class="px-4 py-2 rounded-lg text-sm font-medium text-dark/70 hover:text-primary hover:bg-primary/8 transition-all duration-200"
+        >
+          {link.label}
+        </a>
+      ))}
+
+      <!-- CTA pill -->
+      <a
+        href="/yearbook"
+        class="ml-3 px-5 py-2.5 rounded-full bg-primary text-off-white text-sm font-medium hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/25 transition-all duration-200 active:scale-95"
+      >
+        The Yearbook
+      </a>
+    </nav>
+
+    <!-- Mobile hamburger -->
+    <button
+      id="mobile-menu-btn"
+      class="md:hidden p-2 rounded-lg text-dark/70 hover:text-primary hover:bg-primary/8 transition-all"
+      aria-label="Open menu"
+      aria-expanded="false"
+    >
+      <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
+        <path fill-rule="evenodd" d="M3 5h14a1 1 0 010 2H3a1 1 0 010-2zm0 4h14a1 1 0 010 2H3a1 1 0 010-2zm0 4h14a1 1 0 010 2H3a1 1 0 010-2z" clip-rule="evenodd"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    id="mobile-menu"
+    class="md:hidden hidden bg-off-white/95 backdrop-blur border-t border-dark/8 px-6 pb-5"
+  >
+    {navLinks.map(link => (
+      <a
+        href={link.href}
+        class="block py-3 text-sm font-medium text-dark/70 border-b border-dark/6 hover:text-primary transition-colors last:border-0"
+      >
+        {link.label}
+      </a>
+    ))}
+    <a
+      href="/yearbook"
+      class="mt-4 block text-center px-5 py-3 rounded-full bg-primary text-off-white text-sm font-medium"
+    >
+      The Yearbook ✨
+    </a>
+  </div>
+</header>
+
+<!-- Nav spacer -->
+<div class="h-[72px]"></div>
+
+<script>
+  // Sticky shadow on scroll
+  const nav = document.getElementById('site-nav');
+  const onScroll = () => {
+    if (window.scrollY > 20) {
+      nav?.classList.add('scrolled');
+    } else {
+      nav?.classList.remove('scrolled');
+    }
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
+
+  // Mobile menu toggle
+  const btn  = document.getElementById('mobile-menu-btn');
+  const menu = document.getElementById('mobile-menu');
+  btn?.addEventListener('click', () => {
+    const open = menu?.classList.toggle('hidden') === false;
+    btn.setAttribute('aria-expanded', String(open));
+  });
+
+  // Close mobile menu on link click
+  menu?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      menu.classList.add('hidden');
+      btn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+</script>
+
+<style>
+  header {
+    background: rgba(247, 245, 255, 0.72);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border-bottom: 1px solid transparent;
+  }
+  header.scrolled {
+    background: rgba(247, 245, 255, 0.88);
+    border-bottom-color: rgba(26, 21, 35, 0.08);
+    box-shadow: 0 1px 32px rgba(107, 92, 231, 0.06);
+  }
+</style>

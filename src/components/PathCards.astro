@@ -1,0 +1,128 @@
+---
+const paths = [
+  {
+    emoji:   '🎢',
+    tag:     'Disney Fan',
+    heading: 'You love the parks',
+    body:    'Park guides, hidden gems, ride rankings, and every bit of magic I\'ve captured across all four parks. This is your home base.',
+    cta:     'Explore Disney content',
+    href:    '#disney',
+    bg:      'from-primary/8 to-periwinkle/8',
+    border:  'border-primary/20',
+    tagBg:   'bg-primary/10 text-primary',
+    arrow:   '#6B5CE7',
+  },
+  {
+    emoji:   '🎬',
+    tag:     'Creator or Brand',
+    heading: 'You want to work together',
+    body:    'Brand partnerships, sponsored content, and creative strategy with someone who genuinely loves what they cover. Let\'s make something real.',
+    cta:     'See my work & rates',
+    href:    '#work',
+    bg:      'from-dark/5 to-mint/8',
+    border:  'border-mint/25',
+    tagBg:   'bg-dark text-mint',
+    arrow:   '#3BFFB3',
+  },
+  {
+    emoji:   '✏️',
+    tag:     'Just Exploring',
+    heading: 'You stumbled in',
+    body:    'Perfect. Wander through the writing, check the about page, or sign up for The Yearbook. You\'ll figure out why you\'re here.',
+    cta:     'Start reading',
+    href:    '#writing',
+    bg:      'from-periwinkle/10 to-periwinkle/4',
+    border:  'border-periwinkle/25',
+    tagBg:   'bg-periwinkle/20 text-primary',
+    arrow:   '#A89FF5',
+  },
+];
+---
+
+<section id="about" class="py-20 max-w-6xl mx-auto px-6">
+  <!-- Section label -->
+  <div class="text-center mb-12">
+    <p class="text-sm font-medium tracking-widest uppercase text-primary/70 mb-3">
+      Who is this for?
+    </p>
+    <h2 class="font-display text-[clamp(1.8rem,3.5vw,2.6rem)] text-dark leading-tight">
+      Where do you fit in?
+    </h2>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-5" id="path-cards-grid">
+    {paths.map((path, i) => (
+      <a
+        href={path.href}
+        class={`path-card group relative flex flex-col p-7 rounded-2xl bg-gradient-to-br ${path.bg} border ${path.border}
+          hover:-translate-y-2 hover:shadow-xl transition-all duration-300`}
+        data-delay={i * 120}
+      >
+        <!-- Tag chip -->
+        <span class={`self-start text-xs font-medium px-3 py-1 rounded-full mb-5 ${path.tagBg}`}>
+          {path.tag}
+        </span>
+
+        <!-- Emoji -->
+        <div class="text-4xl mb-5 group-hover:scale-110 transition-transform duration-300 select-none">
+          {path.emoji}
+        </div>
+
+        <!-- Content -->
+        <h3 class="font-display text-[1.2rem] leading-snug text-dark mb-3">
+          {path.heading}
+        </h3>
+        <p class="text-sm font-light leading-relaxed text-dark/60 flex-1 mb-6">
+          {path.body}
+        </p>
+
+        <!-- Arrow CTA -->
+        <div
+          class="flex items-center gap-2 text-sm font-medium"
+          style={`color: ${path.arrow}`}
+        >
+          {path.cta}
+          <svg
+            class="w-4 h-4 group-hover:translate-x-1.5 transition-transform duration-200"
+            viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+          >
+            <path d="M3 8h10M9 4l4 4-4 4"/>
+          </svg>
+        </div>
+
+        <!-- Inner glow on hover -->
+        <div
+          class="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+          style={`box-shadow: inset 0 0 0 1.5px ${path.arrow}50`}
+        ></div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<script>
+  const cards = document.querySelectorAll<HTMLElement>('.path-card');
+  const obs = new IntersectionObserver(
+    entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const el    = entry.target as HTMLElement;
+          const delay = el.dataset.delay ?? '0';
+          setTimeout(() => {
+            el.style.opacity    = '1';
+            el.style.transform  = 'translateY(0)';
+          }, Number(delay));
+          obs.unobserve(el);
+        }
+      });
+    },
+    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
+  );
+
+  cards.forEach(card => {
+    card.style.opacity   = '0';
+    card.style.transform = 'translateY(32px)';
+    card.style.transition = 'opacity 0.55s ease, transform 0.55s ease';
+    obs.observe(card);
+  });
+</script>

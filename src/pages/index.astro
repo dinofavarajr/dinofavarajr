@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Hero from '../components/Hero.astro';
+import StatsBar from '../components/StatsBar.astro';
+import PathCards from '../components/PathCards.astro';
+import YearbookStrip from '../components/YearbookStrip.astro';
+import RecentWriting from '../components/RecentWriting.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout
+  title="Dino Favara Jr. — YouTube Creator, Disney Obsessive, Video Strategist"
+  description="I help brands and creators grow on video — and occasionally survive every ride at Walt Disney World. 101M+ views, 12+ years, 36K subscribers."
+>
+  <Nav />
+  <main>
+    <Hero />
+    <StatsBar />
+    <PathCards />
+
+    <!-- Disney section placeholder -->
+    <section id="disney" class="py-20 max-w-6xl mx-auto px-6">
+      <div class="rounded-2xl border border-dark/8 bg-white/50 p-12 text-center">
+        <span class="text-5xl block mb-4">🏰</span>
+        <h2 class="font-display text-2xl text-dark mb-2">Disney content coming soon</h2>
+        <p class="text-sm font-light text-dark/50">
+          Park guides, ride rankings, hidden gems — all four parks covered.
+        </p>
+      </div>
+    </section>
+
+    <!-- Work section placeholder -->
+    <section id="work" class="py-4 pb-20 max-w-6xl mx-auto px-6">
+      <div class="rounded-2xl border border-dark/8 bg-white/50 p-12 text-center">
+        <span class="text-5xl block mb-4">🎬</span>
+        <h2 class="font-display text-2xl text-dark mb-2">Work & collaborations</h2>
+        <p class="text-sm font-light text-dark/50 max-w-xs mx-auto">
+          Brand partnerships, sponsored content, and video strategy.
+          Reach out at <a href="mailto:dino@mercurysocialmedia.com" class="text-primary font-medium hover:underline">dino@mercurysocialmedia.com</a>
+        </p>
+      </div>
+    </section>
+
+    <YearbookStrip />
+    <RecentWriting />
+  </main>
+  <Footer />
+</Layout>
