@@ -1,6 +1,12 @@
 ---
 import { Image } from 'astro:assets';
 import dinoPhoto from '../assets/dino-photo.jpg';
+import avatar1 from '../assets/avatar-1.jpg';
+import avatar2 from '../assets/avatar-2.jpg';
+import avatar3 from '../assets/avatar-3.jpg';
+import avatar4 from '../assets/avatar-4.jpg';
+import avatar5 from '../assets/avatar-5.jpg';
+import avatar6 from '../assets/avatar-6.jpg';
 ---
 
 <section class="relative overflow-hidden pt-12 pb-4 md:pt-20">
@@ -60,11 +66,14 @@ import dinoPhoto from '../assets/dino-photo.jpg';
         <!-- Micro social proof -->
         <div class="flex items-center gap-4 pt-1">
           <div class="flex -space-x-1.5">
-            {['#6B5CE7','#A89FF5','#3BFFB3','#8B7FEF','#C4BCFF'].map(c => (
-              <div
-                class="w-7 h-7 rounded-full border-2 border-off-white"
-                style={`background: ${c}`}
-              ></div>
+            {[avatar1, avatar2, avatar3, avatar4, avatar5, avatar6].map(av => (
+              <Image
+                src={av}
+                alt="Subscriber"
+                class="w-7 h-7 rounded-full border-2 border-off-white object-cover"
+                width={28}
+                height={28}
+              />
             ))}
           </div>
           <p class="text-xs font-medium text-dark/50">
