@@ -30,7 +30,7 @@
         </h2>
 
         <!-- Subtext -->
-        <p class="text-[1rem] font-light leading-relaxed text-off-white/60 max-w-sm mx-auto">
+        <p class="text-[1rem] font-light leading-relaxed text-off-white/85 max-w-sm mx-auto">
           Life lessons, personal updates, and YouTube BTS...<br class="hidden sm:block"/>
           written for my kids to find someday.
         </p>
@@ -39,13 +39,14 @@
         <form
           id="yearbook-form"
           class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto pt-2"
-          onsubmit="return false;"
+          novalidate
         >
           <input
             type="email"
-            name="email"
+            name="email_address"
             placeholder="your@email.com"
             required
+            autocomplete="email"
             class="flex-1 px-5 py-3.5 rounded-full bg-off-white/8 border border-off-white/15 text-off-white placeholder:text-off-white/35 text-sm font-light focus:outline-none focus:border-primary/60 focus:bg-off-white/12 transition-all"
           />
           <button
@@ -55,12 +56,26 @@
               transition-all duration-200 active:scale-95"
             style="color: #1A1523;"
           >
-            Subscribble for free
+            Subscribble Fo Shizzle
           </button>
         </form>
 
+        <div
+          id="yearbook-success"
+          class="hidden py-3 px-5 rounded-xl bg-mint/15 border border-mint/25 text-sm font-medium text-off-white"
+        >
+          You're in! Check your inbox. ✨
+        </div>
+
+        <div
+          id="yearbook-error"
+          class="hidden py-3 px-5 rounded-xl bg-red-900/30 border border-red-400/25 text-sm font-medium text-red-300"
+        >
+          Something went wrong. Try again?
+        </div>
+
         <!-- Fine print -->
-        <p class="text-[11px] text-off-white/30 font-light">
+        <p class="text-[11px] text-off-white/55 font-light">
           No spam. No algorithm. Just writing. Unsubscribe whenever.
         </p>
       </div>
@@ -73,16 +88,48 @@
 
 <script>
   const form = document.getElementById('yearbook-form') as HTMLFormElement | null;
-  form?.addEventListener('submit', (e) => {
-    e.preventDefault();
-    const input = form.querySelector<HTMLInputElement>('input[name="email"]');
-    const btn   = form.querySelector<HTMLButtonElement>('button[type="submit"]');
-    if (!input || !btn) return;
-    // Placeholder success state — wire up to your email provider
-    btn.textContent = '✓ You\'re in!';
-    btn.disabled = true;
-    btn.style.background = '#A89FF5';
-    input.value = '';
-    input.placeholder = 'See you in your inbox 🦕';
-  });
+  const successMsg = document.getElementById('yearbook-success');
+  const errorMsg = document.getElementById('yearbook-error');
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const emailInput = form.querySelector<HTMLInputElement>('input[name="email_address"]');
+      const email = emailInput ? emailInput.value.trim() : '';
+      if (!email) return;
+
+      const submitBtn = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Subscribing…';
+      }
+
+      if (errorMsg) errorMsg.classList.add('hidden');
+
+      try {
+        const res = await fetch(
+          'https://app.kit.com/forms/9211740/subscriptions',
+          {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email_address: email }),
+          }
+        );
+
+        if (res.ok) {
+          form.classList.add('hidden');
+          if (successMsg) successMsg.classList.remove('hidden');
+        } else {
+          throw new Error(`Status ${res.status}`);
+        }
+      } catch (err) {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Subscribble Fo Shizzle';
+        }
+        if (errorMsg) errorMsg.classList.remove('hidden');
+      }
+    });
+  }
 </script>

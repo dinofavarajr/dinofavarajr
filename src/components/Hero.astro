@@ -39,10 +39,12 @@ import avatar6 from '../assets/avatar-6.jpg';
         </h1>
 
         <!-- Subhead with rotating fun facts -->
-        <p class="text-[1.05rem] font-light leading-relaxed text-dark/65 max-w-[480px]">
-          I build repeatable (and viral) video formats for brands and creators...
-          <span id="rotating-fact" class="text-dark/80 font-normal transition-opacity duration-500"></span>
-        </p>
+        <div class="min-h-[5.5rem]">
+          <p class="text-[1.05rem] font-light leading-relaxed text-dark/65 max-w-[480px]">
+            I build repeatable (and viral) video formats for brands and creators...
+            <span id="rotating-fact" class="text-dark/80 font-normal transition-opacity duration-500"></span>
+          </p>
+        </div>
 
         <!-- CTAs -->
         <div class="flex flex-wrap gap-3 pt-1">
@@ -66,8 +68,8 @@ import avatar6 from '../assets/avatar-6.jpg';
         </div>
 
         <!-- Micro social proof -->
-        <div class="flex items-center gap-4 pt-1">
-          <div class="flex -space-x-1.5">
+        <div class="flex flex-wrap items-center gap-3 pt-1">
+          <div class="flex -space-x-1.5 flex-shrink-0">
             {[avatar1, avatar2, avatar3, avatar4, avatar5, avatar6].map(av => (
               <Image
                 src={av}

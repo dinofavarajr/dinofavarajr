@@ -3,11 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import KitForm from '../components/KitForm.astro';
+import { Image } from 'astro:assets';
+import bannerImage from '../assets/bannerimage-2.png';
 ---
 
 <Layout
-  title="About — Dino Favara Jr."
-  description="I'm Dino — a YouTube creator, video strategist, and Disney investigator based in Orlando, FL. 101M+ views, 12+ years of content."
+  title="About ... Dino Favara Jr."
+  description="I'm Dino ... a YouTube creator, video strategist, and Disney investigator based in Orlando, FL. 101M+ views, 12+ years of content."
 >
   <Nav />
 
@@ -22,15 +24,34 @@ import KitForm from '../components/KitForm.astro';
       </div>
 
       <div class="max-w-6xl mx-auto px-6">
-        <div class="flex items-center gap-3 mb-5">
-          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
-          <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
-            Orlando, FL · Creator since 2012
-          </span>
+        <div class="flex flex-col lg:flex-row lg:items-center gap-8 lg:gap-0">
+
+          <!-- Left: headline -->
+          <div class="flex-shrink-0 lg:w-[42%] lg:pr-6">
+            <div class="flex items-center gap-3 mb-5">
+              <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+              <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
+                Orlando, FL · Creator since 2008
+              </span>
+            </div>
+            <h1 class="font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.07] tracking-tight text-dark">
+              YouTube creator. Video architect. Disney investigator. <em class="italic text-primary not-italic">Professional Silly Goose.</em>
+            </h1>
+          </div>
+
+          <!-- Right: image fading in from left -->
+          <div class="lg:flex-1 overflow-hidden rounded-2xl">
+            <Image
+              src={bannerImage}
+              alt="Dino Favara Jr. at Magic Kingdom in front of Cinderella Castle"
+              class="w-full h-auto object-cover"
+              widths={[800, 1200, 1600]}
+              sizes="(max-width: 1024px) 100vw, 60vw"
+              style="mask-image: linear-gradient(to right, transparent 0%, black 32%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 32%);"
+            />
+          </div>
+
         </div>
-        <h1 class="font-display text-[clamp(2.2rem,5.5vw,4rem)] leading-[1.07] tracking-tight text-dark max-w-3xl">
-          I make videos, build audiences, and <em class="italic text-primary not-italic">occasionally</em> survive every ride at Walt Disney World.
-        </h1>
       </div>
     </section>
 
@@ -44,13 +65,16 @@ import KitForm from '../components/KitForm.astro';
         <h2 class="font-display text-3xl text-dark mb-6">The quick version</h2>
         <div class="space-y-4 text-[1.05rem] font-light text-dark/70 leading-relaxed">
           <p>
-            I'm Dino — a YouTube creator, video strategist, and Disney investigator based in Orlando, FL. I've been making content since 2012 and somehow accumulated 101M+ views along the way.
+            I'm Dino. YouTube creator, video architect, Disney investigator, and professional Silly Goose.
           </p>
           <p>
-            I help brands and creators build repeatable video systems that actually grow. Not one-off viral moments — durable engines.
+            I've been making videos since 2008 when my brother Blake and I filmed ourselves in our kitchen ... him fake-teaching the internet how to make a PB&J while I danced to MC Hammer in the background. Nobody asked for it, but we made it anyway.
           </p>
           <p>
-            Outside of work, I'm a husband, dad, One Piece reader, and guy who takes Disney very seriously.
+            Since then I've generated 101M+ views across my own channel and my clients'. I've helped brands build short-form video systems that actually grow, and I've visited every pool at Walt Disney World and lived to tell about it.
+          </p>
+          <p>
+            I'm based in Orlando, FL with my wife Jenny, my boys Dino III and River, and a very opinionated Corgi named Sunny.
           </p>
         </div>
       </div>
@@ -64,17 +88,95 @@ import KitForm from '../components/KitForm.astro';
           <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Background</span>
         </div>
         <h2 class="font-display text-3xl text-dark mb-8">The longer story</h2>
-        <div class="space-y-6">
-          <div class="rounded-xl border border-dashed border-primary/25 bg-primary/4 p-6">
-            <p class="text-[0.95rem] font-light text-dark/50 leading-relaxed italic">
-              (Your origin story goes here — where you grew up, how you got into video, what drives you. Replace this placeholder with your real story.)
+        <div class="space-y-6 text-[1.05rem] font-light text-dark/70 leading-relaxed">
+          <p>
+            I grew up as a Navy kid ... which means we had to move a few times.
+          </p>
+          <p>
+            Panama City. Kingsland, Georgia. Jacksonville. Back to Georgia again. Every few years, new neighborhood. New school. New lunch table to figure out.
+          </p>
+          <p>
+            Most people would call that hard. I call it the best education I ever got.
+          </p>
+          <p>
+            Because when you're always the new kid, you learn fast. You learn which friends are worth keeping. You learn that family is sometimes the best friend you've got. You learn how to walk into a room full of strangers and find the one person sitting by themselves and go sit next to them ... not out of pity, but because you've been that person and you know they're probably the most interesting one in the room.
+          </p>
+
+          <div class="rounded-xl border border-primary/20 bg-primary/4 px-6 py-5">
+            <p class="text-[1.05rem] font-light text-dark/80 leading-relaxed italic">
+              That's still how I move through the world.
             </p>
           </div>
-          <div class="rounded-xl border border-dashed border-primary/25 bg-primary/4 p-6">
-            <p class="text-[0.95rem] font-light text-dark/50 leading-relaxed italic">
-              (Faith, family, and the things that shaped who you are. This is the part people actually remember — be honest here.)
+
+          <p>
+            In 9th grade I got bumped off my lunch table ... literally the seventh kid in a row of six. So I moved one seat over and sat by myself. Didn't say anything. Just sat there. And slowly, one by one, the quiet kid, the loud kid, the guy nobody really knew ... they all came over. My friend from the old table eventually walked over, smiled, and handed me a drawing that said "King of the Nerds."
+          </p>
+          <p>
+            I'm pretty sure it was a compliment.
+          </p>
+          <p>
+            My faith became my own in the summer of 2008 at a church camp in Daytona Beach. There was an optional prayer session. My friends were going so I went. I don't know how to explain what happened in that room except that I ended up on the floor and I was scared to get up. I prayed over an empty chair that whoever sat in it would come to Christ that night. The person who stood up and gave their life to Jesus was sitting in that chair.
+          </p>
+
+          <div class="rounded-xl border border-primary/20 bg-primary/4 px-6 py-5">
+            <p class="text-[1.05rem] font-light text-dark/80 leading-relaxed italic">
+              I walked out of that camp a different person. Not perfect. Just... anchored.
             </p>
           </div>
+
+          <p>
+            That anchor is what lets me move so freely. I'm an Enneagram 7 through and through ... I want all the experiences, all the adventures, all the flavors. I've had to learn that "more" isn't always the answer. But God has been the one consistent thing in every season, every zip code, every new chapter. The stability He provides is what lets me take risks, try things, start over, and keep going.
+          </p>
+          <p>
+            One of my second jobs out of college was as a Kids Director at Journey Christian Church in Apopka, FL. Good job. Good people. Wrong fit. After a year I quit. And I hate quitting.
+          </p>
+          <p>
+            I felt like a quitter until my counselor said something I've never forgotten: <em>"We're all just tasting different flavors of ice cream. You tried chocolate and you didn't like it. That's okay. Figure out what flavor you LOVE."</em>
+          </p>
+          <p>
+            I knew immediately. It was making videos.
+          </p>
+          <p>
+            I had always made videos. It was the throughline in every job I had and I certainly never got paid for it. To know it was possible to get paid to make videos ... I knew that was what I wanted to do. I called everyone in my life and told them I was going to try to become a full-time YouTuber. Every single person said "that makes sense." And I've been chasing that goal since 2020.
+          </p>
+          <p>
+            I met Jenny at a work event in 2018. She was out of my league and I knew it immediately so I shrugged it off. Then later that year, there was a company cruise to the Bahamas and we reconnected briefly. Halfway through the trip there was a dance party. One person jumped in and started a dance circle. Jenny walked through the whole crowd, looked at me, nodded "sup," and jumped in as the second person without a single second of hesitation.
+          </p>
+          <p>
+            The world went quiet. Everything was in slow motion. I stood still.
+          </p>
+          <p>
+            That was it for me.
+          </p>
+          <p>
+            Fast forward 2 years: we got together, we broke up, got back together, I moved to Orlando, we broke up, we got back together, she moved to Orlando, we got married.
+          </p>
+          <p>
+            We have two boys now. Dino III is two. River is brand new. Almost every morning I read the Bible out loud to them. We're 23 books in. I don't take that lightly.
+          </p>
+
+          <p>
+            After committing to video full time, I figured out how to make myself useful fast. I started writing LinkedIn content for real estate agents... then stumbled into repurposing podcast clips before anyone was really doing it. One client led to another, and before long I had built a small agency helping business owners get seen without wasting money on ads or guesswork (<a href="/work" class="text-primary hover:underline">if you want to see what that work actually looked like, head to the Work page</a>).
+          </p>
+
+          <div class="rounded-xl border border-primary/20 bg-primary/4 px-6 py-5">
+            <p class="text-[1.05rem] font-light text-dark/80 leading-relaxed italic">
+              I'll be honest with you. I don't feel like I've arrived at anything yet.
+            </p>
+          </div>
+
+          <p>
+            I look around at what I've built and I know ... I KNOW ... that some people would call this their dream life. And some days I have to slow down and actually see it. The boys. Jenny. The channel growing. The work I get to do.
+          </p>
+          <p>
+            But I'm still figuring out how to become the best. Not the best at YouTube. Not the best at Disney content. Just... the best version of what I'm supposed to be. The fullest expression of the thing God put in me when He made me this way.
+          </p>
+          <p>
+            I think that's okay. I think that tension is the point.
+          </p>
+          <p>
+            My whole life has been about moving into new rooms and making them feel like home. I think I've got a few more rooms left.
+          </p>
         </div>
       </div>
     </section>
@@ -89,11 +191,11 @@ import KitForm from '../components/KitForm.astro';
 
       <div class="space-y-5 max-w-2xl">
         {[
-          { n: 1, text: 'I follow Jesus.' },
-          { n: 2, text: 'Married to Jenny, dad to Dino III and River.' },
-          { n: 3, text: "I've been creating YouTube content since 2012 and generated 101M+ views." },
-          { n: 4, text: 'I have 100+ Disney park visits and strong opinions about all of them.' },
-          { n: 5, text: 'Cherry Dr. Pepper Zero is objectively the best drink.' },
+          { n: 1, text: "I follow Jesus." },
+          { n: 2, text: 'Married to Jenny. Dad to Dino III and River. Our Corgi is named Sunny and she runs the house.' },
+          { n: 3, text: "I've been making videos since 2008 and generating views since before it was a career. 101M+ and counting." },
+          { n: 4, text: 'I have 100+ Disney park visits and strong opinions about every single one of them.' },
+          { n: 5, text: 'Cherry Dr. Pepper Zero is objectively the greatest fountain drink ever created and I will not be taking questions.' },
         ].map(item => (
           <div class="flex items-start gap-5 group">
             <span class="flex-shrink-0 w-10 h-10 rounded-full bg-primary/10 text-primary font-display text-lg flex items-center justify-center group-hover:bg-primary group-hover:text-off-white transition-all duration-200">
@@ -116,13 +218,35 @@ import KitForm from '../components/KitForm.astro';
         </div>
         <h2 class="font-display text-3xl text-dark mb-4">How to work with me</h2>
         <p class="text-[1.05rem] font-light text-dark/65 leading-relaxed mb-8">
-          If you're a brand or creator looking to grow on video, I'd love to talk.
+          If you're a brand or creator looking for someone to build a video strategy that actually grows ... head to the Work page. I treat your business like it's my own.
         </p>
         <a
           href="/work"
           class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-primary text-primary font-medium text-sm hover:bg-primary hover:text-off-white transition-all duration-200"
         >
           See my work →
+        </a>
+      </div>
+    </section>
+
+    <!-- ── YouTube CTA ── -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="max-w-xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">YouTube</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-4">Subscribe to my YouTube channel</h2>
+        <p class="text-[1.05rem] font-light text-dark/65 leading-relaxed mb-8">
+          Every single view is an opportunity for me to share joy with others and I don't take that lightly. Help me become a full-time YouTuber and drop a comment to let me know your favorite ice cream flavor.
+        </p>
+        <a
+          href="https://www.youtube.com/@dinofavarajr"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border-2 border-primary text-primary font-medium text-sm hover:bg-primary hover:text-off-white transition-all duration-200"
+        >
+          Watch on YouTube →
         </a>
       </div>
     </section>
@@ -136,7 +260,7 @@ import KitForm from '../components/KitForm.astro';
         </div>
         <h2 class="font-display text-3xl text-dark mb-4">Follow the journey</h2>
         <p class="text-[1.05rem] font-light text-dark/65 leading-relaxed mb-8">
-          The Yearbook is where I write about life, creativity, and growing up — raw, honest, and written for my kids to find someday. No pitch. Just the real stuff.
+          The Yearbook is my monthly newsletter. Life, creativity, faith, fatherhood, and monthly updates on my YouTube channel. Subscribe here.
         </p>
         <KitForm
           formId="9211740"
@@ -149,3 +273,4 @@ import KitForm from '../components/KitForm.astro';
 
   <Footer />
 </Layout>
+

@@ -1,0 +1,1318 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+type RideTag = 'kid-friendly' | 'cornerstone' | 'overrated' | 'single-rider' | 'ac-haven';
+type RideType = 'ride' | 'special';
+
+interface Ride {
+  id: string;
+  name: string;
+  land: string;
+  x: number;
+  y: number;
+  reviewed: boolean;
+  stars?: number;
+  tags?: RideTag[];
+  take?: string;
+  type: RideType;
+  video?: boolean;
+}
+
+interface Park {
+  name: string;
+  emoji: string;
+  rides: Ride[];
+}
+
+const parks: Record<string, Park> = {
+  epcot: {
+    name: 'EPCOT',
+    emoji: '🌍',
+    rides: [
+      { id: 'mission-space-green', name: 'Mission: Space (Green)', land: 'World Discovery', x: 545, y: 398, reviewed: true, stars: 1, tags: ['single-rider'], take: "The Green mission is genuinely underrated — a solid space simulation that doesn't require a barf bag. Great for first-timers who want the full experience.", type: 'ride', video: false },
+      { id: 'mission-space-orange', name: 'Mission: Space (Orange)', land: 'World Discovery', x: 598, y: 382, reviewed: true, stars: 4, tags: ['cornerstone'], take: "This is the real deal — intense, centrifugal, and surprisingly educational about what astronauts actually experience. Do not skip this one.", type: 'ride' },
+      { id: 'figment', name: 'Journey into Imagination with Figment', land: 'World Celebration', x: 340, y: 388, reviewed: true, stars: 3, tags: ['kid-friendly', 'ac-haven'], take: "Nostalgia bait that mostly lands. Figment is a Disney icon and this ride coasts on pure vibes — but in a way that somehow works.", type: 'ride' },
+      { id: 'spaceship-earth', name: 'Spaceship Earth', land: 'World Celebration', x: 400, y: 252, reviewed: false, type: 'ride' },
+      { id: 'guardians', name: 'Guardians of the Galaxy: Cosmic Rewind', land: 'World Discovery', x: 618, y: 339, reviewed: false, type: 'ride' },
+      { id: 'test-track', name: 'Test Track', land: 'World Discovery', x: 558, y: 426, reviewed: false, type: 'ride' },
+      { id: 'soarin', name: "Soarin' Around the World", land: 'World Nature', x: 238, y: 424, reviewed: false, type: 'ride' },
+      { id: 'living-land', name: 'Living with the Land', land: 'World Nature', x: 195, y: 448, reviewed: false, type: 'ride' },
+      { id: 'seas-nemo', name: 'The Seas with Nemo & Friends', land: 'World Nature', x: 170, y: 392, reviewed: false, type: 'ride' },
+      { id: 'turtle-talk', name: 'Turtle Talk with Crush', land: 'World Nature', x: 148, y: 432, reviewed: false, type: 'ride' },
+      { id: 'frozen', name: 'Frozen Ever After', land: 'World Showcase', x: 200, y: 159, reviewed: false, type: 'ride' },
+      { id: 'remy', name: "Remy's Ratatouille Adventure", land: 'World Showcase', x: 535, y: 171, reviewed: false, type: 'ride' },
+      { id: 'gran-fiesta', name: 'Gran Fiesta Tour', land: 'World Showcase', x: 155, y: 129, reviewed: false, type: 'ride' },
+    ]
+  },
+  magic_kingdom: {
+    name: 'Magic Kingdom',
+    emoji: '🏰',
+    rides: [
+      { id: 'speedway', name: 'Tomorrowland Speedway', land: 'Tomorrowland', x: 618, y: 348, reviewed: true, stars: 2, tags: ['kid-friendly'], take: "It's a go-kart doing 7mph on a rail and your kid will absolutely lose their mind for it. You will not. That's the deal and it's fine.", type: 'ride' },
+      { id: 'jungle-cruise', name: 'Jungle Cruise', land: 'Adventureland', x: 262, y: 445, reviewed: true, stars: 3.5, tags: ['cornerstone'], take: "The rating depends entirely on your Skipper. A transcendent one makes this a 5-star experience. An average one makes it a 2. Pray accordingly.", type: 'ride' },
+      { id: 'festival-of-fantasy', name: 'Festival of Fantasy Parade', land: 'Main Street, U.S.A.', x: 400, y: 480, reviewed: true, stars: 5, tags: ['cornerstone'], take: "The single best thing you can do at Walt Disney World. Find a spot 30 minutes early, stand your ground, and just let it absolutely destroy you.", type: 'special' },
+      { id: 'tron', name: 'TRON Lightcycle / Run', land: 'Tomorrowland', x: 590, y: 192, reviewed: false, type: 'ride' },
+      { id: 'space-mountain', name: 'Space Mountain', land: 'Tomorrowland', x: 642, y: 278, reviewed: false, type: 'ride' },
+      { id: 'buzz', name: "Buzz Lightyear's Space Ranger Spin", land: 'Tomorrowland', x: 568, y: 318, reviewed: false, type: 'ride' },
+      { id: 'peoplemover', name: 'Tomorrowland Transit Authority PeopleMover', land: 'Tomorrowland', x: 598, y: 252, reviewed: false, type: 'ride' },
+      { id: 'little-mermaid', name: 'Under the Sea: Journey of The Little Mermaid', land: 'Fantasyland', x: 505, y: 218, reviewed: true, stars: 3.3, tags: ['kid-friendly', 'cornerstone'], take: "A charming dark ride that's better than it has any right to be. The practical effects mixed with projections work together in a way that genuinely hits.", type: 'ride' },
+      { id: 'ariel-grotto', name: "Ariel's Grotto (Meet & Greet)", land: 'Fantasyland', x: 535, y: 200, reviewed: true, stars: 3, tags: ['kid-friendly'], take: "A solid character meet. Ariel is engaged, the theming is lovely, and kids absolutely lose their minds for it. Worth it if you have little ones.", type: 'special' },
+      { id: 'seven-dwarfs', name: 'Seven Dwarfs Mine Train', land: 'Fantasyland', x: 475, y: 182, reviewed: false, type: 'ride' },
+      { id: 'small-world', name: "It's a Small World", land: 'Fantasyland', x: 398, y: 135, reviewed: false, type: 'ride' },
+      { id: 'peter-pan', name: "Peter Pan's Flight", land: 'Fantasyland', x: 352, y: 172, reviewed: false, type: 'ride' },
+      { id: 'dumbo', name: 'Dumbo the Flying Elephant', land: 'Fantasyland', x: 328, y: 215, reviewed: false, type: 'ride' },
+      { id: 'haunted-mansion', name: 'Haunted Mansion', land: 'Liberty Square', x: 268, y: 268, reviewed: false, type: 'ride' },
+      { id: 'pirates', name: 'Pirates of the Caribbean', land: 'Adventureland', x: 228, y: 428, reviewed: false, type: 'ride' },
+      { id: 'tiki-room', name: "Walt Disney's Enchanted Tiki Room", land: 'Adventureland', x: 192, y: 462, reviewed: false, type: 'ride' },
+      { id: 'big-thunder', name: 'Big Thunder Mountain Railroad', land: 'Frontierland', x: 192, y: 358, reviewed: false, type: 'ride' },
+      { id: 'tianas', name: "Tiana's Bayou Adventure", land: 'Frontierland', x: 228, y: 392, reviewed: false, type: 'ride' },
+      { id: 'country-bear', name: 'Country Bear Jamboree', land: 'Frontierland', x: 238, y: 338, reviewed: false, type: 'ride' },
+      { id: 'liberty-belle', name: 'Liberty Belle Riverboat', land: 'Liberty Square', x: 295, y: 305, reviewed: false, type: 'ride' },
+    ]
+  },
+  hollywood_studios: {
+    name: 'Hollywood Studios',
+    emoji: '🎬',
+    rides: [
+      { id: 'rise-resistance', name: 'Star Wars: Rise of the Resistance', land: "Galaxy's Edge", x: 162, y: 162, reviewed: false, type: 'ride' },
+      { id: 'millennium-falcon', name: 'Millennium Falcon: Smugglers Run', land: "Galaxy's Edge", x: 228, y: 208, reviewed: false, type: 'ride' },
+      { id: 'slinky-dog', name: 'Slinky Dog Dash', land: 'Toy Story Land', x: 585, y: 268, reviewed: false, type: 'ride' },
+      { id: 'toy-story-mania', name: 'Toy Story Mania!', land: 'Toy Story Land', x: 542, y: 318, reviewed: false, type: 'ride' },
+      { id: 'alien-swirling', name: 'Alien Swirling Saucers', land: 'Toy Story Land', x: 612, y: 312, reviewed: false, type: 'ride' },
+      { id: 'rock-roller', name: "Rock 'n' Roller Coaster", land: 'Sunset Boulevard', x: 625, y: 392, reviewed: false, type: 'ride' },
+      { id: 'tower-terror', name: 'The Twilight Zone Tower of Terror', land: 'Sunset Boulevard', x: 585, y: 452, reviewed: false, type: 'ride' },
+      { id: 'muppets', name: "Muppet*Vision 3D", land: 'Grand Avenue', x: 415, y: 372, reviewed: false, type: 'ride' },
+      { id: 'indiana-jones', name: 'Indiana Jones Epic Stunt Spectacular', land: 'Echo Lake', x: 292, y: 348, reviewed: false, type: 'ride' },
+      { id: 'star-tours', name: 'Star Tours — The Adventures Continue', land: 'Echo Lake', x: 308, y: 392, reviewed: false, type: 'ride' },
+      { id: 'mickey-runaway', name: "Mickey & Minnie's Runaway Railway", land: 'Hollywood Boulevard', x: 415, y: 282, reviewed: false, type: 'ride' },
+    ]
+  },
+  animal_kingdom: {
+    name: 'Animal Kingdom',
+    emoji: '🦁',
+    rides: [
+      { id: 'navi-river', name: "Na'vi River Journey", land: 'Pandora', x: 255, y: 445, reviewed: true, stars: 1, tags: ['overrated', 'ac-haven'], take: "The animatronic Shaman at the end is legitimately one of the most impressive things Disney has ever built. Then you look at the 90-minute wait and do the math.", type: 'ride' },
+      { id: 'flight-of-passage', name: 'Avatar Flight of Passage', land: 'Pandora', x: 212, y: 408, reviewed: false, type: 'ride' },
+      { id: 'kilimanjaro', name: 'Kilimanjaro Safaris', land: 'Africa', x: 352, y: 162, reviewed: false, type: 'ride' },
+      { id: 'gorilla-falls', name: 'Gorilla Falls Exploration Trail', land: 'Africa', x: 392, y: 198, reviewed: false, type: 'ride' },
+      { id: 'expedition-everest', name: 'Expedition Everest', land: 'Asia', x: 572, y: 212, reviewed: false, type: 'ride' },
+      { id: 'kali-river', name: 'Kali River Rapids', land: 'Asia', x: 522, y: 182, reviewed: false, type: 'ride' },
+      { id: 'maharajah-trek', name: 'Maharajah Jungle Trek', land: 'Asia', x: 588, y: 262, reviewed: false, type: 'ride' },
+      { id: 'dinosaur', name: 'DINOSAUR', land: 'DinoLand U.S.A.', x: 578, y: 382, reviewed: false, type: 'ride' },
+      { id: 'primeval-whirl', name: 'Primeval Whirl', land: 'DinoLand U.S.A.', x: 552, y: 438, reviewed: false, type: 'ride' },
+      { id: 'bugs-life', name: "It's Tough to be a Bug!", land: 'Discovery Island', x: 398, y: 292, reviewed: false, type: 'ride' },
+    ]
+  }
+};
+---
+
+<Layout
+  title="Disney Field Guide — Dino Favara Jr."
+  description="100+ visits. No sponsors. Real opinions on every ride at Walt Disney World — reviewed on camera, one ride at a time."
+>
+  <Nav />
+
+  <main>
+
+    <!-- ── HERO ── -->
+    <section class="relative overflow-hidden bg-[#1A1523] py-24">
+      <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+        <div class="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-[#A89FF5]/20 blur-[120px]"></div>
+        <div class="absolute top-20 -right-20 w-[400px] h-[400px] rounded-full bg-[#6B5CE7]/25 blur-[100px]"></div>
+        <div class="absolute bottom-0 left-1/2 w-[500px] h-[300px] rounded-full bg-[#A89FF5]/10 blur-[80px] -translate-x-1/2"></div>
+      </div>
+
+      <div class="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center gap-5">
+        <div class="flex items-center gap-3">
+          <div class="h-px w-8 bg-[#A89FF5]/50"></div>
+          <span class="text-xs font-medium tracking-[0.2em] uppercase text-[#A89FF5]/80">100+ visits · No sponsors · Real opinions</span>
+          <div class="h-px w-8 bg-[#A89FF5]/50"></div>
+        </div>
+
+        <h1 class="font-display text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-[#FAF9F5]">
+          Dino's Disney<br />Field Guide
+        </h1>
+
+        <p class="text-[1.1rem] font-light text-[#FAF9F5]/55 leading-relaxed max-w-md">
+          Every ride gets reviewed on camera. This map fills up as I go.
+        </p>
+
+        <div class="flex items-center gap-2 mt-2">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#A89FF5]/15 border border-[#A89FF5]/25 text-[#A89FF5] text-xs font-medium">
+            <span class="w-1.5 h-1.5 rounded-full bg-[#A89FF5] animate-pulse"></span>
+            Map grows with every trip
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PARK TABS + MAP ── -->
+    <section class="bg-[#FAF9F5] pt-12 pb-16">
+      <div class="max-w-6xl mx-auto px-6">
+
+        <!-- Disclaimer -->
+        <p class="text-center text-sm italic text-dark/45 mb-8 font-light">
+          These are my real opinions from real visits. Nobody paid me to say any of this — and I've never once eaten at the Rainforest Cafe.
+        </p>
+
+        <!-- Park Tabs -->
+        <div class="flex flex-wrap gap-2 justify-center mb-0" role="tablist" aria-label="Select a park">
+          {Object.entries(parks).map(([key, park], i) => (
+            <button
+              class={`park-tab ${i === 0 ? 'active' : ''}`}
+              data-park={key}
+              role="tab"
+              aria-selected={i === 0 ? 'true' : 'false'}
+            >
+              <span class="hole" aria-hidden="true"></span>
+              {park.emoji} {park.name}
+            </button>
+          ))}
+        </div>
+
+        <!-- Map Container -->
+        <div class="map-wrapper rounded-b-2xl rounded-tr-2xl overflow-hidden shadow-lg border border-[#C4A97A]/40">
+
+          <!-- EPCOT Map -->
+          <div id="map-epcot" class="park-map active" data-park="epcot">
+            <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block" style="font-family: Georgia, 'Times New Roman', serif;">
+              <defs>
+                <filter id="ep-rough" x="-8%" y="-8%" width="116%" height="116%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.04" numOctaves="3" seed="7" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.5" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+
+              <rect width="800" height="520" fill="#F5EDD8"/>
+              <rect width="800" height="520" fill="none" stroke="#D4B870" stroke-width="18" opacity="0.08"/>
+
+              <!-- Double vintage border -->
+              <rect x="5" y="5" width="790" height="510" fill="none" stroke="#C4A97A" stroke-width="2" opacity="0.75"/>
+              <rect x="14" y="14" width="772" height="492" fill="none" stroke="#C4A97A" stroke-width="0.75" opacity="0.38"/>
+              <!-- Corner ornaments -->
+              <line x1="5" y1="5" x2="58" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="5" x2="5" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="5" r="4" fill="#C4A97A"/><line x1="14" y1="30" x2="30" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="5" x2="742" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="5" x2="795" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="5" r="4" fill="#C4A97A"/><line x1="786" y1="30" x2="770" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="5" y1="515" x2="58" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="515" x2="5" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="515" r="4" fill="#C4A97A"/><line x1="14" y1="490" x2="30" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="515" x2="742" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="515" x2="795" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="515" r="4" fill="#C4A97A"/><line x1="786" y1="490" x2="770" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+
+              <!-- Title -->
+              <line x1="258" y1="28" x2="325" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+              <text x="400" y="33" text-anchor="middle" font-size="13" fill="#6B4A14" letter-spacing="6" font-weight="bold" font-style="italic">EPCOT</text>
+              <line x1="475" y1="28" x2="542" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+
+              <!-- ── WORLD SHOWCASE — horseshoe shape (top of map, opening faces down) ── -->
+              <path d="M 148,200 C 124,184 110,151 114,121 C 118,91 140,68 170,57 C 200,47 238,48 265,62 C 288,73 302,91 314,109 C 324,126 334,138 358,144 C 378,152 392,156 400,156 C 408,156 422,152 442,144 C 466,138 476,126 486,109 C 498,91 512,73 535,62 C 562,48 600,47 630,57 C 660,68 682,91 686,121 C 690,151 676,184 652,200 C 628,211 595,225 558,225 C 520,225 476,219 446,210 C 428,205 415,202 400,202 C 385,202 372,205 354,210 C 324,219 280,225 242,225 C 204,225 170,211 148,200 Z" fill="#D0D8E8" stroke="#7888A8" stroke-width="1.3" filter="url(#ep-rough)" opacity="0.9"/>
+              <!-- Lagoon water -->
+              <ellipse cx="400" cy="121" rx="178" ry="46" fill="#B5C8DC" stroke="#7898B8" stroke-width="1" opacity="0.85"/>
+              <text x="400" y="125" text-anchor="middle" font-size="8" font-style="italic" fill="#3A4A6A" opacity="0.65">World Showcase Lagoon</text>
+              <!-- World Showcase label at top arc -->
+              <text x="400" y="57" text-anchor="middle" font-size="9" font-style="italic" fill="#3A3860" opacity="0.7" font-weight="bold">World Showcase</text>
+
+              <!-- Country pavilion labels around the lagoon -->
+              <text x="153" y="125" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8">Mexico</text>
+              <text x="198" y="160" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" transform="rotate(15,198,160)">Norway</text>
+              <text x="260" y="181" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" transform="rotate(8,260,181)">China</text>
+              <text x="322" y="193" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" transform="rotate(4,322,193)">Germany</text>
+              <text x="370" y="197" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8">Italy</text>
+              <text x="400" y="199" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" font-weight="bold">U.S.A.</text>
+              <text x="430" y="197" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8">Japan</text>
+              <text x="476" y="193" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" transform="rotate(-4,476,193)">Morocco</text>
+              <text x="538" y="181" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" transform="rotate(-8,538,181)">France</text>
+              <text x="600" y="160" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8" transform="rotate(-14,600,160)">U.K.</text>
+              <text x="646" y="125" text-anchor="middle" font-size="7" font-style="italic" fill="#3A3860" opacity="0.8">Canada</text>
+
+              <!-- Separator line between World Showcase and Future World -->
+              <line x1="148" y1="242" x2="652" y2="242" stroke="#C4A97A" stroke-width="0.75" stroke-dasharray="6 4" opacity="0.35"/>
+
+              <!-- ── SPACESHIP EARTH illustration — dead center between sections ── -->
+              <g transform="translate(400,252)" opacity="0.88">
+                <line x1="-18" y1="27" x2="-26" y2="46" stroke="#9B7C52" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="0"   y1="29" x2="0"   y2="46" stroke="#9B7C52" stroke-width="2.5" stroke-linecap="round"/>
+                <line x1="18"  y1="27" x2="26"  y2="46" stroke="#9B7C52" stroke-width="2.5" stroke-linecap="round"/>
+                <circle r="29" fill="#E8E2D5" stroke="#9B7C52" stroke-width="1.5"/>
+                <line x1="-29" y1="0" x2="29" y2="0" stroke="#C4A97A" stroke-width="0.6" opacity="0.5"/>
+                <line x1="0" y1="-29" x2="0" y2="29" stroke="#C4A97A" stroke-width="0.6" opacity="0.5"/>
+                <ellipse rx="29" ry="12" stroke="#C4A97A" stroke-width="0.6" fill="none" opacity="0.5"/>
+                <ellipse rx="12" ry="29" stroke="#C4A97A" stroke-width="0.6" fill="none" opacity="0.5"/>
+                <line x1="-25" y1="-14" x2="0" y2="29" stroke="#C4A97A" stroke-width="0.5" opacity="0.3"/>
+                <line x1="25" y1="-14" x2="0" y2="29" stroke="#C4A97A" stroke-width="0.5" opacity="0.3"/>
+              </g>
+
+              <!-- ── FUTURE WORLD LAND AREAS ── -->
+
+              <!-- World Nature — left, sage green -->
+              <path d="M 58,320 C 65,299 95,285 132,283 C 170,281 212,293 240,314 C 264,331 272,359 265,384 C 258,409 234,426 202,433 C 168,440 132,432 106,415 C 78,397 62,371 62,346 C 62,335 58,333 58,320 Z" fill="#C8DDB8" stroke="#6A8A48" stroke-width="1.3" filter="url(#ep-rough)" opacity="0.92"/>
+              <text x="162" y="344" text-anchor="middle" font-size="10" font-style="italic" fill="#2E5018" opacity="0.88" transform="rotate(-2,162,344)">World Nature</text>
+
+              <!-- World Discovery — right, warm parchment-gold -->
+              <path d="M 528,299 C 545,281 580,278 620,278 C 660,281 698,298 718,326 C 736,349 736,380 720,402 C 704,424 674,437 638,441 C 600,444 562,434 540,414 C 518,393 506,366 510,341 C 512,322 515,314 528,299 Z" fill="#E0D5B0" stroke="#8A7832" stroke-width="1.3" filter="url(#ep-rough)" opacity="0.92"/>
+              <text x="622" y="348" text-anchor="middle" font-size="10" font-style="italic" fill="#4A3A08" opacity="0.88" transform="rotate(2,622,348)">World Discovery</text>
+
+              <!-- World Celebration — center -->
+              <path d="M 312,305 C 325,286 358,278 398,278 C 438,278 470,288 484,307 C 496,322 498,346 488,368 C 478,388 456,404 428,409 C 400,414 370,410 348,397 C 324,382 308,359 308,336 C 308,322 308,320 312,305 Z" fill="#EDE2C0" stroke="#A08838" stroke-width="1.3" filter="url(#ep-rough)" opacity="0.92"/>
+              <text x="398" y="376" text-anchor="middle" font-size="9" font-style="italic" fill="#4A3808" opacity="0.88">World Celebration</text>
+
+              <!-- ── TREES (border of Future World) ── -->
+              <g transform="translate(60,370)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#6A8B3A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#7A9B45" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(60,414)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#6A8B3A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#7A9B45" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(730,320)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#D0C898" stroke="#A09848" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#D8D0A8" stroke="#A09848" stroke-width="0.5"/></g>
+              <g transform="translate(730,367)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#D0C898" stroke="#A09848" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#D8D0A8" stroke="#A09848" stroke-width="0.5"/></g>
+
+              <!-- ── COMPASS ROSE (top-right) ── -->
+              <g transform="translate(742,76)">
+                <circle r="30" fill="#F5EDD8" stroke="#C4A97A" stroke-width="1.5"/>
+                <circle r="4" fill="#C4A97A"/>
+                <polygon points="0,-30 -5,-13 0,-9 5,-13" fill="#8B6914"/>
+                <polygon points="0,30 -5,13 0,9 5,13" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="-30,0 -13,-5 -9,0 -13,5" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="30,0 13,-5 9,0 13,5" fill="#C4A97A" opacity="0.65"/>
+                <line x1="-21" y1="-21" x2="21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <line x1="21" y1="-21" x2="-21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <text x="0" y="-16" text-anchor="middle" font-size="9" fill="#6B4A14" font-weight="bold">N</text>
+                <text x="0" y="22" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">S</text>
+                <text x="-20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">W</text>
+                <text x="20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">E</text>
+              </g>
+              <text x="742" y="115" text-anchor="middle" font-size="6" font-style="italic" fill="#8B6914" opacity="0.55">True North</text>
+
+              <!-- Ride Pins -->
+              {parks.epcot.rides.map(ride => (
+                <g
+                  class="ride-pin-group"
+                  data-park="epcot"
+                  data-name={ride.name}
+                  data-land={ride.land}
+                  data-reviewed={ride.reviewed ? "true" : "false"}
+                  data-stars={ride.stars?.toString() ?? ""}
+                  data-tags={ride.tags?.join(",") ?? ""}
+                  data-take={ride.take ?? ""}
+                  data-type={ride.type}
+                  data-video={ride.video !== false ? "true" : "false"}
+                  style="cursor:pointer"
+                  role="button"
+                  tabindex="0"
+                  aria-label={ride.name}
+                >
+                  <circle cx={ride.x} cy={ride.y} r="13" fill="transparent"/>
+                  {ride.reviewed ? (
+                    ride.type === 'special' ? (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <polygon points={`${ride.x},${ride.y-8} ${ride.x+7},${ride.y} ${ride.x},${ride.y+8} ${ride.x-7},${ride.y}`} fill="#C4A97A" stroke="#8B6914" stroke-width="1.5"/>
+                      </>
+                    ) : (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <circle cx={ride.x} cy={ride.y} r="7.5" fill="#A89FF5" stroke="#6B5CE7" stroke-width="2"/>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.5"/>
+                      <circle cx={ride.x} cy={ride.y} r="7" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+                    </>
+                  )}
+                </g>
+              ))}
+            </svg>
+          </div>
+
+          <!-- MAGIC KINGDOM Map -->
+          <div id="map-magic_kingdom" class="park-map" data-park="magic_kingdom" style="display:none">
+            <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block" style="font-family: Georgia, 'Times New Roman', serif;">
+              <defs>
+                <filter id="mk-rough" x="-8%" y="-8%" width="116%" height="116%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.038" numOctaves="3" seed="4" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+
+              <rect width="800" height="520" fill="#F5EDD8"/>
+              <!-- Subtle vignette -->
+              <rect width="800" height="520" fill="none" stroke="#D4B870" stroke-width="18" opacity="0.08"/>
+
+              <!-- Double vintage border -->
+              <rect x="5" y="5" width="790" height="510" fill="none" stroke="#C4A97A" stroke-width="2" opacity="0.75"/>
+              <rect x="14" y="14" width="772" height="492" fill="none" stroke="#C4A97A" stroke-width="0.75" opacity="0.38"/>
+
+              <!-- Corner ornaments (all 4) -->
+              <line x1="5" y1="5" x2="58" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="5" x2="5" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="5" r="4" fill="#C4A97A"/><line x1="14" y1="30" x2="30" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="5" x2="742" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="5" x2="795" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="5" r="4" fill="#C4A97A"/><line x1="786" y1="30" x2="770" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="5" y1="515" x2="58" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="515" x2="5" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="515" r="4" fill="#C4A97A"/><line x1="14" y1="490" x2="30" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="515" x2="742" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="515" x2="795" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="515" r="4" fill="#C4A97A"/><line x1="786" y1="490" x2="770" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+
+              <!-- Park title with flanking rules -->
+              <line x1="200" y1="28" x2="288" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+              <text x="400" y="33" text-anchor="middle" font-size="13" fill="#6B4A14" letter-spacing="5" font-weight="bold" font-style="italic">MAGIC KINGDOM</text>
+              <line x1="512" y1="28" x2="600" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+
+              <!-- ── LAND AREAS — organic bezier blobs ── -->
+
+              <!-- Fantasyland — north, large, soft lavender-rose -->
+              <path d="M 272,188 C 278,155 325,122 388,114 C 451,106 518,122 560,154 C 596,182 606,224 594,260 C 582,294 550,314 506,320 C 462,325 418,322 376,312 C 330,300 284,274 267,246 C 253,222 268,215 272,188 Z" fill="#E5CDE5" stroke="#9A7A9A" stroke-width="1.3" filter="url(#mk-rough)" opacity="0.92"/>
+              <text x="428" y="162" text-anchor="middle" font-size="12" font-style="italic" fill="#52285A" opacity="0.88" transform="rotate(-1,428,162)">Fantasyland</text>
+
+              <!-- Tomorrowland — right, cool steel blue -->
+              <path d="M 512,198 C 532,168 582,155 638,170 C 690,184 730,225 734,270 C 738,314 720,358 690,384 C 660,410 620,416 583,404 C 546,390 518,360 510,322 C 502,285 495,225 512,198 Z" fill="#C2D2E5" stroke="#6A8CAA" stroke-width="1.3" filter="url(#mk-rough)" opacity="0.92"/>
+              <text x="644" y="234" text-anchor="middle" font-size="11" font-style="italic" fill="#1A3A58" opacity="0.88" transform="rotate(6,644,234)">Tomorrowland</text>
+
+              <!-- Liberty Square — upper left, parchment colonial -->
+              <path d="M 228,228 C 243,202 274,193 308,206 C 335,217 350,245 344,274 C 338,300 318,318 291,324 C 264,330 237,315 222,291 C 208,269 215,250 228,228 Z" fill="#D6C49A" stroke="#8A7038" stroke-width="1.3" filter="url(#mk-rough)" opacity="0.92"/>
+              <text x="276" y="266" text-anchor="middle" font-size="9" font-style="italic" fill="#3A2A08" opacity="0.88" transform="rotate(-4,276,266)">Liberty Sq.</text>
+
+              <!-- Frontierland — left, warm dusty gold -->
+              <path d="M 148,295 C 162,264 196,250 230,258 C 262,266 284,290 288,322 C 292,353 276,382 250,400 C 224,418 188,420 162,404 C 134,386 124,352 132,319 C 138,300 138,314 148,295 Z" fill="#D2BA85" stroke="#8A6E32" stroke-width="1.3" filter="url(#mk-rough)" opacity="0.92"/>
+              <text x="192" y="348" text-anchor="middle" font-size="10" font-style="italic" fill="#3A2A08" opacity="0.88" transform="rotate(-6,192,348)">Frontierland</text>
+
+              <!-- Adventureland — lower left, jungle green -->
+              <path d="M 150,398 C 165,366 197,352 232,358 C 266,364 294,384 302,417 C 310,448 300,478 277,491 C 253,503 216,500 190,482 C 164,462 150,430 150,398 Z" fill="#B5CF9E" stroke="#58782A" stroke-width="1.3" filter="url(#mk-rough)" opacity="0.92"/>
+              <text x="216" y="435" text-anchor="middle" font-size="10" font-style="italic" fill="#284518" opacity="0.88" transform="rotate(-7,216,435)">Adventureland</text>
+
+              <!-- Main Street USA — bottom center, warm cream strip -->
+              <path d="M 370,358 L 364,494 L 436,494 L 430,358 C 430,349 418,342 400,342 C 382,342 370,349 370,358 Z" fill="#EDE5CC" stroke="#C4A97A" stroke-width="1.3" filter="url(#mk-rough)" opacity="0.92"/>
+              <text x="400" y="445" text-anchor="middle" font-size="8" font-style="italic" fill="#4A3018" opacity="0.86" transform="rotate(-90,400,445)">Main Street U.S.A.</text>
+
+              <!-- Hub — central plaza -->
+              <circle cx="400" cy="312" r="50" fill="#F2EADA" stroke="#C4A97A" stroke-width="1.8" opacity="0.96"/>
+              <text x="400" y="316" text-anchor="middle" font-size="7" font-style="italic" fill="#8B6914" opacity="0.65">The Hub</text>
+
+              <!-- ── SPOKE CORRIDORS ── -->
+              <path d="M 400,262 L 400,228" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+              <path d="M 448,294 C 475,284 498,272 510,262" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+              <path d="M 355,282 C 335,272 318,268 306,268" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+              <path d="M 352,338 C 325,332 305,328 288,322" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+              <path d="M 368,355 C 345,368 320,382 302,390" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+              <path d="M 400,362 L 400,392" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.5"/>
+
+              <!-- ── CINDERELLA CASTLE ── -->
+              <g transform="translate(400,268)" opacity="0.9">
+                <rect x="-26" y="-19" width="52" height="19" fill="#EAE4DC" stroke="#9B7C52" stroke-width="1"/>
+                <path d="M -9,-19 L -9,-9 Q 0,-4 9,-9 L 9,-19" fill="#C8B89A" stroke="#9B7C52" stroke-width="0.8"/>
+                <rect x="-38" y="-30" width="14" height="13" fill="#E2DAD0" stroke="#9B7C52" stroke-width="1"/>
+                <rect x="24" y="-30" width="14" height="13" fill="#E2DAD0" stroke="#9B7C52" stroke-width="1"/>
+                <rect x="-10" y="-50" width="20" height="32" fill="#EAE4DC" stroke="#9B7C52" stroke-width="1"/>
+                <path d="M -4,-40 L -4,-34 Q 0,-30 4,-34 L 4,-40" fill="#C8B89A" stroke="#9B7C52" stroke-width="0.5"/>
+                <rect x="-25" y="-25" width="5" height="7" fill="#EAE4DC" stroke="#9B7C52" stroke-width="0.75"/>
+                <rect x="-14" y="-25" width="5" height="7" fill="#EAE4DC" stroke="#9B7C52" stroke-width="0.75"/>
+                <rect x="9"  y="-25" width="5" height="7" fill="#EAE4DC" stroke="#9B7C52" stroke-width="0.75"/>
+                <rect x="20" y="-25" width="5" height="7" fill="#EAE4DC" stroke="#9B7C52" stroke-width="0.75"/>
+                <polygon points="-38,-30 -24,-30 -31,-52" fill="#AE9FD0" stroke="#8878B8" stroke-width="0.8"/>
+                <polygon points="24,-30 38,-30 31,-52"  fill="#AE9FD0" stroke="#8878B8" stroke-width="0.8"/>
+                <polygon points="-10,-50 10,-50 0,-75"  fill="#AE9FD0" stroke="#8878B8" stroke-width="1"/>
+                <line x1="0" y1="-75" x2="0" y2="-82" stroke="#9B7C52" stroke-width="0.75"/>
+                <polygon points="0,-82 8,-78 0,-74" fill="#C4A97A"/>
+                <line x1="-31" y1="-52" x2="-31" y2="-58" stroke="#9B7C52" stroke-width="0.5"/>
+                <polygon points="-31,-58 -24,-55 -31,-52" fill="#C4A97A"/>
+                <line x1="31" y1="-52" x2="31" y2="-58" stroke="#9B7C52" stroke-width="0.5"/>
+                <polygon points="31,-58 38,-55 31,-52" fill="#C4A97A"/>
+              </g>
+
+              <!-- ── TREES (scattered at land edges) ── -->
+              <g transform="translate(278,152)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-15 -8,-3 8,-3" fill="#6A8B3A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#7A9B45" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(318,110)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#6A8B3A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#7A9B45" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(488,113)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#6A8B3A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#7A9B45" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(552,148)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#6A8B3A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#7A9B45" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(698,178)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-12 -6,-2 6,-2" fill="#8A9BAA" stroke="#5A6B7A" stroke-width="0.5"/><polygon points="0,-8 -4,1 4,1" fill="#9AABB8" stroke="#5A6B7A" stroke-width="0.5"/></g>
+              <g transform="translate(720,315)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-12 -6,-2 6,-2" fill="#8A9BAA" stroke="#5A6B7A" stroke-width="0.5"/><polygon points="0,-8 -4,1 4,1" fill="#9AABB8" stroke="#5A6B7A" stroke-width="0.5"/></g>
+              <g transform="translate(130,318)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#7A9B4A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#8AAB55" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(128,392)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#7A9B4A" stroke="#4A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#8AAB55" stroke="#4A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(150,462)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(188,494)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(300,494)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+
+              <!-- ── COMPASS ROSE (top-right) ── -->
+              <g transform="translate(742,76)">
+                <circle r="30" fill="#F5EDD8" stroke="#C4A97A" stroke-width="1.5"/>
+                <circle r="4" fill="#C4A97A"/>
+                <polygon points="0,-30 -5,-13 0,-9 5,-13" fill="#8B6914"/>
+                <polygon points="0,30 -5,13 0,9 5,13" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="-30,0 -13,-5 -9,0 -13,5" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="30,0 13,-5 9,0 13,5" fill="#C4A97A" opacity="0.65"/>
+                <line x1="-21" y1="-21" x2="21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <line x1="21" y1="-21" x2="-21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <text x="0" y="-16" text-anchor="middle" font-size="9" fill="#6B4A14" font-weight="bold">N</text>
+                <text x="0" y="22" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">S</text>
+                <text x="-20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">W</text>
+                <text x="20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">E</text>
+              </g>
+              <text x="742" y="115" text-anchor="middle" font-size="6" font-style="italic" fill="#8B6914" opacity="0.55">True North</text>
+
+              {parks.magic_kingdom.rides.map(ride => (
+                <g
+                  class="ride-pin-group"
+                  data-park="magic_kingdom"
+                  data-name={ride.name}
+                  data-land={ride.land}
+                  data-reviewed={ride.reviewed ? "true" : "false"}
+                  data-stars={ride.stars?.toString() ?? ""}
+                  data-tags={ride.tags?.join(",") ?? ""}
+                  data-take={ride.take ?? ""}
+                  data-type={ride.type}
+                  data-video={ride.video !== false ? "true" : "false"}
+                  style="cursor:pointer"
+                  role="button"
+                  tabindex="0"
+                  aria-label={ride.name}
+                >
+                  <circle cx={ride.x} cy={ride.y} r="13" fill="transparent"/>
+                  {ride.reviewed ? (
+                    ride.type === 'special' ? (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <polygon points={`${ride.x},${ride.y-8} ${ride.x+7},${ride.y} ${ride.x},${ride.y+8} ${ride.x-7},${ride.y}`} fill="#C4A97A" stroke="#8B6914" stroke-width="1.5"/>
+                      </>
+                    ) : (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <circle cx={ride.x} cy={ride.y} r="7.5" fill="#A89FF5" stroke="#6B5CE7" stroke-width="2"/>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.5"/>
+                      <circle cx={ride.x} cy={ride.y} r="7" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+                    </>
+                  )}
+                </g>
+              ))}
+            </svg>
+          </div>
+
+          <!-- HOLLYWOOD STUDIOS Map -->
+          <div id="map-hollywood_studios" class="park-map" data-park="hollywood_studios" style="display:none">
+            <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block" style="font-family: Georgia, 'Times New Roman', serif;">
+              <defs>
+                <filter id="hs-rough" x="-8%" y="-8%" width="116%" height="116%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.042" numOctaves="3" seed="11" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="2.8" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+
+              <rect width="800" height="520" fill="#F5EDD8"/>
+              <rect width="800" height="520" fill="none" stroke="#D4B870" stroke-width="18" opacity="0.08"/>
+              <rect x="5" y="5" width="790" height="510" fill="none" stroke="#C4A97A" stroke-width="2" opacity="0.75"/>
+              <rect x="14" y="14" width="772" height="492" fill="none" stroke="#C4A97A" stroke-width="0.75" opacity="0.38"/>
+              <line x1="5" y1="5" x2="58" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="5" x2="5" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="5" r="4" fill="#C4A97A"/><line x1="14" y1="30" x2="30" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="5" x2="742" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="5" x2="795" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="5" r="4" fill="#C4A97A"/><line x1="786" y1="30" x2="770" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="5" y1="515" x2="58" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="515" x2="5" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="515" r="4" fill="#C4A97A"/><line x1="14" y1="490" x2="30" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="515" x2="742" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="515" x2="795" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="515" r="4" fill="#C4A97A"/><line x1="786" y1="490" x2="770" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+
+              <!-- Title -->
+              <line x1="172" y1="28" x2="242" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+              <text x="400" y="33" text-anchor="middle" font-size="13" fill="#6B4A14" letter-spacing="4" font-weight="bold" font-style="italic">HOLLYWOOD STUDIOS</text>
+              <line x1="558" y1="28" x2="628" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+
+              <!-- ── LAND AREAS ── -->
+
+              <!-- Star Wars: Galaxy's Edge — upper left, deep slate blue -->
+              <path d="M 60,68 C 72,44 108,28 152,28 C 196,28 244,46 274,76 C 300,102 312,138 306,172 C 300,205 276,228 244,238 C 210,248 172,242 146,224 C 118,205 92,175 76,145 C 62,118 54,90 60,68 Z" fill="#B8C5D0" stroke="#5A7090" stroke-width="1.3" filter="url(#hs-rough)" opacity="0.92"/>
+              <text x="168" y="138" text-anchor="middle" font-size="9" font-style="italic" fill="#1A2A3A" opacity="0.88" transform="rotate(-3,168,138)">Star Wars:</text>
+              <text x="168" y="151" text-anchor="middle" font-size="9" font-style="italic" fill="#1A2A3A" opacity="0.88" transform="rotate(-3,168,151)">Galaxy's Edge</text>
+
+              <!-- Toy Story Land — right, sunny yellow -->
+              <path d="M 500,195 C 518,168 558,155 602,160 C 644,165 680,188 696,220 C 710,249 706,285 688,310 C 670,334 634,347 596,344 C 558,340 524,322 510,294 C 496,267 484,220 500,195 Z" fill="#E5DC9A" stroke="#8A8028" stroke-width="1.3" filter="url(#hs-rough)" opacity="0.92"/>
+              <text x="598" y="248" text-anchor="middle" font-size="10" font-style="italic" fill="#4A4008" opacity="0.88" transform="rotate(4,598,248)">Toy Story Land</text>
+
+              <!-- Sunset Boulevard — lower right, warm terracotta -->
+              <path d="M 528,356 C 544,328 582,314 624,320 C 662,326 694,350 704,382 C 713,410 704,444 682,463 C 660,482 626,488 594,477 C 560,464 534,434 526,402 C 520,375 518,380 528,356 Z" fill="#DEC0A0" stroke="#8A5A38" stroke-width="1.3" filter="url(#hs-rough)" opacity="0.92"/>
+              <text x="620" y="408" text-anchor="middle" font-size="10" font-style="italic" fill="#4A2A10" opacity="0.88" transform="rotate(6,620,408)">Sunset Blvd</text>
+
+              <!-- Echo Lake — center left, cool teal -->
+              <path d="M 228,305 C 242,278 273,263 308,270 C 340,277 364,302 368,332 C 371,360 356,388 332,400 C 306,412 272,408 250,392 C 226,374 216,346 220,318 C 222,308 222,318 228,305 Z" fill="#B8D0CE" stroke="#487880" stroke-width="1.3" filter="url(#hs-rough)" opacity="0.92"/>
+              <text x="290" y="348" text-anchor="middle" font-size="9" font-style="italic" fill="#1A3A3A" opacity="0.88">Echo Lake</text>
+
+              <!-- Hollywood Boulevard — entrance center, warm cream -->
+              <path d="M 348,432 C 356,410 380,398 400,398 C 420,398 444,410 452,432 C 460,452 456,482 442,496 C 428,508 415,512 400,512 C 385,512 372,508 358,496 C 344,482 340,452 348,432 Z" fill="#EDE5CC" stroke="#C4A97A" stroke-width="1.3" filter="url(#hs-rough)" opacity="0.92"/>
+              <text x="400" y="462" text-anchor="middle" font-size="8" font-style="italic" fill="#4A3018" opacity="0.86" transform="rotate(-90,400,462)">Hollywood Blvd</text>
+
+              <!-- Grand Avenue / Animation Courtyard — center -->
+              <path d="M 350,268 C 362,244 388,232 416,236 C 442,240 464,260 470,288 C 475,312 464,337 442,349 C 418,361 388,360 365,346 C 340,330 330,304 338,280 C 340,271 344,280 350,268 Z" fill="#D0D8B8" stroke="#6A7A48" stroke-width="1.3" filter="url(#hs-rough)" opacity="0.92"/>
+              <text x="408" y="298" text-anchor="middle" font-size="8" font-style="italic" fill="#2A3A18" opacity="0.88">Grand Ave</text>
+
+              <!-- ── CLAPPERBOARD landmark ── -->
+              <g transform="translate(408,258)" opacity="0.88">
+                <rect x="-24" y="5" width="48" height="32" rx="2" fill="#EAE4DC" stroke="#9B7C52" stroke-width="1.2"/>
+                <rect x="-24" y="-4" width="48" height="11" rx="2" fill="#2A2A2A" stroke="#9B7C52" stroke-width="1.2"/>
+                <line x1="-18" y1="-4" x2="-12" y2="7" stroke="#EAE4DC" stroke-width="2"/>
+                <line x1="-7"  y1="-4" x2="-1"  y2="7" stroke="#EAE4DC" stroke-width="2"/>
+                <line x1="4"   y1="-4" x2="10"  y2="7" stroke="#EAE4DC" stroke-width="2"/>
+                <line x1="15"  y1="-4" x2="21"  y2="7" stroke="#EAE4DC" stroke-width="2"/>
+                <text x="0" y="21" text-anchor="middle" font-size="6" fill="#9B7C52" font-style="italic">TAKE 1</text>
+                <line x1="-16" y1="25" x2="16" y2="25" stroke="#C4A97A" stroke-width="0.5" opacity="0.5"/>
+                <text x="0" y="31" text-anchor="middle" font-size="5" fill="#9B7C52" opacity="0.65">SCENE 1</text>
+              </g>
+
+              <!-- ── TREES ── -->
+              <g transform="translate(64,145)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(64,200)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(700,160)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#D0C080" stroke="#A09040" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#D8C890" stroke="#A09040" stroke-width="0.5"/></g>
+              <g transform="translate(700,490)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#D0C080" stroke="#A09040" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#D8C890" stroke="#A09040" stroke-width="0.5"/></g>
+
+              <!-- ── COMPASS ROSE (top-right) ── -->
+              <g transform="translate(742,76)">
+                <circle r="30" fill="#F5EDD8" stroke="#C4A97A" stroke-width="1.5"/>
+                <circle r="4" fill="#C4A97A"/>
+                <polygon points="0,-30 -5,-13 0,-9 5,-13" fill="#8B6914"/>
+                <polygon points="0,30 -5,13 0,9 5,13" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="-30,0 -13,-5 -9,0 -13,5" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="30,0 13,-5 9,0 13,5" fill="#C4A97A" opacity="0.65"/>
+                <line x1="-21" y1="-21" x2="21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <line x1="21" y1="-21" x2="-21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <text x="0" y="-16" text-anchor="middle" font-size="9" fill="#6B4A14" font-weight="bold">N</text>
+                <text x="0" y="22" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">S</text>
+                <text x="-20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">W</text>
+                <text x="20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">E</text>
+              </g>
+              <text x="742" y="115" text-anchor="middle" font-size="6" font-style="italic" fill="#8B6914" opacity="0.55">True North</text>
+
+              {parks.hollywood_studios.rides.map(ride => (
+                <g
+                  class="ride-pin-group"
+                  data-park="hollywood_studios"
+                  data-name={ride.name}
+                  data-land={ride.land}
+                  data-reviewed={ride.reviewed ? "true" : "false"}
+                  data-stars={ride.stars?.toString() ?? ""}
+                  data-tags={ride.tags?.join(",") ?? ""}
+                  data-take={ride.take ?? ""}
+                  data-type={ride.type}
+                  data-video={ride.video !== false ? "true" : "false"}
+                  style="cursor:pointer"
+                  role="button"
+                  tabindex="0"
+                  aria-label={ride.name}
+                >
+                  <circle cx={ride.x} cy={ride.y} r="13" fill="transparent"/>
+                  {ride.reviewed ? (
+                    ride.type === 'special' ? (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <polygon points={`${ride.x},${ride.y-8} ${ride.x+7},${ride.y} ${ride.x},${ride.y+8} ${ride.x-7},${ride.y}`} fill="#C4A97A" stroke="#8B6914" stroke-width="1.5"/>
+                      </>
+                    ) : (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <circle cx={ride.x} cy={ride.y} r="7.5" fill="#A89FF5" stroke="#6B5CE7" stroke-width="2"/>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.5"/>
+                      <circle cx={ride.x} cy={ride.y} r="7" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+                    </>
+                  )}
+                </g>
+              ))}
+            </svg>
+          </div>
+
+          <!-- ANIMAL KINGDOM Map -->
+          <div id="map-animal_kingdom" class="park-map" data-park="animal_kingdom" style="display:none">
+            <svg viewBox="0 0 800 520" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto block" style="font-family: Georgia, 'Times New Roman', serif;">
+              <defs>
+                <filter id="ak-rough" x="-8%" y="-8%" width="116%" height="116%">
+                  <feTurbulence type="fractalNoise" baseFrequency="0.036" numOctaves="3" seed="14" result="noise"/>
+                  <feDisplacementMap in="SourceGraphic" in2="noise" scale="3" xChannelSelector="R" yChannelSelector="G"/>
+                </filter>
+              </defs>
+
+              <rect width="800" height="520" fill="#F5EDD8"/>
+              <rect width="800" height="520" fill="none" stroke="#D4B870" stroke-width="18" opacity="0.08"/>
+              <rect x="5" y="5" width="790" height="510" fill="none" stroke="#C4A97A" stroke-width="2" opacity="0.75"/>
+              <rect x="14" y="14" width="772" height="492" fill="none" stroke="#C4A97A" stroke-width="0.75" opacity="0.38"/>
+              <line x1="5" y1="5" x2="58" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="5" x2="5" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="5" r="4" fill="#C4A97A"/><line x1="14" y1="30" x2="30" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="5" x2="742" y2="5" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="5" x2="795" y2="58" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="5" r="4" fill="#C4A97A"/><line x1="786" y1="30" x2="770" y2="14" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="5" y1="515" x2="58" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="5" y1="515" x2="5" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="5" cy="515" r="4" fill="#C4A97A"/><line x1="14" y1="490" x2="30" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+              <line x1="795" y1="515" x2="742" y2="515" stroke="#C4A97A" stroke-width="2.5"/><line x1="795" y1="515" x2="795" y2="462" stroke="#C4A97A" stroke-width="2.5"/><circle cx="795" cy="515" r="4" fill="#C4A97A"/><line x1="786" y1="490" x2="770" y2="506" stroke="#C4A97A" stroke-width="0.8" opacity="0.5"/>
+
+              <!-- Title -->
+              <line x1="188" y1="28" x2="258" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+              <text x="400" y="33" text-anchor="middle" font-size="13" fill="#6B4A14" letter-spacing="4" font-weight="bold" font-style="italic">ANIMAL KINGDOM</text>
+              <line x1="542" y1="28" x2="612" y2="28" stroke="#C4A97A" stroke-width="0.75" opacity="0.6"/>
+
+              <!-- ── LAND AREAS ── -->
+
+              <!-- Africa — upper left, warm golden savanna -->
+              <path d="M 218,68 C 232,44 272,30 320,32 C 368,35 412,56 438,88 C 460,116 460,152 444,178 C 428,204 396,220 360,222 C 322,224 284,210 258,186 C 230,160 216,128 216,96 C 216,80 216,84 218,68 Z" fill="#DDCF98" stroke="#8A7430" stroke-width="1.3" filter="url(#ak-rough)" opacity="0.92"/>
+              <text x="328" y="130" text-anchor="middle" font-size="12" font-style="italic" fill="#3A2A08" opacity="0.88" transform="rotate(-2,328,130)">Africa</text>
+
+              <!-- Asia — upper right, warm bamboo tan -->
+              <path d="M 452,58 C 465,34 502,20 545,24 C 588,28 630,50 652,82 C 672,110 672,150 654,178 C 636,205 604,220 568,220 C 530,220 496,204 474,178 C 452,152 446,116 450,86 C 452,70 450,68 452,58 Z" fill="#D5C9A8" stroke="#7A6A38" stroke-width="1.3" filter="url(#ak-rough)" opacity="0.92"/>
+              <text x="552" y="118" text-anchor="middle" font-size="12" font-style="italic" fill="#3A2808" opacity="0.88" transform="rotate(2,552,118)">Asia</text>
+
+              <!-- Discovery Island — center organic blob -->
+              <path d="M 342,290 C 352,264 374,248 402,248 C 430,248 454,265 464,292 C 473,317 464,346 444,362 C 422,378 400,382 378,374 C 354,364 336,342 334,316 C 332,304 338,302 342,290 Z" fill="#C8E0B0" stroke="#5A7A38" stroke-width="1.3" filter="url(#ak-rough)" opacity="0.92"/>
+              <text x="400" y="316" text-anchor="middle" font-size="8" font-style="italic" fill="#2A4A18" opacity="0.88">Discovery</text>
+              <text x="400" y="327" text-anchor="middle" font-size="8" font-style="italic" fill="#2A4A18" opacity="0.88">Island</text>
+
+              <!-- Pandora — lower left, bioluminescent teal-green -->
+              <path d="M 125,375 C 138,345 168,326 204,326 C 240,326 276,346 295,375 C 313,402 312,438 295,462 C 277,486 246,498 214,494 C 180,490 148,468 132,438 C 118,410 116,402 125,375 Z" fill="#AECFC4" stroke="#488070" stroke-width="1.3" filter="url(#ak-rough)" opacity="0.92"/>
+              <text x="212" y="420" text-anchor="middle" font-size="9" font-style="italic" fill="#184838" opacity="0.88" transform="rotate(-3,212,420)">Pandora</text>
+              <text x="212" y="432" text-anchor="middle" font-size="7" font-style="italic" fill="#184838" opacity="0.75" transform="rotate(-3,212,432)">World of Avatar</text>
+
+              <!-- DinoLand U.S.A. — lower right, dusty orange-tan -->
+              <path d="M 462,368 C 476,340 510,326 548,330 C 585,334 618,356 634,388 C 648,416 644,450 626,472 C 608,494 576,504 544,500 C 510,496 480,476 466,446 C 453,418 450,394 462,368 Z" fill="#DCBF98" stroke="#8A5A38" stroke-width="1.3" filter="url(#ak-rough)" opacity="0.92"/>
+              <text x="548" y="420" text-anchor="middle" font-size="9" font-style="italic" fill="#4A2808" opacity="0.88" transform="rotate(3,548,420)">DinoLand U.S.A.</text>
+
+              <!-- ── WALKING PATHS (spokes from Discovery Island) ── -->
+              <path d="M 400,248 C 395,235 385,225 370,210" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.48"/>
+              <path d="M 452,290 C 465,278 478,265 490,252" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.48"/>
+              <path d="M 342,316 C 328,312 312,304 296,295" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.48"/>
+              <path d="M 368,370 C 348,382 325,390 300,392" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.48"/>
+              <path d="M 436,358 C 452,370 468,378 484,382" stroke="#C4A97A" stroke-width="1.5" stroke-dasharray="5 3" opacity="0.48"/>
+
+              <!-- ── TREE OF LIFE illustration ── -->
+              <g transform="translate(400,308)" opacity="0.88">
+                <path d="M -6,22 C -15,20 -22,18 -20,28" fill="none" stroke="#9B8040" stroke-width="1.8"/>
+                <path d="M 6,22 C 15,20 22,18 20,28" fill="none" stroke="#9B8040" stroke-width="1.8"/>
+                <path d="M -7,24 C -9,4 -9,-14 0,-28 C 9,-14 9,4 7,24 Z" fill="#9B8040" stroke="#6B5020" stroke-width="1"/>
+                <ellipse cx="0" cy="-18" rx="36" ry="28" fill="#488035" stroke="#2A5820" stroke-width="1.2"/>
+                <ellipse cx="-20" cy="-38" rx="20" ry="14" fill="#3A6B28" stroke="#2A5820" stroke-width="1"/>
+                <ellipse cx="16"  cy="-40" rx="18" ry="13" fill="#488030" stroke="#2A5820" stroke-width="1"/>
+                <ellipse cx="2"   cy="-50" rx="14" ry="11" fill="#528838" stroke="#2A5820" stroke-width="0.75"/>
+                <ellipse cx="4"   cy="-59" rx="9"  ry="8"  fill="#488838" stroke="#2A5820" stroke-width="0.75"/>
+              </g>
+
+              <!-- ── EVEREST mountain (Asia) ── -->
+              <g transform="translate(570,168)" opacity="0.78">
+                <polygon points="0,-35 -32,22 32,22" fill="#C8B898" stroke="#9B8060" stroke-width="1.2"/>
+                <polygon points="0,-35 -10,-12 10,-12" fill="white" opacity="0.88"/>
+                <polygon points="0,-35 10,-12 32,22 0,22" fill="#B0A080" opacity="0.28"/>
+                <text x="0" y="32" text-anchor="middle" font-size="6" font-style="italic" fill="#6B4A14" opacity="0.7">Everest</text>
+              </g>
+
+              <!-- ── TREES ── -->
+              <g transform="translate(64,138)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(64,190)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(64,245)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#5A8B3A" stroke="#3A6B2A" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#6A9B45" stroke="#3A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(720,92)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#9B9875" stroke="#6B6845" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#ABAB80" stroke="#6B6845" stroke-width="0.5"/></g>
+              <g transform="translate(720,148)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#9B9875" stroke="#6B6845" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#ABAB80" stroke="#6B6845" stroke-width="0.5"/></g>
+              <g transform="translate(128,498)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-14 -7,-2 7,-2" fill="#4A8B3A" stroke="#2A6B2A" stroke-width="0.5"/><polygon points="0,-10 -5,1 5,1" fill="#5A9B45" stroke="#2A6B2A" stroke-width="0.5"/></g>
+              <g transform="translate(630,498)"><rect x="-1.5" y="0" width="3" height="5" fill="#9B8040"/><polygon points="0,-13 -6,-2 6,-2" fill="#C8A878" stroke="#987848" stroke-width="0.5"/><polygon points="0,-9 -4,1 4,1" fill="#D8B888" stroke="#987848" stroke-width="0.5"/></g>
+
+              <!-- ── COMPASS ROSE (top-right) ── -->
+              <g transform="translate(742,76)">
+                <circle r="30" fill="#F5EDD8" stroke="#C4A97A" stroke-width="1.5"/>
+                <circle r="4" fill="#C4A97A"/>
+                <polygon points="0,-30 -5,-13 0,-9 5,-13" fill="#8B6914"/>
+                <polygon points="0,30 -5,13 0,9 5,13" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="-30,0 -13,-5 -9,0 -13,5" fill="#C4A97A" opacity="0.65"/>
+                <polygon points="30,0 13,-5 9,0 13,5" fill="#C4A97A" opacity="0.65"/>
+                <line x1="-21" y1="-21" x2="21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <line x1="21" y1="-21" x2="-21" y2="21" stroke="#C4A97A" stroke-width="0.6" opacity="0.35"/>
+                <text x="0" y="-16" text-anchor="middle" font-size="9" fill="#6B4A14" font-weight="bold">N</text>
+                <text x="0" y="22" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">S</text>
+                <text x="-20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">W</text>
+                <text x="20" y="3" text-anchor="middle" font-size="7" fill="#8B6914" opacity="0.8">E</text>
+              </g>
+              <text x="742" y="115" text-anchor="middle" font-size="6" font-style="italic" fill="#8B6914" opacity="0.55">True North</text>
+
+              {parks.animal_kingdom.rides.map(ride => (
+                <g
+                  class="ride-pin-group"
+                  data-park="animal_kingdom"
+                  data-name={ride.name}
+                  data-land={ride.land}
+                  data-reviewed={ride.reviewed ? "true" : "false"}
+                  data-stars={ride.stars?.toString() ?? ""}
+                  data-tags={ride.tags?.join(",") ?? ""}
+                  data-take={ride.take ?? ""}
+                  data-type={ride.type}
+                  data-video={ride.video !== false ? "true" : "false"}
+                  style="cursor:pointer"
+                  role="button"
+                  tabindex="0"
+                  aria-label={ride.name}
+                >
+                  <circle cx={ride.x} cy={ride.y} r="13" fill="transparent"/>
+                  {ride.reviewed ? (
+                    ride.type === 'special' ? (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <polygon points={`${ride.x},${ride.y-8} ${ride.x+7},${ride.y} ${ride.x},${ride.y+8} ${ride.x-7},${ride.y}`} fill="#C4A97A" stroke="#8B6914" stroke-width="1.5"/>
+                      </>
+                    ) : (
+                      <>
+                        <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.8"/>
+                        <circle cx={ride.x} cy={ride.y} r="7.5" fill="#A89FF5" stroke="#6B5CE7" stroke-width="2"/>
+                      </>
+                    )
+                  ) : (
+                    <>
+                      <circle cx={ride.x} cy={ride.y} r="9" fill="white" opacity="0.5"/>
+                      <circle cx={ride.x} cy={ride.y} r="7" fill="none" stroke="#9CA3AF" stroke-width="1.5"/>
+                    </>
+                  )}
+                </g>
+              ))}
+            </svg>
+          </div>
+
+        </div><!-- /map-wrapper -->
+
+        <!-- Map Legend -->
+        <div class="mt-6 flex flex-wrap items-center gap-5 justify-center">
+          <div class="flex items-center gap-2 text-sm text-dark/60">
+            <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="#A89FF5" stroke="#6B5CE7" stroke-width="2"/></svg>
+            Reviewed on camera
+          </div>
+          <div class="flex items-center gap-2 text-sm text-dark/60">
+            <svg width="16" height="16" viewBox="0 0 16 16"><polygon points="8,2 14,8 8,14 2,8" fill="#C4A97A" stroke="#8B6914" stroke-width="1.5"/></svg>
+            Special Experience
+          </div>
+          <div class="flex items-center gap-2 text-sm text-dark/60">
+            <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="8" cy="8" r="6" fill="none" stroke="#9CA3AF" stroke-width="1.5"/></svg>
+            Not yet reviewed
+          </div>
+        </div>
+
+        <!-- Tag Legend -->
+        <div class="mt-5 flex flex-wrap gap-2 justify-center">
+          <span class="tag-pill" style="background:#FEF3C7;color:#92400E">🧒 Kid Friendly</span>
+          <span class="tag-pill" style="background:#EDE9FE;color:#5B21B6">⭐ Cornerstone Experience</span>
+          <span class="tag-pill" style="background:#FEE2E2;color:#991B1B">😒 Overrated</span>
+          <span class="tag-pill" style="background:#DBEAFE;color:#1E40AF">🎿 Single Rider Available</span>
+          <span class="tag-pill" style="background:#E0F2FE;color:#0C4A6E">❄️ Air Conditioning Haven</span>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ── SLIDE-OUT DETAIL PANEL ── -->
+    <div id="ride-panel" class="ride-panel" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Ride details">
+      <div class="ride-panel-inner">
+        <button id="panel-close" class="panel-close-btn" aria-label="Close panel">✕</button>
+        <div id="panel-content" class="panel-content">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </div>
+    <div id="panel-overlay" class="panel-overlay" aria-hidden="true"></div>
+
+    <!-- ── COMING SOON STRIP ── -->
+    <section class="bg-[#1A1523] py-10 px-6">
+      <div class="max-w-3xl mx-auto text-center flex flex-col sm:flex-row items-center justify-center gap-4">
+        <p class="text-[#FAF9F5]/70 text-sm font-light leading-relaxed">
+          Every ride. Every park. Reviewed on camera. Subscribe to follow the journey
+        </p>
+        <a
+          href="https://app.kit.com/forms/9211740/subscriptions"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="flex-shrink-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#A89FF5] text-[#1A1523] text-sm font-medium hover:bg-[#C0B8FF] transition-colors duration-200"
+        >
+          Subscribe →
+        </a>
+      </div>
+    </section>
+
+    <!-- ── DAY PLANNER ── -->
+    <section class="bg-[#FAF9F5] py-20 px-6">
+      <div class="max-w-3xl mx-auto">
+        <div class="flex items-center gap-3 mb-4">
+          <div class="h-px w-10 bg-[#6B5CE7]/40 flex-shrink-0"></div>
+          <span class="text-xs font-medium tracking-widest uppercase text-[#6B5CE7]/70">Day Planner</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-2">Build Your Day</h2>
+        <p class="text-sm font-light text-dark/50 mb-8">Based on Dino's real ratings and 100+ park visits.</p>
+
+        <div class="bg-white rounded-2xl border border-dark/8 p-8 shadow-sm">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-6">
+            <div class="flex flex-col gap-2">
+              <label for="who-coming" class="text-sm font-medium text-dark/70">Who's coming?</label>
+              <select id="who-coming" class="planner-select">
+                <option value="solo">Just me (solo)</option>
+                <option value="couple">Me + someone</option>
+                <option value="kids">Kids in the mix</option>
+                <option value="group">Big group</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="thrill-level" class="text-sm font-medium text-dark/70">Thrill level?</label>
+              <select id="thrill-level" class="planner-select">
+                <option value="chill">Keep it chill</option>
+                <option value="mix">Mix it up</option>
+                <option value="send">Send it</option>
+              </select>
+            </div>
+          </div>
+          <button id="build-day-btn" class="w-full py-3.5 rounded-xl bg-[#6B5CE7] text-white font-medium text-sm hover:bg-[#5a4bd4] transition-colors duration-200">
+            Build My Day →
+          </button>
+        </div>
+
+        <!-- Planner Results -->
+        <div id="planner-results" class="mt-8 hidden">
+          <!-- Filled by JS -->
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  /* ── Park Tabs ── */
+  .park-tab {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 9px 18px 9px 28px;
+    background: #FAF9F5;
+    border: 1.5px solid #C4A97A;
+    border-radius: 4px 4px 0 0;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: #6B5CE7;
+    cursor: pointer;
+    transition: all 0.2s;
+    outline: none;
+  }
+  .park-tab:hover {
+    background: #f0ebdf;
+    border-color: #A07840;
+  }
+  .park-tab.active {
+    background: #6B5CE7;
+    border-color: #6B5CE7;
+    color: #FAF9F5;
+  }
+  .park-tab .hole {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    border: 1.5px solid currentColor;
+    opacity: 0.4;
+  }
+
+  /* ── Map wrapper ── */
+  .map-wrapper {
+    background: #F5EDD8;
+    border-top: none;
+  }
+
+  /* ── Tag Pills ── */
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px 10px;
+    border-radius: 999px;
+    font-size: 0.75rem;
+    font-weight: 500;
+    font-family: 'DM Sans', system-ui, sans-serif;
+  }
+
+  /* ── Ride Pins hover ── */
+  .ride-pin-group:hover circle,
+  .ride-pin-group:focus circle {
+    filter: brightness(1.1);
+  }
+  .ride-pin-group:focus {
+    outline: none;
+  }
+  .ride-pin-group:focus-visible circle:last-child {
+    stroke-width: 3;
+  }
+
+  /* ── Slide-out Panel ── */
+  .ride-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: min(420px, 100vw);
+    background: #FAF9F5;
+    box-shadow: -4px 0 30px rgba(26, 21, 35, 0.18);
+    z-index: 200;
+    transform: translateX(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow-y: auto;
+  }
+  .ride-panel.open {
+    transform: translateX(0);
+  }
+  .ride-panel-inner {
+    padding: 28px 28px 48px;
+    position: relative;
+  }
+  .panel-close-btn {
+    position: absolute;
+    top: 18px;
+    right: 18px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 1.5px solid rgba(26,21,35,0.15);
+    background: transparent;
+    font-size: 13px;
+    color: #6B5CE7;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.15s;
+  }
+  .panel-close-btn:hover {
+    background: #6B5CE7;
+    color: white;
+    border-color: #6B5CE7;
+  }
+
+  /* ── Panel Overlay ── */
+  .panel-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(26, 21, 35, 0.35);
+    z-index: 199;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .panel-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* ── Day Planner Select ── */
+  .planner-select {
+    appearance: none;
+    background: #FAF9F5 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M2 4l4 4 4-4' stroke='%236B5CE7' stroke-width='1.5' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;
+    border: 1.5px solid rgba(26,21,35,0.15);
+    border-radius: 10px;
+    padding: 10px 36px 10px 14px;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: #1A1523;
+    cursor: pointer;
+    transition: border-color 0.15s;
+  }
+  .planner-select:focus {
+    outline: none;
+    border-color: #6B5CE7;
+    box-shadow: 0 0 0 3px rgba(107,92,231,0.12);
+  }
+</style>
+
+<script>
+  // ── Tag data ──
+  const tagInfo: Record<string, { emoji: string; label: string; bg: string; color: string }> = {
+    'kid-friendly':  { emoji: '🧒', label: 'Kid Friendly',           bg: '#FEF3C7', color: '#92400E' },
+    'cornerstone':   { emoji: '⭐', label: 'Cornerstone Experience',  bg: '#EDE9FE', color: '#5B21B6' },
+    'overrated':     { emoji: '😒', label: 'Overrated',               bg: '#FEE2E2', color: '#991B1B' },
+    'single-rider':  { emoji: '🎿', label: 'Single Rider Available',  bg: '#DBEAFE', color: '#1E40AF' },
+    'ac-haven':      { emoji: '❄️', label: 'Air Conditioning Haven',  bg: '#E0F2FE', color: '#0C4A6E' },
+  };
+
+  function renderStars(rating: number): string {
+    const full = Math.floor(rating);
+    const frac = rating - full;
+    const empty = 5 - Math.ceil(rating);
+    let stars = '★'.repeat(full);
+    if (frac >= 0.25 && frac < 0.75) stars += '½';
+    else if (frac >= 0.75) stars += '★';
+    stars += '☆'.repeat(Math.max(0, 5 - stars.replace('½','').length));
+    return stars;
+  }
+
+  // ── Park tab switching ──
+  document.querySelectorAll<HTMLButtonElement>('.park-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      const park = tab.dataset.park!;
+      document.querySelectorAll('.park-tab').forEach(t => {
+        t.classList.remove('active');
+        t.setAttribute('aria-selected', 'false');
+      });
+      tab.classList.add('active');
+      tab.setAttribute('aria-selected', 'true');
+      document.querySelectorAll<HTMLElement>('.park-map').forEach(m => {
+        m.style.display = m.dataset.park === park ? 'block' : 'none';
+      });
+    });
+  });
+
+  // ── Pin clicks ──
+  const panel = document.getElementById('ride-panel')!;
+  const overlay = document.getElementById('panel-overlay')!;
+  const panelContent = document.getElementById('panel-content')!;
+
+  function openPanel(data: {
+    name: string; land: string; reviewed: string;
+    stars: string; tags: string; take: string; type: string; video: string;
+  }) {
+    const isReviewed = data.reviewed === 'true';
+    const stars = parseFloat(data.stars);
+    const tags = data.tags ? data.tags.split(',').filter(Boolean) : [];
+    const isSpecial = data.type === 'special';
+    const hasVideo = data.video !== 'false';
+
+    if (!isReviewed) {
+      panelContent.innerHTML = `
+        <div class="mt-6">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 text-xs font-medium" style="background:#F3F4F6;color:#6B7280">
+            ${isSpecial ? '✦ Special Experience' : '🎢 Attraction'}
+          </div>
+          <h2 class="font-display text-2xl text-dark leading-snug mb-2">${data.name}</h2>
+          <p class="text-sm text-dark/50 mb-6">${data.land}</p>
+          <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
+            <span class="text-3xl block mb-3">🎢</span>
+            <p class="font-display text-lg text-dark mb-1">Not reviewed yet</p>
+            <p class="text-sm font-light text-dark/50 leading-relaxed">Check back after my next visit.</p>
+          </div>
+        </div>`;
+    } else {
+      const tagHTML = tags.map(tag => {
+        const t = tagInfo[tag];
+        if (!t) return '';
+        return `<span class="tag-pill" style="background:${t.bg};color:${t.color}">${t.emoji} ${t.label}</span>`;
+      }).join('');
+
+      panelContent.innerHTML = `
+        <div class="mt-6">
+          <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full mb-4 text-xs font-medium" style="background:${isSpecial ? '#FEF3C7' : '#EDE9FE'};color:${isSpecial ? '#92400E' : '#5B21B6'}">
+            ${isSpecial ? '✦ Special Experience' : '🎢 Reviewed on Camera'}
+          </div>
+          <h2 class="font-display text-2xl text-dark leading-snug mb-1">${data.name}</h2>
+          <p class="text-sm text-dark/50 mb-4">${data.land}</p>
+          <div class="flex items-baseline gap-3 mb-5">
+            <span class="font-display text-4xl text-dark">${stars.toFixed(1)}</span>
+            <div>
+              <div class="text-[#A89FF5] text-lg tracking-wide leading-none">${renderStars(stars)}</div>
+              <div class="text-xs text-dark/40 mt-0.5">out of 5</div>
+            </div>
+          </div>
+          <p class="text-sm font-light text-dark/70 leading-relaxed mb-5 italic">"${data.take}"</p>
+          ${tagHTML ? `<div class="flex flex-wrap gap-2 mb-6">${tagHTML}</div>` : ''}
+          ${hasVideo ? `<a
+            href="https://www.youtube.com/@dinofavarajr"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-[#6B5CE7] text-white text-sm font-medium hover:bg-[#5a4bd4] transition-colors duration-200"
+          >
+            Watch the review →
+          </a>` : ''}
+        </div>`;
+    }
+
+    panel.classList.add('open');
+    panel.setAttribute('aria-hidden', 'false');
+    overlay.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closePanel() {
+    panel.classList.remove('open');
+    panel.setAttribute('aria-hidden', 'true');
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  document.querySelectorAll<SVGGElement>('.ride-pin-group').forEach(pin => {
+    pin.addEventListener('click', () => openPanel(pin.dataset as any));
+    pin.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        openPanel(pin.dataset as any);
+      }
+    });
+  });
+
+  document.getElementById('panel-close')!.addEventListener('click', closePanel);
+  overlay.addEventListener('click', closePanel);
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closePanel(); });
+
+  // ── Day Planner ──
+  const recommendations: Record<string, {
+    emoji: string; vibe: string; intro: string;
+    plan: { time: string; icon: string; items: string[] }[];
+    note: string;
+  }> = {
+    'solo-chill': {
+      emoji: '🚶', vibe: 'Solo & Chill',
+      intro: "No agenda, no rope drop panic. This is the most underrated way to do Disney.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Soarin' Around the World — a perfect slow opener", "Living with the Land — surprisingly meditative", "Spaceship Earth — it's a classic for a reason"] },
+        { time: 'Midday', icon: '☀️', items: ["Journey into Imagination with Figment (3★ · ❄️ AC haven)", "Grab a drink in World Showcase and just walk", "The Seas with Nemo & Friends — zero stress, good AC"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Gran Fiesta Tour (great AC, zero line)", "Frozen Ever After — short, sweet, well-done", "Pick a World Showcase pavilion and eat your way through it"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT Forever nighttime show", "Late dinner in World Showcase — France pavilion recommended"] },
+      ],
+      note: "Skip anything with a 45+ min wait. You're here for the experience, not the throughput. Trust.",
+    },
+    'solo-mix': {
+      emoji: '🎯', vibe: 'Solo & Mixing It Up',
+      intro: "Single rider lines are your secret weapon. Use them mercilessly.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★) — single rider and early, this is perfect", "Guardians of the Galaxy: Cosmic Rewind (single rider)", "Test Track — single rider makes this effortless"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Green (1★) as a comparison — skip it if you're short on time", "Journey into Imagination with Figment (3★ · ❄️)", "Soarin' on single rider when the line peaks"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest if at Animal Kingdom", "Kilimanjaro Safaris for the reset", "Na'vi River Journey is 1★ — only worth it if under 15 min"] },
+        { time: 'Evening', icon: '🌙', items: ["World Showcase for food and drinks", "Nighttime show to close it out"] },
+      ],
+      note: "Na'vi River Journey gets 1★ from me. Beautiful animatronic, brutal wait. The math doesn't math.",
+    },
+    'solo-send': {
+      emoji: '🚀', vibe: 'Solo & Sending It',
+      intro: "Rope drop. Lightning Lane. Maximum rides per dollar. Let's go.",
+      plan: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage at AK — first ride, no exceptions", "Rise of the Resistance at HS — second park", "TRON Lightcycle / Run at MK if you have the legs"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange (4★ · criminally underridden)", "Expedition Everest", "Seven Dwarfs Mine Train — single rider line when available"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Guardians of the Galaxy: Cosmic Rewind", "Rock 'n' Roller Coaster at HS", "Space Mountain — still worth it every time"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy if at MK (5★ — mandatory, I don't care how tired you are)", "Haunted Mansion — never skip", "Pirates of the Caribbean as a nightcap"] },
+      ],
+      note: "Mission: Space Orange is rated 4★ and most people skip it. That's their loss and your gain.",
+    },
+    'couple-chill': {
+      emoji: '💑', vibe: 'Couple & Chill',
+      intro: "Slow down. This is the most romantic park in the world if you let it be.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Living with the Land — boat ride, genuinely lovely, no one fights on this ride", "The Seas with Nemo & Friends", "Soarin' — sit front row together"] },
+        { time: 'Midday', icon: '☀️', items: ["World Showcase loop — drinks and food at every pavilion", "Journey into Imagination with Figment (3★ · ❄️)", "Frozen Ever After — sweet, short, well done"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Haunted Mansion if at MK — a date night classic", "Pirates of the Caribbean", "Jungle Cruise (3.5★) — if you get a great Skipper, it's a 5"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK (5★ — hits differently with someone)", "EPCOT nighttime show", "Late dinner in World Showcase — France or Japan pavilion"] },
+      ],
+      note: "Festival of Fantasy is rated 5★. Find a good spot early. Bring your person. It's almost inconveniently good.",
+    },
+    'couple-mix': {
+      emoji: '🎡', vibe: 'Couple & Mixing It Up',
+      intro: "Best of both worlds — thrills in the morning, vibes in the afternoon.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★) — do this together, it's an experience", "Guardians of the Galaxy: Cosmic Rewind", "Test Track — the competitive mode is fun with two people"] },
+        { time: 'Midday', icon: '☀️', items: ["Soarin' — front row if you can get it", "Jungle Cruise (3.5★) — pray for a good Skipper together", "Living with the Land as a midday reset"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest if at AK", "Journey into Imagination with Figment (3★ · ❄️ break)", "World Showcase food crawl"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK if that's your park (5★)", "EPCOT nighttime show", "Na'vi is 1★ — skip it. Flight of Passage instead."] },
+      ],
+      note: "Jungle Cruise (3.5★) has a ceiling of 5 when the Skipper is transcendent. The variance is real. Go in knowing that.",
+    },
+    'couple-send': {
+      emoji: '🎢', vibe: 'Couple & Sending It',
+      intro: "You're here to ride and you will not be slowed down.",
+      plan: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage together — genuinely life-changing", "Rise of the Resistance — worth any wait, do it together", "TRON Lightcycle / Run — screaming together is bonding"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange (4★) — intense, go together", "Seven Dwarfs Mine Train", "Expedition Everest — back row, every time"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Rock 'n' Roller Coaster at HS", "Tower of Terror — the classic", "Haunted Mansion as a palate cleanser"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK (5★ — even thrill-seekers need to see this)", "Space Mountain at night", "Big Thunder Mountain Railroad — underrated last ride"] },
+      ],
+      note: "Mission: Space Orange is rated 4★ and criminally underridden. Most people go Green. Don't.",
+    },
+    'kids-chill': {
+      emoji: '👨‍👩‍👧', vibe: 'Kids & Keeping It Chill',
+      intro: "Match the kids' energy, not yours. Some of the best Disney is slow Disney.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["It's a Small World — start soft and familiar", "Dumbo the Flying Elephant — they will lose their minds", "Under the Sea: Journey of The Little Mermaid (3.3★ · 🧒)"] },
+        { time: 'Midday', icon: '☀️', items: ["Ariel's Grotto Meet & Greet (3★ · 🧒) — absolute kid moment", "Journey into Imagination with Figment (3★ · ❄️ 🧒)", "Lunch + rest break — seriously, build it in, no exceptions"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Peter Pan's Flight — the wait is brutal but kids deserve it", "Tomorrowland Speedway (2★) — they'll love it, you'll endure it", "Turtle Talk with Crush — ❄️ and kids are obsessed"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy parade (5★) — position early, it's worth it at every age", "Jungle Cruise (3.5★) — kids love the animals", "Leave before fireworks unless your kid has nerves of steel"] },
+      ],
+      note: "Tomorrowland Speedway gets 2★ but your kid doesn't care about stars. They care about the steering wheel. This is their day.",
+    },
+    'kids-mix': {
+      emoji: '🎪', vibe: 'Kids & Mixing It Up',
+      intro: "Adventure for the big kids, magic for the little ones. Split strategically.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Seven Dwarfs Mine Train — the family coaster GOAT", "Under the Sea: Journey of The Little Mermaid (3.3★ · 🧒)", "The Seas with Nemo & Friends — low key, everyone likes it"] },
+        { time: 'Midday', icon: '☀️', items: ["Ariel's Grotto Meet & Greet (3★) for the little ones", "Mission: Space Green for older kids (3.8★ · solid)", "Journey into Imagination with Figment (3★ · ❄️ 🧒) — great AC break"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Na'vi River Journey (1★) — short, kids like the lights, watch the wait time", "Slinky Dog Dash at HS if switching parks", "Toy Story Mania! — competitive, fun for everyone"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — non-negotiable", "Haunted Mansion — brave kids 6+ will love it", "Pirates of the Caribbean — the classic closer"] },
+      ],
+      note: "Na'vi gets 1★ from me, but kids under 8 genuinely don't care. The lights are pretty. Just don't wait 90 minutes for it.",
+    },
+    'kids-send': {
+      emoji: '🎠', vibe: 'Kids & Sending It',
+      intro: "Big-kid energy. Someone in your group is over 44 inches and ready to go.",
+      plan: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage (44\"+) — this changes lives at any age", "Slinky Dog Dash — great gateway coaster for newer riders", "Seven Dwarfs Mine Train — all ages, worth every minute of the wait"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange for the brave ones (4★)", "Mission: Space Green for everyone else (3.8★)", "Under the Sea: Little Mermaid (3.3★ · 🧒) as a breather"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest — first big coaster moment for older kids", "Haunted Mansion — spooky but not scary, a rite of passage", "TRON Lightcycle / Run if Lightning Lane available"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — mandatory at any age", "Space Mountain — a rite of passage", "Big Thunder Mountain Railroad — great family closer"] },
+      ],
+      note: "Mission: Space has two sides for a reason. Green (3.8★) keeps everyone comfortable. Orange (4★) is for the brave. Know your crew.",
+    },
+    'group-chill': {
+      emoji: '👥', vibe: 'Big Group & Keeping It Easy',
+      intro: "Coordination is the enemy of joy. Pick a pace and stick to it.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Kilimanjaro Safaris — everyone fits, everyone loves animals, zero conflict", "Living with the Land — surprisingly meditative, group-sized boats", "Soarin' — grand, easy, universally beloved"] },
+        { time: 'Midday', icon: '☀️', items: ["World Showcase split-and-meet strategy — pick a pavilion to regroup", "Journey into Imagination with Figment (3★ · ❄️)", "Ariel's Grotto if there are kids in the mix (3★)"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Festival of Fantasy parade (5★) — the great equalizer, everyone loves it", "Jungle Cruise (3.5★) — Skipper-dependent but groups go nuts", "It's a Small World — comfortable, AC, group-sized vehicles"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT nighttime show or MK fireworks", "Pirates of the Caribbean — group-friendly, fun closer"] },
+      ],
+      note: "Festival of Fantasy parade is rated 5★ and it works for every group configuration I've seen. Find a spot. Commit.",
+    },
+    'group-mix': {
+      emoji: '🎭', vibe: 'Big Group & Mixing It Up',
+      intro: "Split the group by tolerance level. Regroup strategically. This is the way.",
+      plan: [
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space — Orange (4★) for the brave, Green (3.8★) for everyone else", "Kilimanjaro Safaris — regroup here, zero conflict, everyone happy", "Seven Dwarfs Mine Train — family coaster sweet spot"] },
+        { time: 'Midday', icon: '☀️', items: ["Jungle Cruise (3.5★) — everyone on one boat, a true group experience", "Journey into Imagination with Figment (3★ · ❄️) for the chill contingent", "Living with the Land for the 'I just want to see things' people"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Soarin' — front row only, worth fighting for", "Na'vi River Journey is 1★ — skip if wait is over 20 min", "Test Track — good for competitive groups"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — reunite everyone here, no exceptions", "Haunted Mansion — atmospheric, most people handle it fine", "Pirates of the Caribbean — classic group closer"] },
+      ],
+      note: "Jungle Cruise (3.5★) is the great group equalizer when the Skipper is good. The ceiling is a genuine 5-star group experience.",
+    },
+    'group-send': {
+      emoji: '🏆', vibe: 'Big Group & Going All In',
+      intro: "Your group has aligned on maximum rides. Respect. This requires planning.",
+      plan: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Rise of the Resistance — worth splitting up and regrouping for", "Flight of Passage (44\"+) — life-changing for everyone who can ride", "TRON Lightcycle / Run — get Lightning Lane in advance, not optional"] },
+        { time: 'Midday', icon: '☀️', items: ["Expedition Everest — groups love screaming together", "Mission: Space Orange (4★) — the underrated heavy hitter", "Rock 'n' Roller Coaster at HS — back-to-back is valid"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Tower of Terror — the drop is always funnier in a group", "Guardians of the Galaxy: Cosmic Rewind", "Seven Dwarfs Mine Train — groups go to war over this wait time, it's worth it"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — even thrill-seekers need to see this, mandatory", "Haunted Mansion — a classic group nightcap", "Na'vi River Journey is 1★ — skip it, do Flight of Passage again instead"] },
+      ],
+      note: "Na'vi River Journey is 1★. With a big group, the wait hurts more. Flight of Passage is in the same land. Do that instead. Every time.",
+    },
+  };
+
+  document.getElementById('build-day-btn')!.addEventListener('click', () => {
+    const who = (document.getElementById('who-coming') as HTMLSelectElement).value;
+    const thrill = (document.getElementById('thrill-level') as HTMLSelectElement).value;
+    const key = `${who}-${thrill}`;
+    const rec = recommendations[key];
+    if (!rec) return;
+
+    const planHTML = rec.plan.map(block => `
+      <div class="mb-5">
+        <div class="flex items-center gap-2 mb-2">
+          <span class="text-lg">${block.icon}</span>
+          <span class="text-xs font-medium tracking-widest uppercase text-[#6B5CE7]/70">${block.time}</span>
+        </div>
+        <ul class="space-y-1.5">
+          ${block.items.map(item => `
+            <li class="flex items-start gap-2 text-sm font-light text-dark/70">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#A89FF5] flex-shrink-0"></span>
+              ${item}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    `).join('');
+
+    const resultsEl = document.getElementById('planner-results')!;
+    resultsEl.innerHTML = `
+      <div class="bg-white rounded-2xl border border-dark/8 p-8 shadow-sm">
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-3xl">${rec.emoji}</span>
+          <div>
+            <h3 class="font-display text-xl text-dark">${rec.vibe}</h3>
+            <p class="text-sm font-light text-dark/50 leading-relaxed">${rec.intro}</p>
+          </div>
+        </div>
+        <div class="h-px bg-dark/8 my-5"></div>
+        ${planHTML}
+        <div class="mt-4 p-4 rounded-xl bg-[#F5EDD8] border border-[#C4A97A]/30">
+          <p class="text-sm font-light text-dark/65 italic">💬 Dino's note: ${rec.note}</p>
+        </div>
+      </div>
+    `;
+    resultsEl.classList.remove('hidden');
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+</script>
