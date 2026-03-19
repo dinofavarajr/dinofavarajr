@@ -98,7 +98,7 @@ import Footer from '../../components/Footer.astro';
     if (!/^\d+\.?\d*$/.test(clean)) return;
     const raw = parseFloat(clean);
     if (isNaN(raw)) return;
-    const dur = 1800;
+    const dur = 5000;
     const start = performance.now();
     const fmt = (n: number): string => {
       if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');

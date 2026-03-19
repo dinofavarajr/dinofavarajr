@@ -47,7 +47,7 @@ import Footer from '../../components/Footer.astro';
           <!-- Before -->
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
-            <span class="count-up font-display text-[4.5rem] leading-none text-red-500" data-value="1000">1,000</span>
+            <span class="count-up font-display text-[clamp(5rem,16vw,10rem)] leading-none text-red-500" data-value="1000">1,000</span>
             <span class="mt-2 text-sm font-light text-dark/50">per video</span>
           </div>
           <!-- Arrow -->
@@ -60,7 +60,7 @@ import Footer from '../../components/Footer.astro';
           <!-- After -->
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-green-500/4">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views After</span>
-            <span class="count-up font-display text-[4.5rem] leading-none text-green-600" data-value="50.5M">50.5M</span>
+            <span class="count-up font-display text-[clamp(5rem,16vw,10rem)] leading-none text-green-600" data-value="50.5M">50.5M</span>
             <span class="mt-2 text-sm font-light text-dark/50">in 86 days</span>
           </div>
         </div>
@@ -170,7 +170,7 @@ import Footer from '../../components/Footer.astro';
     if (!/^\d+\.?\d*$/.test(clean)) return;
     const raw = parseFloat(clean);
     if (isNaN(raw)) return;
-    const dur = 1800;
+    const dur = 5000;
     const start = performance.now();
     const fmt = (n: number): string => {
       if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
