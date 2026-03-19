@@ -6,121 +6,76 @@ import Footer from '../../components/Footer.astro';
 
 <Layout
   title="Sweet Fish Media Case Study | Dino Favara Jr."
-  description="100-250 episodes. 250-500 clips. 500K+ total views. End-to-end content lifecycle management across multiple B2B podcast clients."
+  description="Produced 100–250 episodes and 250–500 short-form clips across multiple B2B podcast clients, generating 500K+ total views."
 >
   <Nav />
 
   <main>
-    <!-- Back link -->
     <section class="max-w-3xl mx-auto px-6 pt-10">
       <a href="/work" class="inline-flex items-center gap-2 text-sm font-medium text-primary/70 hover:text-primary transition-colors duration-200">
         &larr; All case studies
       </a>
     </section>
 
-    <!-- Header -->
     <section class="max-w-3xl mx-auto px-6 pt-8 pb-12">
       <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-700 tracking-wide mb-6">
-        Podcast Production
+        Podcast Content Engine
       </span>
       <h1 class="font-display text-[clamp(2rem,5vw,3.2rem)] leading-[1.1] tracking-tight text-dark mb-4">
-        Sweet Fish Media
+        Sweet Fish Media | B2B Podcast Production
       </h1>
       <p class="text-lg font-light text-dark/60 leading-relaxed max-w-xl">
-        100-250 episodes. 250-500 clips. 500K+ total views across multiple B2B podcast clients.
+        Produced 100–250 episodes and 250–500 short-form clips across multiple B2B podcast clients, generating 500K+ total views.
       </p>
-
-      <!-- Service tags -->
       <div class="flex flex-wrap gap-2 mt-6">
-        {['Podcast Production', 'Clip Strategy', 'B2B Content', 'Distribution', 'Account Management', 'QBRs'].map(tag => (
-          <span class="px-3 py-1.5 rounded-full border border-dark/10 bg-white/60 text-xs font-medium text-dark/55">
-            {tag}
-          </span>
+        {['Podcast Strategy', 'Clip Selection', 'Content Briefs', 'QBR Reporting', 'Short-Form Distribution', 'Performance Analysis'].map(tag => (
+          <span class="px-3 py-1.5 rounded-full border border-dark/10 bg-white/60 text-xs font-medium text-dark/55">{tag}</span>
         ))}
       </div>
     </section>
 
-    <!-- Before / After -->
-    <section class="max-w-3xl mx-auto px-6 pb-12">
-      <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
-          <!-- Scale stat left -->
-          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
-            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Episodes Managed</span>
-            <span class="font-display text-[2.8rem] leading-none text-primary">250+</span>
-            <span class="mt-2 text-sm font-light text-dark/50">across clients</span>
-          </div>
-          <!-- Arrow -->
-          <div class="hidden md:flex items-center justify-center px-4">
-            <span class="text-2xl text-dark/20">&rarr;</span>
-          </div>
-          <div class="flex md:hidden items-center justify-center py-2">
-            <span class="text-2xl text-dark/20">&darr;</span>
-          </div>
-          <!-- Scale stat right -->
-          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-primary/4">
-            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views Generated</span>
-            <span class="font-display text-[2.8rem] leading-none text-primary">500K+</span>
-            <span class="mt-2 text-sm font-light text-dark/50">B2B podcast clips</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Metrics Grid -->
     <section class="max-w-3xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { value: '500K+', label: 'Total Views', sub: '(across all clients)' },
-          { value: '500+', label: 'Clips Produced', sub: '(from long-form)' },
-          { value: '250+', label: 'Episodes', sub: '(managed end-to-end)' },
-          { value: 'Multi', label: 'Client Accounts', sub: '(B2B podcasts)' },
+          { value: '100–250', label: 'Episodes Produced', sub: '' },
+          { value: '250–500', label: 'Short-Form Clips Created', sub: '' },
+          { value: '500K+', label: 'Total Views Generated', sub: '(approx.)' },
+          { value: 'B2B', label: 'Niche Expertise', sub: '' },
         ].map(m => (
           <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
             <span class="font-display text-2xl text-primary">{m.value}</span>
             <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
-            <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>
+            {m.sub && <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>}
           </div>
         ))}
       </div>
     </section>
 
-    <!-- Body Content -->
     <section class="max-w-3xl mx-auto px-6 pb-16">
       <article class="prose-custom">
-        <h3>The Situation</h3>
-        <p>Sweet Fish Media is one of the leading B2B podcast agencies in the country, producing shows for some of the most recognized brands in the B2B space. Managing high-volume podcast production at scale — across multiple clients, multiple shows, and multiple distribution channels — requires more than a content strategy. It requires systems, accountability, and a clear content lifecycle from recording to clip to distribution.</p>
+        <h3>The Work</h3>
+        <p>At Sweet Fish Media, I managed the full content lifecycle for multiple B2B podcast clients across different industries — from strategy and content briefs through clip selection, editing direction, distribution, and performance reporting.</p>
 
-        <h3>The Approach</h3>
-        <p>This engagement was operational as much as it was creative. I managed end-to-end content lifecycle across multiple client accounts: <strong>episode strategy, clip selection, editing direction, distribution, and quarterly business reviews with clients.</strong></p>
-        <p>The clip selection process was built around a simple filter: what moment in this episode would make a cold viewer stop scrolling and want to hear more of the show? Not the best quote. Not the most impressive stat. The moment with the most narrative pull. Applying that consistently across hundreds of episodes at scale required a repeatable system, not creative instinct on each clip.</p>
-        <p>QBRs were a critical piece. Clients needed to see that their content investment was producing measurable results. I built reporting frameworks that connected clip performance to broader show growth metrics — making the ROI of short-form content legible to business-minded stakeholders.</p>
+        <h3>What I Built</h3>
+        <p><strong>Strategy & Ideation:</strong> I develop content briefs for each show, identifying which episodes and segments have the highest potential for short-form performance.</p>
+        <p><strong>Clip Selection & Direction:</strong> For each episode, I identify the 3–5 moments with the strongest hook, emotional resonance, or tactical value. I write editing direction so editors can execute without guesswork.</p>
+        <p><strong>Distribution & Optimization:</strong> Each clip is optimized for its target platform. A LinkedIn clip for a B2B SaaS podcast looks different than a YouTube Short for a marketing show.</p>
+        <p><strong>Performance Reporting:</strong> I run quarterly business reviews (QBRs) with clients, analyzing what formats are working and adjusting strategy based on data. Not vanity metrics, but strategic conversations about what's driving results.</p>
 
-        <h3>The Results</h3>
-        <p>Across 100-250 episodes and 250-500 clips, the accounts I managed generated 500K+ total views. For B2B content — where audiences are smaller, more targeted, and harder to reach than consumer niches — 500K views represents meaningful distribution and brand exposure at scale.</p>
-        <p>More importantly, the clients retained. Consistent results, clear reporting, and a team that treated their business like it mattered. That's what keeps accounts.</p>
+        <h3>The Takeaway</h3>
+        <p>Producing hundreds of episodes and clips across multiple clients simultaneously forced me to build systems that scale. I can't be in the weeds of every edit for every client. So I built repeatable frameworks for clip selection, editing direction, and performance analysis that work across niches. That same systems-thinking is what I bring to any content operation.</p>
+
+        <p class="text-[11px] text-dark/35 mt-6">*Total views figure is approximate and being finalized.</p>
       </article>
-
-      <!-- Timeline -->
-      <div class="mt-12 pt-8 border-t border-dark/8">
-        <span class="text-sm font-light text-dark/45">Engagement: ongoing multi-client</span>
-        <div class="mt-2 h-1.5 w-full rounded-full bg-dark/6 overflow-hidden">
-          <div class="h-full rounded-full bg-gradient-to-r from-primary to-mint" style="width: 100%"></div>
-        </div>
-      </div>
     </section>
 
-    <!-- Back to Work CTA -->
     <section class="max-w-3xl mx-auto px-6 pb-20">
       <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
         <div>
           <p class="font-display text-xl text-dark">Want results like this?</p>
           <p class="text-sm font-light text-dark/55 mt-1">Let's talk about building your content engine.</p>
         </div>
-        <a
-          href="mailto:dino@mercurysocialmedia.com"
-          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 whitespace-nowrap"
-        >
+        <a href="mailto:dino@mercurysocialmedia.com" class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 whitespace-nowrap">
           Email me &rarr;
         </a>
       </div>
@@ -131,47 +86,8 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <style>
-  .prose-custom h3 {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.35rem;
-    font-weight: 400;
-    color: var(--dark);
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-  }
-  .prose-custom h3:first-child {
-    margin-top: 0;
-  }
-  .prose-custom p {
-    font-size: 0.95rem;
-    font-weight: 300;
-    line-height: 1.75;
-    color: rgba(26, 21, 35, 0.65);
-    margin-bottom: 1rem;
-  }
-  .prose-custom strong {
-    font-weight: 500;
-    color: var(--dark);
-  }
-  .prose-custom blockquote {
-    border-left: 3px solid var(--primary);
-    padding: 1rem 1.5rem;
-    margin: 1.5rem 0;
-    background: rgba(107, 92, 231, 0.04);
-    border-radius: 0 0.75rem 0.75rem 0;
-  }
-  .prose-custom blockquote p {
-    font-family: 'Instrument Serif', serif;
-    font-size: 1.15rem;
-    font-weight: 400;
-    font-style: italic;
-    color: var(--dark);
-    margin-bottom: 0.5rem;
-  }
-  .prose-custom blockquote cite {
-    font-family: 'DM Sans', sans-serif;
-    font-style: normal;
-    font-size: 0.8rem;
-    color: rgba(26, 21, 35, 0.45);
-  }
+  .prose-custom h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-weight: 400; color: var(--dark); margin-top: 2rem; margin-bottom: 0.75rem; }
+  .prose-custom h3:first-child { margin-top: 0; }
+  .prose-custom p { font-size: 0.95rem; font-weight: 300; line-height: 1.75; color: rgba(26, 21, 35, 0.65); margin-bottom: 1rem; }
+  .prose-custom strong { font-weight: 500; color: var(--dark); }
 </style>
