@@ -1,0 +1,179 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Nick Gray Case Study | Dino Favara Jr."
+  description="From 7,288 average views to 1.54M total views in 90 days. Rebuilt his TikTok identity around one clear thesis and drove the most book sales from a single video in his history."
+>
+  <Nav />
+
+  <main>
+    <!-- Back link -->
+    <section class="max-w-3xl mx-auto px-6 pt-10">
+      <a href="/work" class="inline-flex items-center gap-2 text-sm font-medium text-primary/70 hover:text-primary transition-colors duration-200">
+        &larr; All case studies
+      </a>
+    </section>
+
+    <!-- Header -->
+    <section class="max-w-3xl mx-auto px-6 pt-8 pb-12">
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-amber-500/10 text-amber-700 tracking-wide mb-6">
+        Brand Growth + Revenue
+      </span>
+      <h1 class="font-display text-[clamp(2rem,5vw,3.2rem)] leading-[1.1] tracking-tight text-dark mb-4">
+        Nick Gray
+      </h1>
+      <p class="text-lg font-light text-dark/60 leading-relaxed max-w-xl">
+        From 7,288 average views to 1.54M total views in 90 days — and the most book sales driven by a single video in his history.
+      </p>
+
+      <!-- Service tags -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        {['TikTok Strategy', 'Content Identity', 'Format Development', 'Book Launch Support', 'Short-Form Growth'].map(tag => (
+          <span class="px-3 py-1.5 rounded-full border border-dark/10 bg-white/60 text-xs font-medium text-dark/55">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Before / After -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
+          <!-- Before -->
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
+            <span class="font-display text-[2.8rem] leading-none text-red-500">7,288</span>
+            <span class="mt-2 text-sm font-light text-dark/50">per video</span>
+          </div>
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center px-4">
+            <span class="text-2xl text-dark/20">&rarr;</span>
+          </div>
+          <div class="flex md:hidden items-center justify-center py-2">
+            <span class="text-2xl text-dark/20">&darr;</span>
+          </div>
+          <!-- After -->
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-amber-500/4">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views After</span>
+            <span class="font-display text-[2.8rem] leading-none text-amber-600">1.54M</span>
+            <span class="mt-2 text-sm font-light text-dark/50">in 90 days</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Grid -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { value: '1.54M', label: 'Total Views', sub: '(in 90 days)' },
+          { value: '211x', label: 'View Increase', sub: '(vs. baseline)' },
+          { value: '#1', label: 'Book Sales Driver', sub: '(single video)' },
+          { value: '90', label: 'Day Engagement', sub: '(consistent output)' },
+        ].map(m => (
+          <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
+            <span class="font-display text-2xl text-amber-600">{m.value}</span>
+            <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
+            <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Body Content -->
+    <section class="max-w-3xl mx-auto px-6 pb-16">
+      <article class="prose-custom">
+        <h3>The Situation</h3>
+        <p>Nick Gray is the founder of Museum Hack and the author of <em>The 2-Hour Cocktail Party</em> — a book about how to build real friendships as an adult by hosting small, structured gatherings. He had an audience, a proven book, and a genuine message. But his TikTok content wasn't landing with consistent traction. Average views sat around 7,288 per video — solid, but not growing.</p>
+
+        <h3>The Approach</h3>
+        <p>Nick's problem wasn't effort. It was identity. His content was pulling in multiple directions without a clear thesis the algorithm or a cold viewer could latch onto. We rebuilt his TikTok identity around one sharp, ownable idea: <strong>the loneliness epidemic is real, and Nick has the solution.</strong></p>
+        <p>Every format, hook, and topic decision ran through that filter. We developed a format library tailored to his natural delivery style — conversational, credible, slightly counterintuitive. We also built content that fed directly into his book funnel rather than treating social as separate from the business.</p>
+
+        <h3>The Results</h3>
+        <p>In 90 days, Nick generated 1.54M total views — a 211x increase over his baseline. But the metric that mattered most to him wasn't views. It was book sales. One video in the campaign drove more direct book purchases than any single piece of content in his history.</p>
+        <p>That's the difference between content that performs and content that converts. When the strategy is aligned with the business goal, the numbers follow.</p>
+      </article>
+
+      <!-- Timeline -->
+      <div class="mt-12 pt-8 border-t border-dark/8">
+        <span class="text-sm font-light text-dark/45">Timeline: 90 days</span>
+        <div class="mt-2 h-1.5 w-full rounded-full bg-dark/6 overflow-hidden">
+          <div class="h-full rounded-full bg-gradient-to-r from-amber-400 to-primary" style="width: 100%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Work CTA -->
+    <section class="max-w-3xl mx-auto px-6 pb-20">
+      <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="font-display text-xl text-dark">Want results like this?</p>
+          <p class="text-sm font-light text-dark/55 mt-1">Let's talk about building your content engine.</p>
+        </div>
+        <a
+          href="mailto:dino@mercurysocialmedia.com"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 whitespace-nowrap"
+        >
+          Email me &rarr;
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prose-custom h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-custom h3:first-child {
+    margin-top: 0;
+  }
+  .prose-custom p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(26, 21, 35, 0.65);
+    margin-bottom: 1rem;
+  }
+  .prose-custom strong {
+    font-weight: 500;
+    color: var(--dark);
+  }
+  .prose-custom em {
+    font-style: italic;
+  }
+  .prose-custom blockquote {
+    border-left: 3px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(107, 92, 231, 0.04);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+  .prose-custom blockquote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .prose-custom blockquote cite {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: rgba(26, 21, 35, 0.45);
+  }
+</style>

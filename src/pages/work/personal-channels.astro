@@ -1,0 +1,174 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Personal Channels Case Study | Dino Favara Jr."
+  description="101M+ views. 36K YouTube subscribers. 7M+ Instagram views. 12+ years of building audiences organically. Every system I sell, I tested on myself first."
+>
+  <Nav />
+
+  <main>
+    <!-- Back link -->
+    <section class="max-w-3xl mx-auto px-6 pt-10">
+      <a href="/work" class="inline-flex items-center gap-2 text-sm font-medium text-primary/70 hover:text-primary transition-colors duration-200">
+        &larr; All case studies
+      </a>
+    </section>
+
+    <!-- Header -->
+    <section class="max-w-3xl mx-auto px-6 pt-8 pb-12">
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-blue-500/10 text-blue-700 tracking-wide mb-6">
+        Personal Channel
+      </span>
+      <h1 class="font-display text-[clamp(2rem,5vw,3.2rem)] leading-[1.1] tracking-tight text-dark mb-4">
+        Dino Favara Jr.
+      </h1>
+      <p class="text-lg font-light text-dark/60 leading-relaxed max-w-xl">
+        101M+ views. 36K subscribers. 7M+ Instagram views. 12+ years. Every system I sell, I tested on myself first.
+      </p>
+
+      <!-- Service tags -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        {['YouTube', 'TikTok', 'Instagram Reels', 'Disney Content', 'Long-Form Strategy', 'Short-Form Growth'].map(tag => (
+          <span class="px-3 py-1.5 rounded-full border border-dark/10 bg-white/60 text-xs font-medium text-dark/55">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Stats row -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-3 divide-y md:divide-y-0 md:divide-x divide-dark/8">
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views</span>
+            <span class="font-display text-[2.8rem] leading-none text-blue-600">101M+</span>
+            <span class="mt-2 text-sm font-light text-dark/50">across platforms</span>
+          </div>
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-blue-500/4">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">YouTube Subscribers</span>
+            <span class="font-display text-[2.8rem] leading-none text-blue-600">36K</span>
+            <span class="mt-2 text-sm font-light text-dark/50">and growing</span>
+          </div>
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Years Creating</span>
+            <span class="font-display text-[2.8rem] leading-none text-blue-600">12+</span>
+            <span class="mt-2 text-sm font-light text-dark/50">since 2008</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Grid -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { value: '101M+', label: 'Total Views', sub: '(all platforms)' },
+          { value: '36K', label: 'YouTube Subs', sub: '(organic only)' },
+          { value: '7M+', label: 'Instagram Views', sub: '(Reels)' },
+          { value: '12+', label: 'Years Creating', sub: '(since 2008)' },
+        ].map(m => (
+          <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
+            <span class="font-display text-2xl text-blue-600">{m.value}</span>
+            <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
+            <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Body Content -->
+    <section class="max-w-3xl mx-auto px-6 pb-16">
+      <article class="prose-custom">
+        <h3>The Origin</h3>
+        <p>I've been making videos since 2008 — before YouTube was a career, before algorithms were something you optimized for, before anyone was calling it "content." My brother Blake and I filmed ourselves in our kitchen: him fake-teaching the internet how to make a PB&J while I danced to MC Hammer in the background. Nobody asked for it. We made it anyway.</p>
+        <p>That's still how I approach it. The love for making things came before the strategy. The strategy just made the love more effective.</p>
+
+        <h3>The Channels</h3>
+        <p>My main YouTube channel covers Disney World — park guides, ride rankings, hidden gems, and honest takes on everything from resort pools to park strategy. It's the longest-running version of what I do: show up, be curious, share what I find. 36K subscribers and growing, built entirely without paid promotion or algorithmic shortcuts.</p>
+        <p>On Instagram, I've generated 7M+ views on Reels by applying the same short-form principles I use for clients: <strong>hook fast, deliver value, make it replayable.</strong> The Disney niche is competitive. What works is specificity — strong opinions, clear expertise, and a voice that sounds like a real person, not a content machine.</p>
+        <p>Across YouTube, TikTok, and Instagram, the total view count is 101M+ and climbing. That number matters less to me than what it represents: 12+ years of showing up, testing, failing, iterating, and building something real.</p>
+
+        <h3>Why This Matters for Clients</h3>
+        <p>Every system I sell, I've tested on myself first. When I tell a client their hook isn't working, I know because I've watched my own hooks fail. When I build a format library, I'm drawing from formats I've personally tested in front of an audience that would immediately tell me if they didn't work.</p>
+        <p>The 101M views aren't the credential. The 12 years of trying, failing, and figuring it out are.</p>
+      </article>
+
+      <!-- Timeline -->
+      <div class="mt-12 pt-8 border-t border-dark/8">
+        <span class="text-sm font-light text-dark/45">Timeline: 2008 – present</span>
+        <div class="mt-2 h-1.5 w-full rounded-full bg-dark/6 overflow-hidden">
+          <div class="h-full rounded-full bg-gradient-to-r from-blue-400 to-primary" style="width: 100%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Work CTA -->
+    <section class="max-w-3xl mx-auto px-6 pb-20">
+      <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="font-display text-xl text-dark">Want results like this?</p>
+          <p class="text-sm font-light text-dark/55 mt-1">Let's talk about building your content engine.</p>
+        </div>
+        <a
+          href="mailto:dino@mercurysocialmedia.com"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 whitespace-nowrap"
+        >
+          Email me &rarr;
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prose-custom h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-custom h3:first-child {
+    margin-top: 0;
+  }
+  .prose-custom p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(26, 21, 35, 0.65);
+    margin-bottom: 1rem;
+  }
+  .prose-custom strong {
+    font-weight: 500;
+    color: var(--dark);
+  }
+  .prose-custom blockquote {
+    border-left: 3px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(107, 92, 231, 0.04);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+  .prose-custom blockquote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .prose-custom blockquote cite {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: rgba(26, 21, 35, 0.45);
+  }
+</style>

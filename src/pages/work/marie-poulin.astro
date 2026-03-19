@@ -1,0 +1,176 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Marie Poulin Case Study | Dino Favara Jr."
+  description="From dabbling to a 300K+ view breakout. Took Marie from posting without a strategy to averaging 2K views per video, with multiple 10K+ hits."
+>
+  <Nav />
+
+  <main>
+    <!-- Back link -->
+    <section class="max-w-3xl mx-auto px-6 pt-10">
+      <a href="/work" class="inline-flex items-center gap-2 text-sm font-medium text-primary/70 hover:text-primary transition-colors duration-200">
+        &larr; All case studies
+      </a>
+    </section>
+
+    <!-- Header -->
+    <section class="max-w-3xl mx-auto px-6 pt-8 pb-12">
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-pink-500/10 text-pink-700 tracking-wide mb-6">
+        Start From Zero
+      </span>
+      <h1 class="font-display text-[clamp(2rem,5vw,3.2rem)] leading-[1.1] tracking-tight text-dark mb-4">
+        Marie Poulin
+      </h1>
+      <p class="text-lg font-light text-dark/60 leading-relaxed max-w-xl">
+        From dabbling to a 300K+ view breakout — and a consistent 2K view average along the way.
+      </p>
+
+      <!-- Service tags -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        {['Content Strategy', 'Format Development', 'YouTube Growth', 'Short-Form Video', 'Notion Niche'].map(tag => (
+          <span class="px-3 py-1.5 rounded-full border border-dark/10 bg-white/60 text-xs font-medium text-dark/55">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Before / After -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
+          <!-- Before -->
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Before</span>
+            <span class="font-display text-[2.8rem] leading-none text-red-500">Dabbling</span>
+            <span class="mt-2 text-sm font-light text-dark/50">no strategy</span>
+          </div>
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center px-4">
+            <span class="text-2xl text-dark/20">&rarr;</span>
+          </div>
+          <div class="flex md:hidden items-center justify-center py-2">
+            <span class="text-2xl text-dark/20">&darr;</span>
+          </div>
+          <!-- After -->
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-pink-500/4">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Breakout Video</span>
+            <span class="font-display text-[2.8rem] leading-none text-pink-600">300K+</span>
+            <span class="mt-2 text-sm font-light text-dark/50">views</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Grid -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { value: '300K+', label: 'Breakout Views', sub: '(single video)' },
+          { value: '2K', label: 'Avg Views', sub: '(new baseline)' },
+          { value: '10K+', label: 'Multiple Hits', sub: '(above average)' },
+          { value: '0→1', label: 'Strategy', sub: '(built from scratch)' },
+        ].map(m => (
+          <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
+            <span class="font-display text-2xl text-pink-600">{m.value}</span>
+            <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
+            <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Body Content -->
+    <section class="max-w-3xl mx-auto px-6 pb-16">
+      <article class="prose-custom">
+        <h3>The Situation</h3>
+        <p>Marie Poulin is a Notion expert and educator — one of the most respected voices in the Notion community with a loyal audience. But her short-form video presence didn't reflect that credibility. She was posting without a clear strategy, without a consistent format, and without a thesis her audience could rally around. The content was good. The system wasn't there yet.</p>
+
+        <h3>The Approach</h3>
+        <p>The work started with a simple question: <strong>what does Marie own in the Notion space that nobody else does?</strong> She had deep expertise, strong opinions, and a unique teaching style. We built a content strategy around making that unmistakably visible in the first three seconds of every video.</p>
+        <p>We developed a format library suited to her voice — educational but approachable, never dry. We identified the content angles in the Notion niche that consistently overperformed and built a posting cadence she could sustain. No burnout. No guesswork. Just a repeatable system.</p>
+
+        <h3>The Results</h3>
+        <p>Marie went from posting without a plan to averaging 2K views per video — a meaningful, consistent baseline. Along the way, multiple videos hit 10K+ views, and one broke out at 300K+. That breakout wasn't luck. It was the product of a strategy designed to create the conditions for outliers.</p>
+        <p>The consistency matters as much as the peak. A 300K view video on a channel with no system is a fluke. A 300K view video on a channel averaging 2K views is a signal that the system is working.</p>
+      </article>
+
+      <!-- Timeline -->
+      <div class="mt-12 pt-8 border-t border-dark/8">
+        <span class="text-sm font-light text-dark/45">Result: ongoing growth</span>
+        <div class="mt-2 h-1.5 w-full rounded-full bg-dark/6 overflow-hidden">
+          <div class="h-full rounded-full bg-gradient-to-r from-pink-400 to-periwinkle" style="width: 100%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Work CTA -->
+    <section class="max-w-3xl mx-auto px-6 pb-20">
+      <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="font-display text-xl text-dark">Want results like this?</p>
+          <p class="text-sm font-light text-dark/55 mt-1">Let's talk about building your content engine.</p>
+        </div>
+        <a
+          href="mailto:dino@mercurysocialmedia.com"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 whitespace-nowrap"
+        >
+          Email me &rarr;
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prose-custom h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-custom h3:first-child {
+    margin-top: 0;
+  }
+  .prose-custom p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(26, 21, 35, 0.65);
+    margin-bottom: 1rem;
+  }
+  .prose-custom strong {
+    font-weight: 500;
+    color: var(--dark);
+  }
+  .prose-custom blockquote {
+    border-left: 3px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(107, 92, 231, 0.04);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+  .prose-custom blockquote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .prose-custom blockquote cite {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: rgba(26, 21, 35, 0.45);
+  }
+</style>

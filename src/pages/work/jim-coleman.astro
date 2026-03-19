@@ -1,0 +1,177 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Nav from '../../components/Nav.astro';
+import Footer from '../../components/Footer.astro';
+---
+
+<Layout
+  title="Jim Coleman Case Study | Dino Favara Jr."
+  description="A 77x outlier video. 80K+ views. 4K new subscribers. One concept that outperformed everything on his channel — found through research, not guesswork."
+>
+  <Nav />
+
+  <main>
+    <!-- Back link -->
+    <section class="max-w-3xl mx-auto px-6 pt-10">
+      <a href="/work" class="inline-flex items-center gap-2 text-sm font-medium text-primary/70 hover:text-primary transition-colors duration-200">
+        &larr; All case studies
+      </a>
+    </section>
+
+    <!-- Header -->
+    <section class="max-w-3xl mx-auto px-6 pt-8 pb-12">
+      <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-purple-500/10 text-purple-700 tracking-wide mb-6">
+        Podcast Outlier Strategy
+      </span>
+      <h1 class="font-display text-[clamp(2rem,5vw,3.2rem)] leading-[1.1] tracking-tight text-dark mb-4">
+        The Jim Coleman Show
+      </h1>
+      <p class="text-lg font-light text-dark/60 leading-relaxed max-w-xl">
+        A single concept. 77x his channel average. 80K+ views and 4K new subscribers from one video.
+      </p>
+
+      <!-- Service tags -->
+      <div class="flex flex-wrap gap-2 mt-6">
+        {['Niche Research', 'Outlier Strategy', 'YouTube Strategy', 'Concept Development', 'Podcast Content'].map(tag => (
+          <span class="px-3 py-1.5 rounded-full border border-dark/10 bg-white/60 text-xs font-medium text-dark/55">
+            {tag}
+          </span>
+        ))}
+      </div>
+    </section>
+
+    <!-- Before / After -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
+        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
+          <!-- Before -->
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Channel Average</span>
+            <span class="font-display text-[2.8rem] leading-none text-red-500">1x</span>
+            <span class="mt-2 text-sm font-light text-dark/50">baseline performance</span>
+          </div>
+          <!-- Arrow -->
+          <div class="hidden md:flex items-center justify-center px-4">
+            <span class="text-2xl text-dark/20">&rarr;</span>
+          </div>
+          <div class="flex md:hidden items-center justify-center py-2">
+            <span class="text-2xl text-dark/20">&darr;</span>
+          </div>
+          <!-- After -->
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-purple-500/4">
+            <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Outlier Multiple</span>
+            <span class="font-display text-[2.8rem] leading-none text-purple-600">77x</span>
+            <span class="mt-2 text-sm font-light text-dark/50">on one video</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Metrics Grid -->
+    <section class="max-w-3xl mx-auto px-6 pb-12">
+      <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {[
+          { value: '77x', label: 'Outlier Multiple', sub: '(vs. channel avg)' },
+          { value: '80K+', label: 'Views', sub: '(single video)' },
+          { value: '4K', label: 'New Subscribers', sub: '(from one video)' },
+          { value: '1', label: 'Concept', sub: '(research-driven)' },
+        ].map(m => (
+          <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
+            <span class="font-display text-2xl text-purple-600">{m.value}</span>
+            <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
+            <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Body Content -->
+    <section class="max-w-3xl mx-auto px-6 pb-16">
+      <article class="prose-custom">
+        <h3>The Situation</h3>
+        <p>Jim Coleman runs a podcast-driven YouTube channel covering topics in business, personal development, and entrepreneurship. He had consistent output but inconsistent results — the kind of channel where every video performs about the same, which means no video ever really breaks through. The algorithm doesn't reward average. It rewards outliers.</p>
+
+        <h3>The Approach</h3>
+        <p>Instead of overhauling his content strategy wholesale, I went deep on research. <strong>The goal was to find the one gap in his niche — the topic or angle nobody had done yet, or nobody had done well.</strong></p>
+        <p>I mapped his competitive landscape, analyzed what was working for similar channels, and identified the intersection of high search demand and low-quality supply. Then I reverse-engineered the concept from the result backward: what would a 77x video need to be? What hook? What format? What title structure?</p>
+        <p>Once the concept was locked, execution was straightforward. The research did the heavy lifting.</p>
+
+        <h3>The Results</h3>
+        <p>The video outperformed his channel average by 77x. It generated 80K+ views and 4,000 new subscribers — from a single concept. That's the compounding value of doing the research before the work: one right idea beats a hundred average ones.</p>
+        <p>More importantly, this established a repeatable process Jim could apply to future videos: research the niche, find the gap, build the concept around the gap. Not every video will be a 77x outlier. But you can't get outliers without a system for finding them.</p>
+      </article>
+
+      <!-- Timeline -->
+      <div class="mt-12 pt-8 border-t border-dark/8">
+        <span class="text-sm font-light text-dark/45">Result: single video</span>
+        <div class="mt-2 h-1.5 w-full rounded-full bg-dark/6 overflow-hidden">
+          <div class="h-full rounded-full bg-gradient-to-r from-primary to-periwinkle" style="width: 100%"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Back to Work CTA -->
+    <section class="max-w-3xl mx-auto px-6 pb-20">
+      <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+        <div>
+          <p class="font-display text-xl text-dark">Want results like this?</p>
+          <p class="text-sm font-light text-dark/55 mt-1">Let's talk about building your content engine.</p>
+        </div>
+        <a
+          href="mailto:dino@mercurysocialmedia.com"
+          class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95 whitespace-nowrap"
+        >
+          Email me &rarr;
+        </a>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .prose-custom h3 {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.35rem;
+    font-weight: 400;
+    color: var(--dark);
+    margin-top: 2rem;
+    margin-bottom: 0.75rem;
+  }
+  .prose-custom h3:first-child {
+    margin-top: 0;
+  }
+  .prose-custom p {
+    font-size: 0.95rem;
+    font-weight: 300;
+    line-height: 1.75;
+    color: rgba(26, 21, 35, 0.65);
+    margin-bottom: 1rem;
+  }
+  .prose-custom strong {
+    font-weight: 500;
+    color: var(--dark);
+  }
+  .prose-custom blockquote {
+    border-left: 3px solid var(--primary);
+    padding: 1rem 1.5rem;
+    margin: 1.5rem 0;
+    background: rgba(107, 92, 231, 0.04);
+    border-radius: 0 0.75rem 0.75rem 0;
+  }
+  .prose-custom blockquote p {
+    font-family: 'Instrument Serif', serif;
+    font-size: 1.15rem;
+    font-weight: 400;
+    font-style: italic;
+    color: var(--dark);
+    margin-bottom: 0.5rem;
+  }
+  .prose-custom blockquote cite {
+    font-family: 'DM Sans', sans-serif;
+    font-style: normal;
+    font-size: 0.8rem;
+    color: rgba(26, 21, 35, 0.45);
+  }
+</style>
