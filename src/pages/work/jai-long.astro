@@ -34,35 +34,35 @@ import Footer from '../../components/Footer.astro';
       </div>
     </section>
 
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
-            <span class="font-display text-[2.8rem] leading-none text-red-500">400</span>
+            <span class="count-up font-display text-[4.5rem] leading-none text-red-500" data-value="400">400</span>
             <span class="mt-2 text-sm font-light text-dark/50">per video</span>
           </div>
           <div class="hidden md:flex items-center justify-center px-4"><span class="text-2xl text-dark/20">&rarr;</span></div>
           <div class="flex md:hidden items-center justify-center py-2"><span class="text-2xl text-dark/20">&darr;</span></div>
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-periwinkle/6">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views After</span>
-            <span class="font-display text-[2.8rem] leading-none text-primary">655.9K</span>
+            <span class="count-up font-display text-[4.5rem] leading-none text-primary" data-value="655.9K">655.9K</span>
             <span class="mt-2 text-sm font-light text-dark/50">in 60 days</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { value: '3,525', label: 'TikTok Followers', sub: '(from 216)' },
-          { value: '106.6K', label: 'Top Video Views', sub: '' },
-          { value: '29.6K', label: 'Total Likes', sub: '' },
-          { value: '1,532%', label: 'Follower Growth', sub: '' },
+          { value: '3525', label: 'TikTok Followers', sub: '(from 216)', display: '3,525' },
+          { value: '106.6K', label: 'Top Video Views', sub: '', display: '106.6K' },
+          { value: '29.6K', label: 'Total Likes', sub: '', display: '29.6K' },
+          { value: '1532%', label: 'Follower Growth', sub: '', display: '1,532%' },
         ].map(m => (
           <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
-            <span class="font-display text-2xl text-primary">{m.value}</span>
+            <span class="count-up font-display text-3xl text-primary" data-value={m.value}>{m.display}</span>
             <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
             {m.sub && <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>}
           </div>
@@ -109,6 +109,47 @@ import Footer from '../../components/Footer.astro';
 
   <Footer />
 </Layout>
+
+<script>
+  function animateCount(el: HTMLElement) {
+    const target = el.dataset.value ?? '';
+    const hasPlus = target.includes('+');
+    const hasM = target.includes('M');
+    const hasK = target.includes('K');
+    const hasPercent = target.includes('%');
+    const hasX = /^\d+(\.\d+)?x$/.test(target.replace('+', ''));
+    const clean = target.replace(/[+MKx%,\s]/gi, '').trim();
+    if (!/^\d+\.?\d*$/.test(clean)) return;
+    const raw = parseFloat(clean);
+    if (isNaN(raw)) return;
+    const dur = 1800;
+    const start = performance.now();
+    const fmt = (n: number): string => {
+      if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
+      if (hasK) return Math.round(n) + 'K' + (hasPlus ? '+' : '');
+      if (hasPercent) return Math.round(n).toLocaleString() + '%';
+      if (hasX) return Math.round(n) + 'x';
+      return Math.round(n).toLocaleString() + (hasPlus ? '+' : '');
+    };
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = fmt(eased * raw);
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    };
+    el.textContent = fmt(0);
+    requestAnimationFrame(tick);
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll<HTMLElement>('.count-up').forEach(animateCount);
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll<HTMLElement>('.stats-section').forEach(el => obs.observe(el));
+</script>
 
 <style>
   .prose-custom h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-weight: 400; color: var(--dark); margin-top: 2rem; margin-bottom: 0.75rem; }

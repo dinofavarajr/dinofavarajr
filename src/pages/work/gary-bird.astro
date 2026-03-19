@@ -41,13 +41,13 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- Before / After -->
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
           <!-- Before -->
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
-            <span class="font-display text-[2.8rem] leading-none text-red-500">1,000</span>
+            <span class="count-up font-display text-[4.5rem] leading-none text-red-500" data-value="1000">1,000</span>
             <span class="mt-2 text-sm font-light text-dark/50">per video</span>
           </div>
           <!-- Arrow -->
@@ -60,7 +60,7 @@ import Footer from '../../components/Footer.astro';
           <!-- After -->
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-green-500/4">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views After</span>
-            <span class="font-display text-[2.8rem] leading-none text-green-600">50.5M</span>
+            <span class="count-up font-display text-[4.5rem] leading-none text-green-600" data-value="50.5M">50.5M</span>
             <span class="mt-2 text-sm font-light text-dark/50">in 86 days</span>
           </div>
         </div>
@@ -68,7 +68,7 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- Metrics Grid -->
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { value: '47.1K', label: 'YouTube Subscribers', sub: '(from 533)' },
@@ -77,7 +77,7 @@ import Footer from '../../components/Footer.astro';
           { value: '5', label: 'Major Media Pickups', sub: '(Yahoo, NYPost, more)' },
         ].map(m => (
           <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
-            <span class="font-display text-2xl text-green-600">{m.value}</span>
+            <span class="count-up font-display text-3xl text-green-600" data-value={m.value}>{m.value}</span>
             <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
             <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>
           </div>
@@ -157,6 +157,49 @@ import Footer from '../../components/Footer.astro';
 
   <Footer />
 </Layout>
+
+<script>
+  function animateCount(el: HTMLElement) {
+    const target = el.dataset.value ?? '';
+    const hasPlus = target.includes('+');
+    const hasM = target.includes('M');
+    const hasK = target.includes('K');
+    const hasPercent = target.includes('%');
+    const hasX = /^\d+(\.\d+)?x$/.test(target.replace('+', ''));
+    const clean = target.replace(/[+MKx%,\s]/gi, '').trim();
+    if (!/^\d+\.?\d*$/.test(clean)) return;
+    const raw = parseFloat(clean);
+    if (isNaN(raw)) return;
+    const dur = 1800;
+    const start = performance.now();
+    const fmt = (n: number): string => {
+      if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
+      if (hasK) return Math.round(n) + 'K' + (hasPlus ? '+' : '');
+      if (hasPercent) return Math.round(n).toLocaleString() + '%';
+      if (hasX) return Math.round(n) + 'x';
+      return Math.round(n).toLocaleString() + (hasPlus ? '+' : '');
+    };
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = fmt(eased * raw);
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    };
+    el.textContent = fmt(0);
+    requestAnimationFrame(tick);
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll<HTMLElement>('.count-up').forEach(animateCount);
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+
+  document.querySelectorAll<HTMLElement>('.stats-section').forEach(el => obs.observe(el));
+</script>
 
 <style>
   .prose-custom h3 {

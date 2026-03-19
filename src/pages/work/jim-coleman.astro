@@ -34,35 +34,35 @@ import Footer from '../../components/Footer.astro';
       </div>
     </section>
 
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
         <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
-            <span class="font-display text-[2.8rem] leading-none text-red-500">40–100</span>
+            <span class="font-display text-[4.5rem] leading-none text-red-500">40–100</span>
             <span class="mt-2 text-sm font-light text-dark/50">organic per video (~1K with paid support)</span>
           </div>
           <div class="hidden md:flex items-center justify-center px-4"><span class="text-2xl text-dark/20">&rarr;</span></div>
           <div class="flex md:hidden items-center justify-center py-2"><span class="text-2xl text-dark/20">&darr;</span></div>
           <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-purple-500/4">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">One Video</span>
-            <span class="font-display text-[2.8rem] leading-none text-purple-600">80K+</span>
+            <span class="count-up font-display text-[4.5rem] leading-none text-purple-600" data-value="80K+">80K+</span>
             <span class="mt-2 text-sm font-light text-dark/50">views (77x outlier)</span>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
-          { value: '80K+', label: 'Views on One Video', sub: '' },
-          { value: '77x', label: 'Outlier Multiple', sub: '' },
-          { value: '+4K', label: 'Subscribers from One Video', sub: '' },
-          { value: 'Audience', label: 'Now Asking Him to Return', sub: '' },
+          { value: '80K+', label: 'Views on One Video' },
+          { value: '77x', label: 'Outlier Multiple' },
+          { value: '+4K', label: 'Subscribers from One Video' },
+          { value: 'Audience', label: 'Now Asking Him to Return' },
         ].map(m => (
           <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
-            <span class="font-display text-2xl text-purple-600">{m.value}</span>
+            <span class="count-up font-display text-3xl text-purple-600" data-value={m.value}>{m.value}</span>
             <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
           </div>
         ))}
@@ -107,6 +107,47 @@ import Footer from '../../components/Footer.astro';
 
   <Footer />
 </Layout>
+
+<script>
+  function animateCount(el: HTMLElement) {
+    const target = el.dataset.value ?? '';
+    const hasPlus = target.includes('+');
+    const hasM = target.includes('M');
+    const hasK = target.includes('K');
+    const hasPercent = target.includes('%');
+    const hasX = /^\d+(\.\d+)?x$/.test(target.replace('+', ''));
+    const clean = target.replace(/[+MKx%,\s]/gi, '').trim();
+    if (!/^\d+\.?\d*$/.test(clean)) return;
+    const raw = parseFloat(clean);
+    if (isNaN(raw)) return;
+    const dur = 1800;
+    const start = performance.now();
+    const fmt = (n: number): string => {
+      if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
+      if (hasK) return Math.round(n) + 'K' + (hasPlus ? '+' : '');
+      if (hasPercent) return Math.round(n).toLocaleString() + '%';
+      if (hasX) return Math.round(n) + 'x';
+      return Math.round(n).toLocaleString() + (hasPlus ? '+' : '');
+    };
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = fmt(eased * raw);
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    };
+    el.textContent = fmt(0);
+    requestAnimationFrame(tick);
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll<HTMLElement>('.count-up').forEach(animateCount);
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll<HTMLElement>('.stats-section').forEach(el => obs.observe(el));
+</script>
 
 <style>
   .prose-custom h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-weight: 400; color: var(--dark); margin-top: 2rem; margin-bottom: 0.75rem; }

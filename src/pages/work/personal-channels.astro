@@ -34,7 +34,7 @@ import Footer from '../../components/Footer.astro';
       </div>
     </section>
 
-    <section class="max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
         {[
           { value: '101M+', label: 'Total Views', sub: '' },
@@ -45,7 +45,7 @@ import Footer from '../../components/Footer.astro';
           { value: '12+', label: 'Years Creating', sub: '' },
         ].map(m => (
           <div class="rounded-xl border border-dark/8 bg-white/60 p-5 text-center">
-            <span class="font-display text-2xl text-blue-600">{m.value}</span>
+            <span class="count-up font-display text-3xl text-blue-600" data-value={m.value}>{m.value}</span>
             <p class="mt-1 text-[11px] font-medium uppercase tracking-widest text-dark/45">{m.label}</p>
             {m.sub && <p class="mt-0.5 text-[10px] text-dark/35">{m.sub}</p>}
           </div>
@@ -85,6 +85,47 @@ import Footer from '../../components/Footer.astro';
 
   <Footer />
 </Layout>
+
+<script>
+  function animateCount(el: HTMLElement) {
+    const target = el.dataset.value ?? '';
+    const hasPlus = target.includes('+');
+    const hasM = target.includes('M');
+    const hasK = target.includes('K');
+    const hasPercent = target.includes('%');
+    const hasX = /^\d+(\.\d+)?x$/.test(target.replace('+', ''));
+    const clean = target.replace(/[+MKx%,\s]/gi, '').trim();
+    if (!/^\d+\.?\d*$/.test(clean)) return;
+    const raw = parseFloat(clean);
+    if (isNaN(raw)) return;
+    const dur = 1800;
+    const start = performance.now();
+    const fmt = (n: number): string => {
+      if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
+      if (hasK) return Math.round(n) + 'K' + (hasPlus ? '+' : '');
+      if (hasPercent) return Math.round(n).toLocaleString() + '%';
+      if (hasX) return Math.round(n) + 'x';
+      return Math.round(n).toLocaleString() + (hasPlus ? '+' : '');
+    };
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / dur, 1);
+      const eased = 1 - Math.pow(1 - progress, 3);
+      el.textContent = fmt(eased * raw);
+      if (progress < 1) requestAnimationFrame(tick);
+      else el.textContent = target;
+    };
+    el.textContent = fmt(0);
+    requestAnimationFrame(tick);
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      entry.target.querySelectorAll<HTMLElement>('.count-up').forEach(animateCount);
+      obs.unobserve(entry.target);
+    });
+  }, { threshold: 0.3 });
+  document.querySelectorAll<HTMLElement>('.stats-section').forEach(el => obs.observe(el));
+</script>
 
 <style>
   .prose-custom h3 { font-family: 'Instrument Serif', serif; font-size: 1.35rem; font-weight: 400; color: var(--dark); margin-top: 2rem; margin-bottom: 0.75rem; }
