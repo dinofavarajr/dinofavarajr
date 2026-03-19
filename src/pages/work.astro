@@ -10,6 +10,121 @@ const stats = [
   { value: '100+',  label: 'Park Visits',     emoji: '🏰' },
 ];
 
+const caseStudies = [
+  {
+    slug: 'gary-bird',
+    tag: 'Short-Form Growth',
+    tagColor: 'bg-green-500/10 text-green-700',
+    client: 'Gary Bird',
+    headline: '1K avg views to 50.5M total views in 86 days.',
+    description: 'Rebuilt his format strategy across YouTube, TikTok, and Instagram. One video became a 20M+ view mega outlier picked up by Yahoo Finance, New York Post, and more.',
+    metric: '50.5M',
+    metricLabel: 'Total views in 86 days',
+    accentFrom: 'from-primary',
+    accentTo: 'to-mint',
+    metricBg: 'bg-primary/6 border-primary/12',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'nick-gray',
+    tag: 'Brand Growth + Revenue',
+    tagColor: 'bg-amber-500/10 text-amber-700',
+    client: 'Nick Gray',
+    headline: '7,288 avg views to 1.5M total views in 90 days.',
+    description: 'Rebuilt his TikTok identity around one clear thesis. Drove the most book sales from a single video in his history.',
+    metric: '1.54M',
+    metricLabel: 'Total views in 90 days',
+    accentFrom: 'from-amber-400',
+    accentTo: 'to-primary',
+    metricBg: 'bg-amber-500/6 border-amber-500/12',
+    metricText: 'text-amber-600',
+  },
+  {
+    slug: 'jai-long',
+    tag: 'Brand Build from Zero',
+    tagColor: 'bg-amber-500/10 text-amber-700',
+    client: 'Jai Long Co.',
+    headline: '400 avg views to 655K total views in 60 days.',
+    description: 'Designed the entire content identity from scratch. Positioning, format library, and a podcast-to-short-form pipeline.',
+    metric: '655K',
+    metricLabel: 'Total views in 60 days',
+    accentFrom: 'from-periwinkle',
+    accentTo: 'to-mint',
+    metricBg: 'bg-periwinkle/10 border-periwinkle/20',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'jim-coleman',
+    tag: 'Podcast Outlier Strategy',
+    tagColor: 'bg-purple-500/10 text-purple-700',
+    client: 'The Jim Coleman Show',
+    headline: 'A 77x outlier video. 80K+ views. 4K new subscribers.',
+    description: 'Researched his niche, found the gap, and strategized one concept that outperformed everything on his channel by 77x.',
+    metric: '77x',
+    metricLabel: 'Outlier multiple',
+    accentFrom: 'from-primary',
+    accentTo: 'to-periwinkle',
+    metricBg: 'bg-primary/6 border-primary/12',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'marie-poulin',
+    tag: 'Start From Zero',
+    tagColor: 'bg-pink-500/10 text-pink-700',
+    client: 'Marie Poulin',
+    headline: 'From dabbling to a 300K+ view breakout.',
+    description: 'Took her from posting without a strategy to averaging 2K views per video, with multiple 10K+ hits and a 300K+ breakout.',
+    metric: '300K+',
+    metricLabel: 'Breakout video views',
+    accentFrom: 'from-pink-400',
+    accentTo: 'to-periwinkle',
+    metricBg: 'bg-pink-500/6 border-pink-500/12',
+    metricText: 'text-pink-600',
+  },
+  {
+    slug: 'upstart-podcast',
+    tag: 'Podcast Clips',
+    tagColor: 'bg-mint/20 text-dark/70',
+    client: 'Upstart Podcast Shorts',
+    headline: 'One concept. 24K views. A clear channel outlier.',
+    description: 'Architected a single video concept that outperformed their typical 1-2K view clips by 12-24x.',
+    metric: '24K',
+    metricLabel: 'Views on one clip',
+    accentFrom: 'from-mint',
+    accentTo: 'to-periwinkle',
+    metricBg: 'bg-mint/10 border-mint/25',
+    metricText: 'text-dark',
+  },
+  {
+    slug: 'sweet-fish',
+    tag: 'Podcast Production',
+    tagColor: 'bg-purple-500/10 text-purple-700',
+    client: 'Sweet Fish Media',
+    headline: '100-250 episodes. 250-500 clips. 500K+ views.',
+    description: 'End-to-end content lifecycle management across multiple B2B podcast clients. Strategy, clips, distribution, and QBRs.',
+    metric: '500K+',
+    metricLabel: 'Total views generated',
+    accentFrom: 'from-primary',
+    accentTo: 'to-mint',
+    metricBg: 'bg-primary/6 border-primary/12',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'personal-channels',
+    tag: 'Personal Channel',
+    tagColor: 'bg-blue-500/10 text-blue-700',
+    client: 'Dino Favara Jr.',
+    headline: '101M+ views. 36K subs. 7M+ Instagram views.',
+    description: '12+ years of building audiences organically across YouTube, TikTok, and Instagram. Every system I sell, I tested on myself first.',
+    metric: '101M+',
+    metricLabel: 'Total views across platforms',
+    accentFrom: 'from-blue-400',
+    accentTo: 'to-primary',
+    metricBg: 'bg-blue-500/6 border-blue-500/12',
+    metricText: 'text-blue-600',
+  },
+];
+
 const services = [
   {
     emoji: '🎯',
@@ -32,13 +147,13 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
 ---
 
 <Layout
-  title="Work — Dino Favara Jr."
+  title="Work | Dino Favara Jr."
   description="Video strategy, brand partnerships, and short-form content. 101M+ views, 12+ years. Let's make something that actually works."
 >
   <Nav />
 
   <main>
-    <!-- ── Hero ── -->
+    <!-- Hero -->
     <section class="relative overflow-hidden pt-14 pb-12">
       <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
         <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/10 blur-[100px]"></div>
@@ -59,7 +174,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
       </div>
     </section>
 
-    <!-- ── Stats Bar ── -->
+    <!-- Stats Bar -->
     <section class="pb-8 max-w-6xl mx-auto px-6">
       <div class="relative rounded-2xl overflow-hidden border border-dark/8 bg-white/70 backdrop-blur-sm shadow-sm">
         <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
@@ -89,7 +204,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
       </div>
     </section>
 
-    <!-- ── Case Studies ── -->
+    <!-- Case Studies -->
     <section class="py-16 max-w-6xl mx-auto px-6">
       <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
@@ -98,52 +213,31 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
       <h2 class="font-display text-3xl text-dark mb-10">Case studies</h2>
 
       <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-
-        <!-- Gary Bird -->
-        <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col gap-5 shadow-sm">
-          <div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-primary to-periwinkle"></div>
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary tracking-wide">
-              TikTok Strategy
-            </span>
-            <span class="text-xs font-medium text-dark/40 uppercase tracking-widest">Gary Bird</span>
-          </div>
-          <div>
-            <h3 class="font-display text-xl text-dark mb-3">From high-output to high-results.</h3>
-            <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
-              Repositioned a TikTok budgeting creator from a grind-and-burn content schedule to a focused, repeatable short-form engine. Less content, better results.
-            </p>
-          </div>
-          <div class="mt-auto rounded-xl bg-primary/6 border border-primary/12 px-6 py-5 flex items-center justify-between">
-            <span class="text-sm font-medium text-dark/55">Result</span>
-            <span class="font-display text-2xl text-primary">↑ Smarter output</span>
-          </div>
-        </div>
-
-        <!-- Upstart Podcast -->
-        <div class="rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col gap-5 shadow-sm">
-          <div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-mint to-periwinkle"></div>
-          <div class="flex items-center justify-between flex-wrap gap-3">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-mint/20 text-dark/70 tracking-wide">
-              Podcast Clips
-            </span>
-            <span class="text-xs font-medium text-dark/40 uppercase tracking-widest">Upstart Podcast Shorts</span>
-          </div>
-          <div>
-            <h3 class="font-display text-xl text-dark mb-3">1–2K views → 24–25K per video.</h3>
-            <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
-              Built a clip selection and editing system that transformed a podcast's short-form presence. Went from near-zero traction to consistently hitting 24–25K views per video.
-            </p>
-          </div>
-          <div class="mt-auto rounded-xl bg-mint/10 border border-mint/25 px-6 py-5 flex items-center justify-between">
-            <span class="text-sm font-medium text-dark/55">Avg. views per video</span>
-            <span class="font-display text-2xl text-dark">24K+</span>
-          </div>
-        </div>
+        {caseStudies.map((cs) => (
+          <a href={`/work/${cs.slug}`} class="group rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col gap-5 shadow-sm hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300 no-underline">
+            <div class={`h-0.5 w-12 rounded-full bg-gradient-to-r ${cs.accentFrom} ${cs.accentTo}`}></div>
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium tracking-wide ${cs.tagColor}`}>
+                {cs.tag}
+              </span>
+              <span class="text-xs font-medium text-dark/40 uppercase tracking-widest">{cs.client}</span>
+            </div>
+            <div>
+              <h3 class="font-display text-xl text-dark mb-3 group-hover:text-primary transition-colors duration-200">{cs.headline}</h3>
+              <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
+                {cs.description}
+              </p>
+            </div>
+            <div class={`mt-auto rounded-xl ${cs.metricBg} border px-6 py-5 flex items-center justify-between`}>
+              <span class="text-sm font-medium text-dark/55">{cs.metricLabel}</span>
+              <span class={`font-display text-2xl ${cs.metricText}`}>{cs.metric}</span>
+            </div>
+          </a>
+        ))}
       </div>
     </section>
 
-    <!-- ── Services ── -->
+    <!-- Services -->
     <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
       <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
@@ -162,7 +256,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
       </div>
     </section>
 
-    <!-- ── Dream Brand Partners ── -->
+    <!-- Dream Brand Partners -->
     <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
       <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
@@ -184,11 +278,10 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
       </p>
     </section>
 
-    <!-- ── CTA Strip ── -->
+    <!-- CTA Strip -->
     <section class="py-20">
       <div class="max-w-6xl mx-auto px-6">
         <div class="relative rounded-2xl overflow-hidden bg-dark text-center px-8 py-16">
-          <!-- Ambient glows -->
           <div class="pointer-events-none absolute inset-0" aria-hidden="true">
             <div class="absolute -top-20 left-1/4 w-[350px] h-[350px] rounded-full bg-primary/25 blur-[80px]"></div>
             <div class="absolute -bottom-20 right-1/4 w-[300px] h-[300px] rounded-full bg-periwinkle/20 blur-[80px]"></div>
@@ -205,7 +298,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
               href="mailto:dino@mercurysocialmedia.com"
               class="inline-flex items-center gap-2 mt-2 px-8 py-4 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
             >
-              Email me →
+              Email me &rarr;
             </a>
           </div>
         </div>
