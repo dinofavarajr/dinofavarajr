@@ -115,15 +115,30 @@ import Footer from '../../components/Footer.astro';
 
         <h3>The Results</h3>
         <p>In 86 days, Gary generated over 50.5 million total views across platforms. His YouTube went from 533 to 47,100 subscribers, an 8,740% increase. His TikTok stall reversed with 5K net new followers gained, and his Instagram grew to 9,716 followers. Individual videos regularly hit hundreds of thousands of views, with top performers reaching 3.5M and 4.9M views.</p>
-        <div class="relative mt-10 mb-6">
-          <!-- Hand-drawn emphasis lines radiating up from the box -->
-          <svg class="absolute -top-8 left-0 w-full pointer-events-none" style="height:36px; overflow:visible;" viewBox="0 0 600 36" preserveAspectRatio="xMidYMax meet" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <!-- Left line: from ~22% width, sweeping up and out to the left -->
-            <path d="M 132 36 C 128 22 92 12 68 2" stroke="var(--primary)" stroke-opacity="0.35" stroke-width="2" stroke-linecap="round"/>
-            <!-- Center line: from ~50%, going straight up with a gentle lean -->
-            <path d="M 300 36 C 296 20 304 12 300 0" stroke="var(--primary)" stroke-opacity="0.55" stroke-width="2.5" stroke-linecap="round"/>
-            <!-- Right line: from ~78%, sweeping up and out to the right -->
-            <path d="M 468 36 C 472 22 508 12 532 2" stroke="var(--primary)" stroke-opacity="0.35" stroke-width="2" stroke-linecap="round"/>
+        <div class="relative my-6">
+          <!-- Top-left corner -->
+          <svg class="absolute -top-4 -left-4 pointer-events-none overflow-visible" width="32" height="32" fill="none" aria-hidden="true">
+            <path d="M 22 22 C 15 14 9 7 2 2" stroke="var(--primary)" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- Top-right corner -->
+          <svg class="absolute -top-4 -right-4 pointer-events-none overflow-visible" width="32" height="32" fill="none" aria-hidden="true">
+            <path d="M 10 22 C 17 14 23 7 30 2" stroke="var(--primary)" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- Left middle -->
+          <svg class="absolute top-1/2 -left-6 -translate-y-1/2 pointer-events-none overflow-visible" width="20" height="4" fill="none" aria-hidden="true">
+            <path d="M 18 2 L 2 2" stroke="var(--primary)" stroke-opacity="0.4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- Right middle -->
+          <svg class="absolute top-1/2 -right-6 -translate-y-1/2 pointer-events-none overflow-visible" width="20" height="4" fill="none" aria-hidden="true">
+            <path d="M 2 2 L 18 2" stroke="var(--primary)" stroke-opacity="0.4" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- Bottom-left corner -->
+          <svg class="absolute -bottom-4 -left-4 pointer-events-none overflow-visible" width="32" height="32" fill="none" aria-hidden="true">
+            <path d="M 22 10 C 15 18 9 24 2 30" stroke="var(--primary)" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+          <!-- Bottom-right corner -->
+          <svg class="absolute -bottom-4 -right-4 pointer-events-none overflow-visible" width="32" height="32" fill="none" aria-hidden="true">
+            <path d="M 10 10 C 17 18 23 24 30 30" stroke="var(--primary)" stroke-opacity="0.5" stroke-width="2" stroke-linecap="round"/>
           </svg>
           <div class="rounded-2xl border border-primary/20 bg-gradient-to-br from-primary/5 to-periwinkle/8 px-8 py-7">
             <p class="!mb-0 !text-dark/80">One video in particular became a mega outlier, generating 20M+ views across all platforms. It didn't just go viral on social. It crossed over into mainstream media and was picked up by <a href="https://www.yahoo.com/lifestyle/man-shows-increase-grocery-prices-201454830.html?guccounter=1&guce_referrer=aHR0cHM6Ly90LmNvLw&guce_referrer_sig=AQAAAFWZn342snFLbLtjUqxGo1PET1RjLOWP3FbM3KJtXVS4aAJpm0NIgAtWxDO3KIQqHZiLL4feas-9Ec7DkMmDfHarir00AEAnvOHDekN-4YjA2K2yADr6qJ3ULxX49h5bwIkZGbiQ_qpw_dIX5t3bXsA7ckdXO4N_uV4S3gZnId_U" target="_blank" rel="noopener noreferrer" class="text-primary underline underline-offset-2 hover:text-primary/70 transition-colors duration-200">Yahoo Finance</a>, the New York Post, <a href="https://www.the-independent.com/life-style/grocery-prices-increase-tiktok-b2443974.html" target="_blank" rel="noopener noreferrer" class="text-primary underline underline-offset-2 hover:text-primary/70 transition-colors duration-200">The Independent</a>, the <a href="https://youtube.com/shorts/VakkzNb7kOg?si=Kob1EUdTCxtflGGK" target="_blank" rel="noopener noreferrer" class="text-primary underline underline-offset-2 hover:text-primary/70 transition-colors duration-200">Benny Johnson Show</a>, and <a href="https://x.com/WallStreetMav/status/1721262167326884160?s=20" target="_blank" rel="noopener noreferrer" class="text-primary underline underline-offset-2 hover:text-primary/70 transition-colors duration-200">Wall Street Mav</a>. That's the difference between a video that performs and a video that becomes a cultural moment.</p>
