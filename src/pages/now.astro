@@ -38,6 +38,18 @@ import Footer from '../components/Footer.astro';
     <!-- ── Content ── -->
     <div class="max-w-2xl mx-auto px-6 pb-20 space-y-16">
 
+      <!-- Where I Am -->
+      <section class="border-t border-dark/8 pt-12">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Location</span>
+        </div>
+        <h2 class="font-display text-2xl text-dark mb-7">Where I am</h2>
+        <p class="text-[1.05rem] font-light text-dark/70 leading-relaxed">
+          Orlando, FL. Hasn't changed for almost 7 years now. Right now I'm in the "thick of it" as people say. Raising a 2 year old and a 5 month old. Trying to get back into some sort of exercise rhythm and eat just marginally better. And trying to remove as much screen time from my life as I can with intentional tech choices. Grayscale screen all the way.
+        </p>
+      </section>
+
       <!-- What I'm Building -->
       <section class="border-t border-dark/8 pt-12">
         <div class="flex items-center gap-3 mb-6">
@@ -106,6 +118,31 @@ import Footer from '../components/Footer.astro';
             </div>
           </div>
         </div>
+      </section>
+
+      <!-- What I'm Obsessed With -->
+      <section class="border-t border-dark/8 pt-12">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Obsessions</span>
+        </div>
+        <h2 class="font-display text-2xl text-dark mb-7">What I'm obsessed with</h2>
+        <ul class="space-y-4">
+          {[
+            { text: 'Single-use tech', note: 'A device that does one thing well. No notifications, no rabbit holes. Just the thing.' },
+            { text: 'Journaling', note: 'I currently have four different journals for different purposes. Yes, four. No, I will not explain.' },
+            { text: 'Retro games on Facebook Marketplace', note: 'Trying to find good deals. It is a disease.' },
+            { text: 'Claude Code', note: "Unironically. I built this entire website with the help of Claude Code. I never thought I'd be able to do something like that. It changed how I think about what I'm capable of building." },
+          ].map(item => (
+            <li class="flex items-start gap-4">
+              <span class="mt-[0.45rem] flex-shrink-0 w-2 h-2 rounded-full bg-primary"></span>
+              <div>
+                <span class="text-[1rem] font-medium text-dark">{item.text}</span>
+                <span class="text-[1rem] font-light text-dark/55">. {item.note}</span>
+              </div>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <!-- What Matters Most -->
