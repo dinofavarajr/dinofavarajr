@@ -31,9 +31,9 @@ const parks: Record<string, Park> = {
     name: 'EPCOT',
     emoji: '🌍',
     rides: [
-      { id: 'mission-space-green', name: 'Mission: Space (Green)', land: 'World Discovery', x: 545, y: 398, reviewed: true, stars: 1, tags: ['single-rider'], take: "The Green mission is genuinely underrated — a solid space simulation that doesn't require a barf bag. Great for first-timers who want the full experience.", type: 'ride', video: false },
-      { id: 'mission-space-orange', name: 'Mission: Space (Orange)', land: 'World Discovery', x: 598, y: 382, reviewed: true, stars: 4, tags: ['cornerstone'], take: "This is the real deal — intense, centrifugal, and surprisingly educational about what astronauts actually experience. Do not skip this one.", type: 'ride' },
-      { id: 'figment', name: 'Journey into Imagination with Figment', land: 'World Celebration', x: 340, y: 388, reviewed: true, stars: 3, tags: ['kid-friendly', 'ac-haven'], take: "Nostalgia bait that mostly lands. Figment is a Disney icon and this ride coasts on pure vibes — but in a way that somehow works.", type: 'ride' },
+      { id: 'mission-space-green', name: 'Mission: Space (Green)', land: 'World Discovery', x: 545, y: 398, reviewed: true, stars: 1, tags: ['single-rider'], take: "The Green mission is genuinely underrated, a solid space simulation that doesn't require a barf bag. Great for first-timers who want the full experience.", type: 'ride', video: false },
+      { id: 'mission-space-orange', name: 'Mission: Space (Orange)', land: 'World Discovery', x: 598, y: 382, reviewed: true, stars: 4, tags: ['cornerstone'], take: "This is the real deal, intense, centrifugal, and surprisingly educational about what astronauts actually experience. Do not skip this one.", type: 'ride' },
+      { id: 'figment', name: 'Journey into Imagination with Figment', land: 'World Celebration', x: 340, y: 388, reviewed: true, stars: 3, tags: ['kid-friendly', 'ac-haven'], take: "Nostalgia bait that mostly lands. Figment is a Disney icon and this ride coasts on pure vibes, but in a way that somehow works.", type: 'ride' },
       { id: 'spaceship-earth', name: 'Spaceship Earth', land: 'World Celebration', x: 400, y: 252, reviewed: false, type: 'ride' },
       { id: 'guardians', name: 'Guardians of the Galaxy: Cosmic Rewind', land: 'World Discovery', x: 618, y: 339, reviewed: false, type: 'ride' },
       { id: 'test-track', name: 'Test Track', land: 'World Discovery', x: 558, y: 426, reviewed: false, type: 'ride' },
@@ -109,8 +109,8 @@ const parks: Record<string, Park> = {
 ---
 
 <Layout
-  title="Disney Field Guide — Dino Favara Jr."
-  description="100+ visits. No sponsors. Real opinions on every ride at Walt Disney World — reviewed on camera, one ride at a time."
+  title="Disney Field Guide | Dino Favara Jr."
+  description="100+ visits. No sponsors. Real opinions on every ride at Walt Disney World. reviewed on camera, one ride at a time."
 >
   <Nav />
 
@@ -159,8 +159,8 @@ const parks: Record<string, Park> = {
             * Under Construction *
           </p>
           <p class="text-[#F5C842]/60 text-sm font-light mt-1 leading-relaxed italic">
-            "We keep moving forward, opening new doors, and doing new things, because we're curious — and curiosity keeps leading us down new paths."
-            <span class="not-italic font-medium text-[#F5C842]/50"> — Walt Disney</span>
+            "We keep moving forward, opening new doors, and doing new things, because we're curious, and curiosity keeps leading us down new paths."
+            <span class="not-italic font-medium text-[#F5C842]/50"> Walt Disney</span>
           </p>
         </div>
         <span class="text-4xl select-none flex-shrink-0 sm:ml-auto" aria-hidden="true">🚧</span>
@@ -173,7 +173,7 @@ const parks: Record<string, Park> = {
 
         <!-- Disclaimer -->
         <p class="text-center text-sm italic text-dark/45 mb-8 font-light">
-          These are my real opinions from real visits. Nobody paid me to say any of this — and I've never once eaten at the Rainforest Cafe.
+          These are my real opinions from real visits. Nobody paid me to say any of this, and I've never once eaten at the Rainforest Cafe.
         </p>
 
         <!-- Park Tabs -->
@@ -1160,10 +1160,10 @@ const parks: Record<string, Park> = {
       emoji: '🚶', vibe: 'Solo & Chill',
       intro: "No agenda, no rope drop panic. This is the most underrated way to do Disney.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Soarin' Around the World — a perfect slow opener", "Living with the Land — surprisingly meditative", "Spaceship Earth — it's a classic for a reason"] },
-        { time: 'Midday', icon: '☀️', items: ["Journey into Imagination with Figment (3★ · ❄️ AC haven)", "Grab a drink in World Showcase and just walk", "The Seas with Nemo & Friends — zero stress, good AC"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Gran Fiesta Tour (great AC, zero line)", "Frozen Ever After — short, sweet, well-done", "Pick a World Showcase pavilion and eat your way through it"] },
-        { time: 'Evening', icon: '🌙', items: ["EPCOT Forever nighttime show", "Late dinner in World Showcase — France pavilion recommended"] },
+        { time: 'Morning', icon: '🌅', items: ["Soarin' Around the World, a perfect slow opener", "Living with the Land, surprisingly meditative", "Spaceship Earth, it's a classic for a reason"] },
+        { time: 'Midday', icon: '☀️', items: ["Journey into Imagination with Figment (3★ · ❄️ AC haven)", "Grab a drink in World Showcase and just walk", "The Seas with Nemo & Friends, zero stress, good AC"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Gran Fiesta Tour (great AC, zero line)", "Frozen Ever After, short, sweet, well-done", "Pick a World Showcase pavilion and eat your way through it"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT Forever nighttime show", "Late dinner in World Showcase. France pavilion recommended"] },
       ],
       note: "Skip anything with a 45+ min wait. You're here for the experience, not the throughput. Trust.",
     },
@@ -1171,9 +1171,9 @@ const parks: Record<string, Park> = {
       emoji: '🎯', vibe: 'Solo & Mixing It Up',
       intro: "Single rider lines are your secret weapon. Use them mercilessly.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★) — single rider and early, this is perfect", "Guardians of the Galaxy: Cosmic Rewind (single rider)", "Test Track — single rider makes this effortless"] },
-        { time: 'Midday', icon: '☀️', items: ["Mission: Space Green (1★) as a comparison — skip it if you're short on time", "Journey into Imagination with Figment (3★ · ❄️)", "Soarin' on single rider when the line peaks"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest if at Animal Kingdom", "Kilimanjaro Safaris for the reset", "Na'vi River Journey is 1★ — only worth it if under 15 min"] },
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★), single rider and early, this is perfect", "Guardians of the Galaxy: Cosmic Rewind (single rider)", "Test Track, single rider makes this effortless"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Green (1★) as a comparison, skip it if you're short on time", "Journey into Imagination with Figment (3★ · ❄️)", "Soarin' on single rider when the line peaks"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest if at Animal Kingdom", "Kilimanjaro Safaris for the reset", "Na'vi River Journey is 1★, only worth it if under 15 min"] },
         { time: 'Evening', icon: '🌙', items: ["World Showcase for food and drinks", "Nighttime show to close it out"] },
       ],
       note: "Na'vi River Journey gets 1★ from me. Beautiful animatronic, brutal wait. The math doesn't math.",
@@ -1182,10 +1182,10 @@ const parks: Record<string, Park> = {
       emoji: '🚀', vibe: 'Solo & Sending It',
       intro: "Rope drop. Lightning Lane. Maximum rides per dollar. Let's go.",
       plan: [
-        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage at AK — first ride, no exceptions", "Rise of the Resistance at HS — second park", "TRON Lightcycle / Run at MK if you have the legs"] },
-        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange (4★ · criminally underridden)", "Expedition Everest", "Seven Dwarfs Mine Train — single rider line when available"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Guardians of the Galaxy: Cosmic Rewind", "Rock 'n' Roller Coaster at HS", "Space Mountain — still worth it every time"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy if at MK (5★ — mandatory, I don't care how tired you are)", "Haunted Mansion — never skip", "Pirates of the Caribbean as a nightcap"] },
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage at AK, first ride, no exceptions", "Rise of the Resistance at HS, second park", "TRON Lightcycle / Run at MK if you have the legs"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange (4★ · criminally underridden)", "Expedition Everest", "Seven Dwarfs Mine Train, single rider line when available"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Guardians of the Galaxy: Cosmic Rewind", "Rock 'n' Roller Coaster at HS", "Space Mountain, still worth it every time"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy if at MK (5★, mandatory, I don't care how tired you are)", "Haunted Mansion, never skip", "Pirates of the Caribbean as a nightcap"] },
       ],
       note: "Mission: Space Orange is rated 4★ and most people skip it. That's their loss and your gain.",
     },
@@ -1193,21 +1193,21 @@ const parks: Record<string, Park> = {
       emoji: '💑', vibe: 'Couple & Chill',
       intro: "Slow down. This is the most romantic park in the world if you let it be.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Living with the Land — boat ride, genuinely lovely, no one fights on this ride", "The Seas with Nemo & Friends", "Soarin' — sit front row together"] },
-        { time: 'Midday', icon: '☀️', items: ["World Showcase loop — drinks and food at every pavilion", "Journey into Imagination with Figment (3★ · ❄️)", "Frozen Ever After — sweet, short, well done"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Haunted Mansion if at MK — a date night classic", "Pirates of the Caribbean", "Jungle Cruise (3.5★) — if you get a great Skipper, it's a 5"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK (5★ — hits differently with someone)", "EPCOT nighttime show", "Late dinner in World Showcase — France or Japan pavilion"] },
+        { time: 'Morning', icon: '🌅', items: ["Living with the Land, boat ride, genuinely lovely, no one fights on this ride", "The Seas with Nemo & Friends", "Soarin', sit front row together"] },
+        { time: 'Midday', icon: '☀️', items: ["World Showcase loop, drinks and food at every pavilion", "Journey into Imagination with Figment (3★ · ❄️)", "Frozen Ever After, sweet, short, well done"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Haunted Mansion if at MK, a date night classic", "Pirates of the Caribbean", "Jungle Cruise (3.5★), if you get a great Skipper, it's a 5"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK (5★, hits differently with someone)", "EPCOT nighttime show", "Late dinner in World Showcase. France or Japan pavilion"] },
       ],
       note: "Festival of Fantasy is rated 5★. Find a good spot early. Bring your person. It's almost inconveniently good.",
     },
     'couple-mix': {
       emoji: '🎡', vibe: 'Couple & Mixing It Up',
-      intro: "Best of both worlds — thrills in the morning, vibes in the afternoon.",
+      intro: "Best of both worlds, thrills in the morning, vibes in the afternoon.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★) — do this together, it's an experience", "Guardians of the Galaxy: Cosmic Rewind", "Test Track — the competitive mode is fun with two people"] },
-        { time: 'Midday', icon: '☀️', items: ["Soarin' — front row if you can get it", "Jungle Cruise (3.5★) — pray for a good Skipper together", "Living with the Land as a midday reset"] },
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★), do this together, it's an experience", "Guardians of the Galaxy: Cosmic Rewind", "Test Track, the competitive mode is fun with two people"] },
+        { time: 'Midday', icon: '☀️', items: ["Soarin', front row if you can get it", "Jungle Cruise (3.5★), pray for a good Skipper together", "Living with the Land as a midday reset"] },
         { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest if at AK", "Journey into Imagination with Figment (3★ · ❄️ break)", "World Showcase food crawl"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK if that's your park (5★)", "EPCOT nighttime show", "Na'vi is 1★ — skip it. Flight of Passage instead."] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK if that's your park (5★)", "EPCOT nighttime show", "Na'vi is 1★, skip it. Flight of Passage instead."] },
       ],
       note: "Jungle Cruise (3.5★) has a ceiling of 5 when the Skipper is transcendent. The variance is real. Go in knowing that.",
     },
@@ -1215,10 +1215,10 @@ const parks: Record<string, Park> = {
       emoji: '🎢', vibe: 'Couple & Sending It',
       intro: "You're here to ride and you will not be slowed down.",
       plan: [
-        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage together — genuinely life-changing", "Rise of the Resistance — worth any wait, do it together", "TRON Lightcycle / Run — screaming together is bonding"] },
-        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange (4★) — intense, go together", "Seven Dwarfs Mine Train", "Expedition Everest — back row, every time"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Rock 'n' Roller Coaster at HS", "Tower of Terror — the classic", "Haunted Mansion as a palate cleanser"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK (5★ — even thrill-seekers need to see this)", "Space Mountain at night", "Big Thunder Mountain Railroad — underrated last ride"] },
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage together, genuinely life-changing", "Rise of the Resistance, worth any wait, do it together", "TRON Lightcycle / Run, screaming together is bonding"] },
+        { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange (4★), intense, go together", "Seven Dwarfs Mine Train", "Expedition Everest, back row, every time"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Rock 'n' Roller Coaster at HS", "Tower of Terror, the classic", "Haunted Mansion as a palate cleanser"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy at MK (5★, even thrill-seekers need to see this)", "Space Mountain at night", "Big Thunder Mountain Railroad, underrated last ride"] },
       ],
       note: "Mission: Space Orange is rated 4★ and criminally underridden. Most people go Green. Don't.",
     },
@@ -1226,10 +1226,10 @@ const parks: Record<string, Park> = {
       emoji: '👨‍👩‍👧', vibe: 'Kids & Keeping It Chill',
       intro: "Match the kids' energy, not yours. Some of the best Disney is slow Disney.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["It's a Small World — start soft and familiar", "Dumbo the Flying Elephant — they will lose their minds", "Under the Sea: Journey of The Little Mermaid (3.3★ · 🧒)"] },
-        { time: 'Midday', icon: '☀️', items: ["Ariel's Grotto Meet & Greet (3★ · 🧒) — absolute kid moment", "Journey into Imagination with Figment (3★ · ❄️ 🧒)", "Lunch + rest break — seriously, build it in, no exceptions"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Peter Pan's Flight — the wait is brutal but kids deserve it", "Tomorrowland Speedway (2★) — they'll love it, you'll endure it", "Turtle Talk with Crush — ❄️ and kids are obsessed"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy parade (5★) — position early, it's worth it at every age", "Jungle Cruise (3.5★) — kids love the animals", "Leave before fireworks unless your kid has nerves of steel"] },
+        { time: 'Morning', icon: '🌅', items: ["It's a Small World, start soft and familiar", "Dumbo the Flying Elephant, they will lose their minds", "Under the Sea: Journey of The Little Mermaid (3.3★ · 🧒)"] },
+        { time: 'Midday', icon: '☀️', items: ["Ariel's Grotto Meet & Greet (3★ · 🧒), absolute kid moment", "Journey into Imagination with Figment (3★ · ❄️ 🧒)", "Lunch + rest break, seriously, build it in, no exceptions"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Peter Pan's Flight, the wait is brutal but kids deserve it", "Tomorrowland Speedway (2★), they'll love it, you'll endure it", "Turtle Talk with Crush, ❄️ and kids are obsessed"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy parade (5★), position early, it's worth it at every age", "Jungle Cruise (3.5★), kids love the animals", "Leave before fireworks unless your kid has nerves of steel"] },
       ],
       note: "Tomorrowland Speedway gets 2★ but your kid doesn't care about stars. They care about the steering wheel. This is their day.",
     },
@@ -1237,10 +1237,10 @@ const parks: Record<string, Park> = {
       emoji: '🎪', vibe: 'Kids & Mixing It Up',
       intro: "Adventure for the big kids, magic for the little ones. Split strategically.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Seven Dwarfs Mine Train — the family coaster GOAT", "Under the Sea: Journey of The Little Mermaid (3.3★ · 🧒)", "The Seas with Nemo & Friends — low key, everyone likes it"] },
-        { time: 'Midday', icon: '☀️', items: ["Ariel's Grotto Meet & Greet (3★) for the little ones", "Mission: Space Green for older kids (3.8★ · solid)", "Journey into Imagination with Figment (3★ · ❄️ 🧒) — great AC break"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Na'vi River Journey (1★) — short, kids like the lights, watch the wait time", "Slinky Dog Dash at HS if switching parks", "Toy Story Mania! — competitive, fun for everyone"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — non-negotiable", "Haunted Mansion — brave kids 6+ will love it", "Pirates of the Caribbean — the classic closer"] },
+        { time: 'Morning', icon: '🌅', items: ["Seven Dwarfs Mine Train, the family coaster GOAT", "Under the Sea: Journey of The Little Mermaid (3.3★ · 🧒)", "The Seas with Nemo & Friends, low key, everyone likes it"] },
+        { time: 'Midday', icon: '☀️', items: ["Ariel's Grotto Meet & Greet (3★) for the little ones", "Mission: Space Green for older kids (3.8★ · solid)", "Journey into Imagination with Figment (3★ · ❄️ 🧒), great AC break"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Na'vi River Journey (1★), short, kids like the lights, watch the wait time", "Slinky Dog Dash at HS if switching parks", "Toy Story Mania!, competitive, fun for everyone"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★), non-negotiable", "Haunted Mansion, brave kids 6+ will love it", "Pirates of the Caribbean, the classic closer"] },
       ],
       note: "Na'vi gets 1★ from me, but kids under 8 genuinely don't care. The lights are pretty. Just don't wait 90 minutes for it.",
     },
@@ -1248,10 +1248,10 @@ const parks: Record<string, Park> = {
       emoji: '🎠', vibe: 'Kids & Sending It',
       intro: "Big-kid energy. Someone in your group is over 44 inches and ready to go.",
       plan: [
-        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage (44\"+) — this changes lives at any age", "Slinky Dog Dash — great gateway coaster for newer riders", "Seven Dwarfs Mine Train — all ages, worth every minute of the wait"] },
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage (44\"+), this changes lives at any age", "Slinky Dog Dash, great gateway coaster for newer riders", "Seven Dwarfs Mine Train, all ages, worth every minute of the wait"] },
         { time: 'Midday', icon: '☀️', items: ["Mission: Space Orange for the brave ones (4★)", "Mission: Space Green for everyone else (3.8★)", "Under the Sea: Little Mermaid (3.3★ · 🧒) as a breather"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest — first big coaster moment for older kids", "Haunted Mansion — spooky but not scary, a rite of passage", "TRON Lightcycle / Run if Lightning Lane available"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — mandatory at any age", "Space Mountain — a rite of passage", "Big Thunder Mountain Railroad — great family closer"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest, first big coaster moment for older kids", "Haunted Mansion, spooky but not scary, a rite of passage", "TRON Lightcycle / Run if Lightning Lane available"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★), mandatory at any age", "Space Mountain, a rite of passage", "Big Thunder Mountain Railroad, great family closer"] },
       ],
       note: "Mission: Space has two sides for a reason. Green (3.8★) keeps everyone comfortable. Orange (4★) is for the brave. Know your crew.",
     },
@@ -1259,10 +1259,10 @@ const parks: Record<string, Park> = {
       emoji: '👥', vibe: 'Big Group & Keeping It Easy',
       intro: "Coordination is the enemy of joy. Pick a pace and stick to it.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Kilimanjaro Safaris — everyone fits, everyone loves animals, zero conflict", "Living with the Land — surprisingly meditative, group-sized boats", "Soarin' — grand, easy, universally beloved"] },
-        { time: 'Midday', icon: '☀️', items: ["World Showcase split-and-meet strategy — pick a pavilion to regroup", "Journey into Imagination with Figment (3★ · ❄️)", "Ariel's Grotto if there are kids in the mix (3★)"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Festival of Fantasy parade (5★) — the great equalizer, everyone loves it", "Jungle Cruise (3.5★) — Skipper-dependent but groups go nuts", "It's a Small World — comfortable, AC, group-sized vehicles"] },
-        { time: 'Evening', icon: '🌙', items: ["EPCOT nighttime show or MK fireworks", "Pirates of the Caribbean — group-friendly, fun closer"] },
+        { time: 'Morning', icon: '🌅', items: ["Kilimanjaro Safaris, everyone fits, everyone loves animals, zero conflict", "Living with the Land, surprisingly meditative, group-sized boats", "Soarin', grand, easy, universally beloved"] },
+        { time: 'Midday', icon: '☀️', items: ["World Showcase split-and-meet strategy, pick a pavilion to regroup", "Journey into Imagination with Figment (3★ · ❄️)", "Ariel's Grotto if there are kids in the mix (3★)"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Festival of Fantasy parade (5★), the great equalizer, everyone loves it", "Jungle Cruise (3.5★). Skipper-dependent but groups go nuts", "It's a Small World, comfortable, AC, group-sized vehicles"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT nighttime show or MK fireworks", "Pirates of the Caribbean, group-friendly, fun closer"] },
       ],
       note: "Festival of Fantasy parade is rated 5★ and it works for every group configuration I've seen. Find a spot. Commit.",
     },
@@ -1270,10 +1270,10 @@ const parks: Record<string, Park> = {
       emoji: '🎭', vibe: 'Big Group & Mixing It Up',
       intro: "Split the group by tolerance level. Regroup strategically. This is the way.",
       plan: [
-        { time: 'Morning', icon: '🌅', items: ["Mission: Space — Orange (4★) for the brave, Green (3.8★) for everyone else", "Kilimanjaro Safaris — regroup here, zero conflict, everyone happy", "Seven Dwarfs Mine Train — family coaster sweet spot"] },
-        { time: 'Midday', icon: '☀️', items: ["Jungle Cruise (3.5★) — everyone on one boat, a true group experience", "Journey into Imagination with Figment (3★ · ❄️) for the chill contingent", "Living with the Land for the 'I just want to see things' people"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Soarin' — front row only, worth fighting for", "Na'vi River Journey is 1★ — skip if wait is over 20 min", "Test Track — good for competitive groups"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — reunite everyone here, no exceptions", "Haunted Mansion — atmospheric, most people handle it fine", "Pirates of the Caribbean — classic group closer"] },
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space. Orange (4★) for the brave, Green (3.8★) for everyone else", "Kilimanjaro Safaris, regroup here, zero conflict, everyone happy", "Seven Dwarfs Mine Train, family coaster sweet spot"] },
+        { time: 'Midday', icon: '☀️', items: ["Jungle Cruise (3.5★), everyone on one boat, a true group experience", "Journey into Imagination with Figment (3★ · ❄️) for the chill contingent", "Living with the Land for the 'I just want to see things' people"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Soarin', front row only, worth fighting for", "Na'vi River Journey is 1★, skip if wait is over 20 min", "Test Track, good for competitive groups"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★), reunite everyone here, no exceptions", "Haunted Mansion, atmospheric, most people handle it fine", "Pirates of the Caribbean, classic group closer"] },
       ],
       note: "Jungle Cruise (3.5★) is the great group equalizer when the Skipper is good. The ceiling is a genuine 5-star group experience.",
     },
@@ -1281,10 +1281,10 @@ const parks: Record<string, Park> = {
       emoji: '🏆', vibe: 'Big Group & Going All In',
       intro: "Your group has aligned on maximum rides. Respect. This requires planning.",
       plan: [
-        { time: 'Rope Drop', icon: '⚡', items: ["Rise of the Resistance — worth splitting up and regrouping for", "Flight of Passage (44\"+) — life-changing for everyone who can ride", "TRON Lightcycle / Run — get Lightning Lane in advance, not optional"] },
-        { time: 'Midday', icon: '☀️', items: ["Expedition Everest — groups love screaming together", "Mission: Space Orange (4★) — the underrated heavy hitter", "Rock 'n' Roller Coaster at HS — back-to-back is valid"] },
-        { time: 'Afternoon', icon: '🌤️', items: ["Tower of Terror — the drop is always funnier in a group", "Guardians of the Galaxy: Cosmic Rewind", "Seven Dwarfs Mine Train — groups go to war over this wait time, it's worth it"] },
-        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — even thrill-seekers need to see this, mandatory", "Haunted Mansion — a classic group nightcap", "Na'vi River Journey is 1★ — skip it, do Flight of Passage again instead"] },
+        { time: 'Rope Drop', icon: '⚡', items: ["Rise of the Resistance, worth splitting up and regrouping for", "Flight of Passage (44\"+), life-changing for everyone who can ride", "TRON Lightcycle / Run, get Lightning Lane in advance, not optional"] },
+        { time: 'Midday', icon: '☀️', items: ["Expedition Everest, groups love screaming together", "Mission: Space Orange (4★), the underrated heavy hitter", "Rock 'n' Roller Coaster at HS, back-to-back is valid"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Tower of Terror, the drop is always funnier in a group", "Guardians of the Galaxy: Cosmic Rewind", "Seven Dwarfs Mine Train, groups go to war over this wait time, it's worth it"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★), even thrill-seekers need to see this, mandatory", "Haunted Mansion, a classic group nightcap", "Na'vi River Journey is 1★, skip it, do Flight of Passage again instead"] },
       ],
       note: "Na'vi River Journey is 1★. With a big group, the wait hurts more. Flight of Passage is in the same land. Do that instead. Every time.",
     },

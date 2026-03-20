@@ -1,0 +1,310 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const stats = [
+  { value: '101M+', label: 'Views Generated', emoji: '👀' },
+  { value: '12+',   label: 'Years Creating',  emoji: '📅' },
+  { value: '36K',   label: 'Subscribers',     emoji: '🎬' },
+  { value: '100+',  label: 'Park Visits',     emoji: '🏰' },
+];
+
+const caseStudies = [
+  {
+    slug: 'gary-bird',
+    tag: 'Short-Form Growth',
+    tagColor: 'bg-green-500/10 text-green-700',
+    client: 'Gary Bird',
+    headline: '1K avg views to 50.5M total views in 86 days.',
+    description: 'Rebuilt his format strategy across YouTube, TikTok, and Instagram. One video became a 20M+ view mega outlier picked up by Yahoo Finance, New York Post, and more.',
+    metric: '50.5M',
+    metricLabel: 'Total views in 86 days',
+    accentFrom: 'from-primary',
+    accentTo: 'to-mint',
+    metricBg: 'bg-primary/6 border-primary/12',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'nick-gray',
+    tag: 'Brand Growth + Revenue',
+    tagColor: 'bg-amber-500/10 text-amber-700',
+    client: 'Nick Gray',
+    headline: '7,288 avg views to 1.5M total views in 90 days.',
+    description: 'Rebuilt his TikTok identity around one clear thesis. Drove the most book sales from a single video in his history.',
+    metric: '1.54M',
+    metricLabel: 'Total views in 90 days',
+    accentFrom: 'from-amber-400',
+    accentTo: 'to-primary',
+    metricBg: 'bg-amber-500/6 border-amber-500/12',
+    metricText: 'text-amber-600',
+  },
+  {
+    slug: 'jai-long',
+    tag: 'Brand Build from Zero',
+    tagColor: 'bg-amber-500/10 text-amber-700',
+    client: 'Jai Long Co.',
+    headline: '400 avg views to 655K total views in 60 days.',
+    description: 'Designed the entire content identity from scratch. Positioning, format library, and a podcast-to-short-form pipeline.',
+    metric: '655K',
+    metricLabel: 'Total views in 60 days',
+    accentFrom: 'from-periwinkle',
+    accentTo: 'to-mint',
+    metricBg: 'bg-periwinkle/10 border-periwinkle/20',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'jim-coleman',
+    tag: 'Podcast Outlier Strategy',
+    tagColor: 'bg-purple-500/10 text-purple-700',
+    client: 'The Jim Coleman Show',
+    headline: 'A 77x outlier video. 80K+ views. 4K new subscribers.',
+    description: 'Researched his niche, found the gap, and strategized one concept that outperformed everything on his channel by 77x.',
+    metric: '77x',
+    metricLabel: 'Outlier multiple',
+    accentFrom: 'from-primary',
+    accentTo: 'to-periwinkle',
+    metricBg: 'bg-primary/6 border-primary/12',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'marie-poulin',
+    tag: 'Start From Zero',
+    tagColor: 'bg-pink-500/10 text-pink-700',
+    client: 'Marie Poulin',
+    headline: 'From dabbling to a 300K+ view breakout.',
+    description: 'Took her from posting without a strategy to averaging 2K views per video, with multiple 10K+ hits and a 300K+ breakout.',
+    metric: '300K+',
+    metricLabel: 'Breakout video views',
+    accentFrom: 'from-pink-400',
+    accentTo: 'to-periwinkle',
+    metricBg: 'bg-pink-500/6 border-pink-500/12',
+    metricText: 'text-pink-600',
+  },
+  {
+    slug: 'upstart-podcast',
+    tag: 'Podcast Clips',
+    tagColor: 'bg-mint/20 text-dark/70',
+    client: 'Upstart Podcast Shorts',
+    headline: 'One concept. 24K views. A clear channel outlier.',
+    description: 'Architected a single video concept that outperformed their typical 1-2K view clips by 12-24x.',
+    metric: '24K',
+    metricLabel: 'Views on one clip',
+    accentFrom: 'from-mint',
+    accentTo: 'to-periwinkle',
+    metricBg: 'bg-mint/10 border-mint/25',
+    metricText: 'text-dark',
+  },
+  {
+    slug: 'sweet-fish',
+    tag: 'Podcast Production',
+    tagColor: 'bg-purple-500/10 text-purple-700',
+    client: 'Sweet Fish Media',
+    headline: '100-250 episodes. 250-500 clips. 500K+ views.',
+    description: 'End-to-end content lifecycle management across multiple B2B podcast clients. Strategy, clips, distribution, and QBRs.',
+    metric: '500K+',
+    metricLabel: 'Total views generated',
+    accentFrom: 'from-primary',
+    accentTo: 'to-mint',
+    metricBg: 'bg-primary/6 border-primary/12',
+    metricText: 'text-primary',
+  },
+  {
+    slug: 'personal-channels',
+    tag: 'Personal Channel',
+    tagColor: 'bg-blue-500/10 text-blue-700',
+    client: 'Dino Favara Jr.',
+    headline: '101M+ views. 36K subs. 7M+ Instagram views.',
+    description: '12+ years of building audiences organically across YouTube, TikTok, and Instagram. Every system I sell, I tested on myself first.',
+    metric: '101M+',
+    metricLabel: 'Total views across platforms',
+    accentFrom: 'from-blue-400',
+    accentTo: 'to-primary',
+    metricBg: 'bg-blue-500/6 border-blue-500/12',
+    metricText: 'text-blue-600',
+  },
+];
+
+const services = [
+  {
+    emoji: '🎯',
+    title: 'YouTube Strategy',
+    description: 'Channel audits, content planning, and format development for creators who want to grow without burning out.',
+  },
+  {
+    emoji: '📱',
+    title: 'Short-Form Video',
+    description: 'Script-to-publish systems for TikTok, Reels, and YouTube Shorts. Built for consistency.',
+  },
+  {
+    emoji: '🎙️',
+    title: 'Podcast Content',
+    description: 'Clip selection, editing direction, and distribution strategy to turn long-form audio into short-form content that works.',
+  },
+];
+
+const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
+---
+
+<Layout
+  title="Work | Dino Favara Jr."
+  description="Video strategy, brand partnerships, and short-form content. 101M+ views, 12+ years. Let's make something that actually works."
+>
+  <Nav />
+
+  <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-14 pb-12">
+      <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/10 blur-[100px]"></div>
+        <div class="absolute top-40 -right-20 w-[400px] h-[400px] rounded-full bg-periwinkle/15 blur-[80px]"></div>
+        <div class="absolute bottom-0 left-1/3 w-[260px] h-[260px] rounded-full bg-mint/8 blur-[72px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
+            Video Strategy &amp; Brand Partnerships
+          </span>
+        </div>
+        <h1 class="font-display text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[1.07] tracking-tight text-dark max-w-2xl">
+          Let's make something that actually works.
+        </h1>
+      </div>
+    </section>
+
+    <!-- Stats Bar -->
+    <section class="pb-8 max-w-6xl mx-auto px-6">
+      <div class="relative rounded-2xl overflow-hidden border border-dark/8 bg-white/70 backdrop-blur-sm shadow-sm">
+        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
+        <div class="grid grid-cols-2 md:grid-cols-4">
+          {stats.map((stat, i) => (
+            <div
+              class={[
+                'relative flex flex-col items-center justify-center py-8 px-4 text-center',
+                'hover:bg-primary/4 transition-colors duration-300 group',
+                i < stats.length - 1 ? 'border-r border-dark/8' : '',
+                i < 2 ? 'border-b border-dark/8 md:border-b-0' : '',
+              ].join(' ')}
+            >
+              <span class="text-[1.5rem] mb-2 group-hover:scale-110 transition-transform duration-200 select-none">
+                {stat.emoji}
+              </span>
+              <span class="font-display text-[2rem] leading-none text-dark tabular-nums">
+                {stat.value}
+              </span>
+              <span class="mt-2 text-[11px] font-medium uppercase tracking-widest text-dark/45">
+                {stat.label}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-periwinkle/30 to-transparent"></div>
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-16 max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Results</span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-10">Case studies</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {caseStudies.map((cs) => (
+          <a href={`/work/${cs.slug}`} class="group rounded-2xl border border-dark/8 bg-white/60 p-8 flex flex-col gap-5 shadow-sm hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300 no-underline">
+            <div class={`h-0.5 w-12 rounded-full bg-gradient-to-r ${cs.accentFrom} ${cs.accentTo}`}></div>
+            <div class="flex items-center justify-between flex-wrap gap-3">
+              <span class={`inline-block px-3 py-1 rounded-full text-xs font-medium tracking-wide ${cs.tagColor}`}>
+                {cs.tag}
+              </span>
+              <span class="text-xs font-medium text-dark/40 uppercase tracking-widest">{cs.client}</span>
+            </div>
+            <div>
+              <h3 class="font-display text-xl text-dark mb-3 group-hover:text-primary transition-colors duration-200">{cs.headline}</h3>
+              <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
+                {cs.description}
+              </p>
+            </div>
+            <div class={`mt-auto rounded-xl ${cs.metricBg} border px-6 py-5 flex items-center justify-between`}>
+              <span class="text-sm font-medium text-dark/55">{cs.metricLabel}</span>
+              <span class={`font-display text-2xl ${cs.metricText}`}>{cs.metric}</span>
+            </div>
+          </a>
+        ))}
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Services</span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-10">What I do</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {services.map(service => (
+          <div class="rounded-2xl border border-dark/8 bg-white/50 p-7 flex flex-col gap-4 hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300">
+            <span class="text-3xl select-none">{service.emoji}</span>
+            <h3 class="font-display text-lg text-dark">{service.title}</h3>
+            <p class="text-sm font-light text-dark/60 leading-relaxed">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Dream Brand Partners -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Wishlist</span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-4">Dream brand partners</h2>
+      <p class="text-[1rem] font-light text-dark/60 mb-8">
+        Open to brand partnerships. Here's who I'd love to work with:
+      </p>
+      <div class="flex flex-wrap gap-3 mb-6">
+        {dreamBrands.map(brand => (
+          <span class="px-5 py-2.5 rounded-full border border-dark/12 bg-white/60 text-sm font-medium text-dark/70 hover:border-primary/30 hover:text-primary hover:bg-primary/5 transition-all duration-200 cursor-default">
+            {brand}
+          </span>
+        ))}
+      </div>
+      <p class="text-sm font-light text-dark/45 italic">
+        If your brand belongs on this list, let's talk.
+      </p>
+    </section>
+
+    <!-- CTA Strip -->
+    <section class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="relative rounded-2xl overflow-hidden bg-dark text-center px-8 py-16">
+          <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div class="absolute -top-20 left-1/4 w-[350px] h-[350px] rounded-full bg-primary/25 blur-[80px]"></div>
+            <div class="absolute -bottom-20 right-1/4 w-[300px] h-[300px] rounded-full bg-periwinkle/20 blur-[80px]"></div>
+          </div>
+
+          <div class="relative z-10 space-y-5">
+            <h2 class="font-display text-[clamp(1.8rem,4vw,3rem)] text-off-white leading-tight">
+              Ready to grow?
+            </h2>
+            <p class="text-[1rem] font-light text-off-white/60 max-w-md mx-auto leading-relaxed">
+              Whether you're a brand looking for a creative partner or a creator who needs a strategy, I'd love to hear from you.
+            </p>
+            <a
+              href="mailto:dino@mercurysocialmedia.com"
+              class="inline-flex items-center gap-2 mt-2 px-8 py-4 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+            >
+              Email me &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
