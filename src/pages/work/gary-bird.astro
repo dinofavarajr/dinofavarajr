@@ -45,7 +45,7 @@ import Footer from '../../components/Footer.astro';
       <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
         <div style="display:grid; grid-template-columns:1fr auto 1fr;">
           <!-- Before -->
-          <div class="flex flex-col items-center justify-center py-6 px-8 text-center">
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
             <span class="count-up font-display leading-none" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1;" text-red-500" data-value="1000">1,000</span>
             <span class="mt-2 text-sm font-light text-dark/50">per video</span>
@@ -58,7 +58,7 @@ import Footer from '../../components/Footer.astro';
             <span class="text-2xl text-dark/20">&darr;</span>
           </div>
           <!-- After -->
-          <div class="flex flex-col items-center justify-center py-6 px-8 text-center bg-green-500/4">
+          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-green-500/4">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views After</span>
             <span class="count-up font-display leading-none" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1;" text-green-600" data-value="50.5M">50.5M</span>
             <span class="mt-2 text-sm font-light text-dark/50">in 86 days</span>
@@ -159,7 +159,7 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <script>
-  function animateCount(el: HTMLElement) {
+  function animateCount(el: HTMLElement, dur: number = 5500) {
     const target = el.dataset.value ?? '';
     const hasPlus = target.includes('+');
     const hasM = target.includes('M');
@@ -170,7 +170,6 @@ import Footer from '../../components/Footer.astro';
     if (!/^\d+\.?\d*$/.test(clean)) return;
     const raw = parseFloat(clean);
     if (isNaN(raw)) return;
-    const dur = 5000;
     const start = performance.now();
     const fmt = (n: number): string => {
       if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
@@ -193,7 +192,7 @@ import Footer from '../../components/Footer.astro';
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll<HTMLElement>('.count-up').forEach(animateCount);
+      const els = entry.target.querySelectorAll<HTMLElement>('.count-up'); els.forEach((el, i) => animateCount(el, i === 0 ? 1200 : 5500));
       obs.unobserve(entry.target);
     });
   }, { threshold: 0.3 });

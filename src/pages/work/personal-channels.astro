@@ -87,7 +87,7 @@ import Footer from '../../components/Footer.astro';
 </Layout>
 
 <script>
-  function animateCount(el: HTMLElement) {
+  function animateCount(el: HTMLElement, dur: number = 5500) {
     const target = el.dataset.value ?? '';
     const hasPlus = target.includes('+');
     const hasM = target.includes('M');
@@ -98,7 +98,6 @@ import Footer from '../../components/Footer.astro';
     if (!/^\d+\.?\d*$/.test(clean)) return;
     const raw = parseFloat(clean);
     if (isNaN(raw)) return;
-    const dur = 5000;
     const start = performance.now();
     const fmt = (n: number): string => {
       if (hasM) return (Math.round(n * 10) / 10) + 'M' + (hasPlus ? '+' : '');
@@ -120,7 +119,7 @@ import Footer from '../../components/Footer.astro';
   const obs = new IntersectionObserver(entries => {
     entries.forEach(entry => {
       if (!entry.isIntersecting) return;
-      entry.target.querySelectorAll<HTMLElement>('.count-up').forEach(animateCount);
+      const els = entry.target.querySelectorAll<HTMLElement>('.count-up'); els.forEach((el, i) => animateCount(el, i === 0 ? 1200 : 5500));
       obs.unobserve(entry.target);
     });
   }, { threshold: 0.3 });
