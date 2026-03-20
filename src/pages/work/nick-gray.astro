@@ -40,12 +40,12 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- Before / After -->
-    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-5xl mx-auto px-6 pb-12">
       <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
-        <div class="grid grid-cols-1 md:grid-cols-[1fr_auto_1fr]">
-          <div class="flex flex-col items-center justify-center py-10 px-8 text-center">
+        <div class="grid grid-cols-[1fr_auto_1fr]">
+          <div class="flex flex-col items-center justify-center py-6 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
-            <span class="count-up font-display text-[clamp(5rem,16vw,10rem)] leading-none text-red-500" data-value="7288">7,288</span>
+            <span class="count-up font-display leading-none" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1;" text-red-500" data-value="7288">7,288</span>
             <span class="mt-2 text-sm font-light text-dark/50">per video</span>
           </div>
           <div class="hidden md:flex items-center justify-center px-4">
@@ -54,9 +54,9 @@ import Footer from '../../components/Footer.astro';
           <div class="flex md:hidden items-center justify-center py-2">
             <span class="text-2xl text-dark/20">&darr;</span>
           </div>
-          <div class="flex flex-col items-center justify-center py-10 px-8 text-center bg-amber-500/4">
+          <div class="flex flex-col items-center justify-center py-6 px-8 text-center bg-amber-500/4">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Total Views After</span>
-            <span class="count-up font-display text-[clamp(5rem,16vw,10rem)] leading-none text-amber-600" data-value="1.54M">1.54M</span>
+            <span class="count-up font-display leading-none" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1;" text-amber-600" data-value="1.54M">1.54M</span>
             <span class="mt-2 text-sm font-light text-dark/50">in 90 days</span>
           </div>
         </div>
@@ -64,7 +64,7 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- Metrics Grid -->
-    <section class="stats-section max-w-3xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-5xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { value: '10.8K', label: 'TikTok Followers', sub: '(from 6,052)' },
