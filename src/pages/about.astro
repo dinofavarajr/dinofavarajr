@@ -47,7 +47,7 @@ import bannerImage from '../assets/bannerimage-2.png';
               class="w-full h-auto object-cover"
               widths={[800, 1200, 1600]}
               sizes="(max-width: 1024px) 100vw, 60vw"
-              style="mask-image: linear-gradient(to right, transparent 0%, black 32%); -webkit-mask-image: linear-gradient(to right, transparent 0%, black 32%);"
+              class="about-banner-img"
             />
           </div>
 
@@ -273,4 +273,17 @@ import bannerImage from '../assets/bannerimage-2.png';
 
   <Footer />
 </Layout>
+
+<style>
+  .about-banner-img {
+    mask-image: linear-gradient(to top, transparent 0%, black 28%);
+    -webkit-mask-image: linear-gradient(to top, transparent 0%, black 28%);
+  }
+  @media (min-width: 1024px) {
+    .about-banner-img {
+      mask-image: linear-gradient(to right, transparent 0%, black 32%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, black 32%);
+    }
+  }
+</style>
 
