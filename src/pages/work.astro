@@ -204,8 +204,27 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
       </div>
     </section>
 
-    <!-- Case Studies -->
+    <!-- Services -->
     <section class="py-16 max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Services</span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-10">What I do</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {services.map(service => (
+          <div class="rounded-2xl border border-dark/8 bg-white/50 p-7 flex flex-col gap-4 hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300">
+            <span class="text-3xl select-none">{service.emoji}</span>
+            <h3 class="font-display text-lg text-dark">{service.title}</h3>
+            <p class="text-sm font-light text-dark/60 leading-relaxed">{service.description}</p>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
       <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
         <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Results</span>
@@ -233,25 +252,6 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
               <span class={`font-display text-2xl ${cs.metricText}`}>{cs.metric}</span>
             </div>
           </a>
-        ))}
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
-      <div class="flex items-center gap-3 mb-6">
-        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
-        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Services</span>
-      </div>
-      <h2 class="font-display text-3xl text-dark mb-10">What I do</h2>
-
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {services.map(service => (
-          <div class="rounded-2xl border border-dark/8 bg-white/50 p-7 flex flex-col gap-4 hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300">
-            <span class="text-3xl select-none">{service.emoji}</span>
-            <h3 class="font-display text-lg text-dark">{service.title}</h3>
-            <p class="text-sm font-light text-dark/60 leading-relaxed">{service.description}</p>
-          </div>
         ))}
       </div>
     </section>
