@@ -4,10 +4,10 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
 const stats = [
-  { value: '101M+', label: 'Views Generated', emoji: '👀' },
-  { value: '12+',   label: 'Years Creating',  emoji: '📅' },
-  { value: '36K',   label: 'Subscribers',     emoji: '🎬' },
-  { value: '100+',  label: 'Park Visits',     emoji: '🏰' },
+  { value: '1000+',   label: 'Videos Created',                   emoji: '🎬' },
+  { value: '81,789',  label: 'Total Followers Across Platforms',  emoji: '👥' },
+  { value: '5000',    label: 'Video Revisions Given (Probably)',  emoji: '✂️' },
+  { value: '???',     label: 'Mistakes Made? Too Many',           emoji: '💀' },
 ];
 
 const caseStudies = [
@@ -182,7 +182,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
           {stats.map((stat, i) => (
             <div
               class={[
-                'relative flex flex-col items-center justify-center py-8 px-4 text-center',
+                'relative flex flex-col items-center justify-center py-5 px-4 text-center',
                 'hover:bg-primary/4 transition-colors duration-300 group',
                 i < stats.length - 1 ? 'border-r border-dark/8' : '',
                 i < 2 ? 'border-b border-dark/8 md:border-b-0' : '',
