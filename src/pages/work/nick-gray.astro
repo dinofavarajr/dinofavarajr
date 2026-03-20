@@ -40,9 +40,9 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- Before / After -->
-    <section class="stats-section max-w-5xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-4xl mx-auto px-6 pb-12">
       <div class="rounded-2xl border border-dark/8 bg-white/70 overflow-hidden">
-        <div class="grid grid-cols-[1fr_auto_1fr]">
+        <div style="display:grid; grid-template-columns:1fr auto 1fr;">
           <div class="flex flex-col items-center justify-center py-6 px-8 text-center">
             <span class="text-[11px] font-medium uppercase tracking-widest text-dark/40 mb-3">Avg Views Before</span>
             <span class="count-up font-display leading-none" style="font-size: clamp(2rem, 5vw, 3.5rem); line-height: 1;" text-red-500" data-value="7288">7,288</span>
@@ -64,7 +64,7 @@ import Footer from '../../components/Footer.astro';
     </section>
 
     <!-- Metrics Grid -->
-    <section class="stats-section max-w-5xl mx-auto px-6 pb-12">
+    <section class="stats-section max-w-4xl mx-auto px-6 pb-12">
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
         {[
           { value: '10.8K', label: 'TikTok Followers', sub: '(from 6,052)' },
