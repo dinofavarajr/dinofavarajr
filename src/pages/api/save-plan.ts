@@ -77,7 +77,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Send plan to the user
     await resend.emails.send({
-      from: 'Dino Favara <onboarding@resend.dev>',
+      from: 'Dino Favara <dino@dinofavarajr.com>',
       to: email,
       subject: `Your ${parkName} day plan — Dino's Disney Field Guide`,
       html: emailBody,
@@ -86,7 +86,7 @@ export const POST: APIRoute = async ({ request }) => {
 
     // Notify Dino with the plan, reply-to set to the user
     await resend.emails.send({
-      from: 'Disney Planner <onboarding@resend.dev>',
+      from: 'Disney Planner <dino@dinofavarajr.com>',
       to: 'dino@dinofavarajr.com',
       replyTo: email,
       subject: `New plan request: ${email} → ${parkName}`,
