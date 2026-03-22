@@ -64,38 +64,53 @@ export const POST: APIRoute = async ({ request }) => {
     </div>
   `;
 
+  // Add to Kit.com list (non-blocking — don't fail the whole request if this errors)
   try {
-    // Add to Kit.com list
     const kitKey = import.meta.env.KIT_API_KEY;
     if (kitKey) {
-      await fetch('https://api.kit.com/v4/subscribers', {
+      const kitRes = await fetch('https://api.kit.com/v4/subscribers', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', 'X-Kit-Api-Key': kitKey },
         body: JSON.stringify({ email_address: email }),
       });
+      const kitBody = await kitRes.text();
+      console.log('Kit response:', kitRes.status, kitBody);
+    } else {
+      console.warn('KIT_API_KEY not set');
     }
+  } catch (err) {
+    console.error('Kit error (non-fatal):', err);
+  }
 
-    // Send plan to the user
-    await resend.emails.send({
+  // Send plan to the user
+  try {
+    const userEmailResult = await resend.emails.send({
       from: 'Dino Favara <dino@dinofavarajr.com>',
       to: email,
       subject: `Your ${parkName} day plan — Dino's Disney Field Guide`,
       html: emailBody,
       replyTo: 'dino@dinofavarajr.com',
     });
+    console.log('User email result:', JSON.stringify(userEmailResult));
+  } catch (err) {
+    console.error('Resend user email error:', err);
+    return new Response(JSON.stringify({ error: 'Failed to send user email' }), { status: 500 });
+  }
 
-    // Notify Dino with the plan, reply-to set to the user
-    await resend.emails.send({
+  // Notify Dino
+  try {
+    const notifyResult = await resend.emails.send({
       from: 'Disney Planner <dino@dinofavarajr.com>',
       to: 'dino@dinofavarajr.com',
       replyTo: email,
       subject: `New plan request: ${email} → ${parkName}`,
       html: notifyBody,
     });
-
-    return new Response(JSON.stringify({ ok: true }), { status: 200 });
+    console.log('Notify email result:', JSON.stringify(notifyResult));
   } catch (err) {
-    console.error('save-plan error', err);
-    return new Response(JSON.stringify({ error: 'Failed to send' }), { status: 500 });
+    console.error('Resend notify email error:', err);
+    // Non-fatal — user email already sent
   }
+
+  return new Response(JSON.stringify({ ok: true }), { status: 200 });
 };
