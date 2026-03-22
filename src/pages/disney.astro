@@ -125,19 +125,9 @@ const parks: Record<string, Park> = {
       </div>
 
       <div class="relative z-10 max-w-4xl mx-auto px-6 text-center flex flex-col items-center gap-5">
-        <div class="flex items-center gap-3">
-          <div class="h-px w-8 bg-[#A89FF5]/50"></div>
-          <span class="text-xs font-medium tracking-[0.2em] uppercase text-[#A89FF5]/80">100+ visits · No sponsors · Real opinions</span>
-          <div class="h-px w-8 bg-[#A89FF5]/50"></div>
-        </div>
-
         <h1 class="font-display text-[clamp(2.8rem,7vw,5.5rem)] leading-[1.05] tracking-tight text-[#FAF9F5]">
           Dino's Disney<br />Field Guide
         </h1>
-
-        <p class="text-[1.1rem] font-light text-[#FAF9F5]/55 leading-relaxed max-w-md">
-          Every ride gets reviewed on camera. This map fills up as I go.
-        </p>
 
         <div class="flex items-center gap-2 mt-2">
           <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-[#A89FF5]/15 border border-[#A89FF5]/25 text-[#A89FF5] text-xs font-medium">
@@ -810,20 +800,10 @@ const parks: Record<string, Park> = {
     </div>
     <div id="panel-overlay" class="panel-overlay" aria-hidden="true"></div>
 
-    <!-- ── COMING SOON STRIP ── -->
+    <!-- ── PLANNER CTA ── -->
     <section class="bg-[#1A1523] py-10 px-6">
-      <div class="max-w-3xl mx-auto text-center flex flex-col sm:flex-row items-center justify-center gap-4">
-        <p class="text-[#FAF9F5]/70 text-sm font-light leading-relaxed">
-          Every ride. Every park. Reviewed on camera. Subscribe to follow the journey
-        </p>
-        <a
-          href="https://app.kit.com/forms/9211740/subscriptions"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="flex-shrink-0 inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-[#A89FF5] text-[#1A1523] text-sm font-medium hover:bg-[#C0B8FF] transition-colors duration-200"
-        >
-          Subscribe →
-        </a>
+      <div class="max-w-3xl mx-auto text-center">
+        <p class="text-[#FAF9F5] text-2xl font-display tracking-tight">Let's plan your day in 5 minutes so you can stop Googling and just go.</p>
       </div>
     </section>
 
@@ -855,6 +835,72 @@ const parks: Record<string, Park> = {
                 <option value="mix">Mix it up</option>
                 <option value="send">Send it</option>
               </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="trip-origin" class="text-sm font-medium text-dark/70">Visiting from out of town?</label>
+              <select id="trip-origin" class="planner-select">
+                <option value="out-of-town">Yes, traveled here</option>
+                <option value="local">Nope, I'm local</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="only-trip" class="text-sm font-medium text-dark/70">Only Disney trip this year?</label>
+              <select id="only-trip" class="planner-select">
+                <option value="yes">Yes, this is it</option>
+                <option value="no">No, I'll be back</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="which-park" class="text-sm font-medium text-dark/70">Which park?</label>
+              <select id="which-park" class="planner-select">
+                <option value="magic_kingdom">Magic Kingdom</option>
+                <option value="epcot">EPCOT</option>
+                <option value="hollywood_studios">Hollywood Studios</option>
+                <option value="animal_kingdom">Animal Kingdom</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="passholder" class="text-sm font-medium text-dark/70">Annual Passholder?</label>
+              <select id="passholder" class="planner-select">
+                <option value="no">No</option>
+                <option value="yes">Yes</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="resort" class="text-sm font-medium text-dark/70">Staying where?</label>
+              <select id="resort" class="planner-select">
+                <option value="on-property">On Disney property</option>
+                <option value="off-property">Off property</option>
+                <option value="day-trip">Not staying (day trip)</option>
+              </select>
+            </div>
+            <div id="kids-age-row" class="flex flex-col gap-2 hidden">
+              <label for="kids-age" class="text-sm font-medium text-dark/70">Kids' age range?</label>
+              <select id="kids-age" class="planner-select">
+                <option value="toddlers">Toddlers (2–4)</option>
+                <option value="young">Young kids (5–8)</option>
+                <option value="tweens">Tweens / teens (9+)</option>
+                <option value="mixed">Mixed ages</option>
+              </select>
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="visit-frequency" class="text-sm font-medium text-dark/70">How often do you go to Disney?</label>
+              <select id="visit-frequency" class="planner-select">
+                <option value="first">First time ever</option>
+                <option value="1-5">1–5 times</option>
+                <option value="5-20">5–20 times</option>
+                <option value="20plus">20+ times</option>
+              </select>
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-5 mb-6">
+            <div class="flex flex-col gap-2">
+              <label for="trip-start" class="text-sm font-medium text-dark/70">Trip starts</label>
+              <input type="date" id="trip-start" class="planner-date" />
+            </div>
+            <div class="flex flex-col gap-2">
+              <label for="trip-end" class="text-sm font-medium text-dark/70">Trip ends</label>
+              <input type="date" id="trip-end" class="planner-date" />
             </div>
           </div>
           <button id="build-day-btn" class="w-full py-3.5 rounded-xl bg-[#6B5CE7] text-white font-medium text-sm hover:bg-[#5a4bd4] transition-colors duration-200">
@@ -1015,6 +1061,22 @@ const parks: Record<string, Park> = {
     color: #1A1523;
     cursor: pointer;
     transition: border-color 0.15s;
+  }
+  .planner-date {
+    background: #FAF9F5;
+    border: 1.5px solid rgba(26,21,35,0.15);
+    border-radius: 10px;
+    padding: 10px 14px;
+    font-size: 0.875rem;
+    font-family: 'DM Sans', system-ui, sans-serif;
+    color: #1A1523;
+    width: 100%;
+    transition: border-color 0.15s;
+  }
+  .planner-date:focus {
+    outline: none;
+    border-color: #6B5CE7;
+    box-shadow: 0 0 0 3px rgba(107,92,231,0.12);
   }
   .planner-select:focus {
     outline: none;
@@ -1290,21 +1352,240 @@ const parks: Record<string, Park> = {
     },
   };
 
+  // Show/hide kids age row based on who's coming
+  const whoSelect = document.getElementById('who-coming') as HTMLSelectElement;
+  const kidsAgeRow = document.getElementById('kids-age-row')!;
+  whoSelect.addEventListener('change', () => {
+    kidsAgeRow.classList.toggle('hidden', whoSelect.value !== 'kids');
+  });
+
+  function getWeatherTips(startStr: string, endStr: string): string[] {
+    if (!startStr) return [];
+    // Parse without timezone issues
+    const [sy, sm, sd] = startStr.split('-').map(Number);
+    const [ey, em, ed] = (endStr || startStr).split('-').map(Number);
+    const start = new Date(sy, sm - 1, sd);
+    const end = new Date(ey, em - 1, ed);
+
+    const months = new Set<number>();
+    const cur = new Date(start);
+    while (cur <= end && months.size <= 12) {
+      months.add(cur.getMonth());
+      cur.setDate(cur.getDate() + 1);
+    }
+
+    const tips: string[] = [];
+    const m = [...months];
+
+    // Holiday crowds
+    const isHolidayWindow =
+      (sm === 12 && sd >= 20) || (sm === 1 && sd <= 5) ||
+      (em === 12 && ed >= 20) || (em === 1 && ed <= 5);
+    if (isHolidayWindow) {
+      tips.push("You're visiting during peak holiday season — expect maximum crowds. Rope drop is not optional, it's survival. Lightning Lane for everything you care about.");
+    }
+
+    // Summer heat + storms (June–September)
+    const isSummer = m.some(mo => [5, 6, 7, 8].includes(mo));
+    if (isSummer) {
+      tips.push("Florida runs its afternoon thunderstorm script like clockwork in summer — expect storms around 3–4pm. Hit outdoor and thrill rides in the morning, then use the rain window for indoor attractions, food, and AC.");
+      tips.push("Heat index will be brutal. Hydrate constantly, wear light clothing, and treat every air-conditioned ride as a bonus break, not just a queue.");
+    }
+
+    // Spring (March–May)
+    const isSpring = m.some(mo => [2, 3, 4].includes(mo));
+    if (isSpring && !isSummer) {
+      tips.push("Spring weather in Orlando is genuinely great — warm, manageable humidity, and usually dry. Afternoon pop-up showers are possible in April and May, so a small poncho in your bag doesn't hurt.");
+    }
+
+    // Fall sweet spot (October–November)
+    const isFall = m.some(mo => [9, 10].includes(mo));
+    if (isFall) {
+      tips.push("October and November are arguably the best time to visit — crowds thin out, temps drop into the 70s, and the Halloween and holiday overlays are running. You picked well.");
+    }
+
+    // Winter (December–February, non-holiday)
+    const isWinter = m.some(mo => [11, 0, 1].includes(mo));
+    if (isWinter && !isHolidayWindow) {
+      tips.push("Florida winters can catch people off guard — mornings can dip into the 50s. Pack a light layer for early park entry and evening fireworks, then shed it by midday when it warms up.");
+    }
+
+    return tips;
+  }
+
+  function buildContextTips(origin: string, onlyTrip: string, passholder: string, resort: string, who: string, kidsAge: string, park: string): string[] {
+    const tips: string[] = [];
+
+    if (passholder === 'yes') {
+      tips.push("You're a passholder — don't grind through everything. Save the stuff that can wait for your next visit and focus on what actually hits today.");
+    } else if (origin === 'out-of-town' && onlyTrip === 'yes') {
+      tips.push("You traveled here and this is your one shot this year. Don't leave anything on the table. Lightning Lane the rides you care about most before they sell out.");
+    } else if (onlyTrip === 'no') {
+      tips.push("You're coming back, so take the pressure off. Miss something today and save it for next time. That's a feature, not a bug.");
+    }
+
+    if (resort === 'on-property') {
+      tips.push("You have Early Theme Park Entry — 30 minutes before official open. Use it on your single most-wanted ride before the crowds catch up.");
+    } else if (resort === 'off-property' || resort === 'day-trip') {
+      tips.push("No early entry, so be at the gate at least 15 minutes before official park open. The first 90 minutes are everything.");
+    }
+
+    if (who === 'kids') {
+      if (kidsAge === 'toddlers') {
+        tips.push("Toddlers will hit a wall after lunch — that's not a maybe, that's a guarantee. Schedule a hotel break or quiet rest window. Fighting it costs you the whole afternoon.");
+      } else if (kidsAge === 'tweens') {
+        const llRide = park === 'magic_kingdom' ? 'TRON and Seven Dwarfs Mine Train' : park === 'hollywood_studios' ? 'Rise of the Resistance and Slinky Dog Dash' : park === 'animal_kingdom' ? 'Flight of Passage' : 'Guardians of the Galaxy and Test Track';
+        tips.push(`Tweens want the big rides. Get Lightning Lane for ${llRide} first thing — those sell out fast and the standby waits are brutal.`);
+      } else if (kidsAge === 'mixed') {
+        tips.push("Mixed ages means a split strategy: one adult per group in different queues, then regroup. Pre-plan your meet-up spots so nobody's standing around waiting.");
+      } else if (kidsAge === 'young') {
+        tips.push("Kids 5–8 have more stamina than toddlers but still need a midday reset. Keep the afternoon schedule lighter and let them pick one ride to ride twice — it matters more to them than you think.");
+      }
+    }
+
+    if (origin === 'local' && passholder === 'no') {
+      tips.push("Local day tripper energy: you can leave whenever it stops being fun. That's a superpower. Use it.");
+    }
+
+    return tips;
+  }
+
+  type PlanBlock = { time: string; icon: string; items: string[] };
+  type ParkPlanMap = Record<string, Record<string, PlanBlock[]>>;
+
+  const parkPlans: ParkPlanMap = {
+    magic_kingdom: {
+      chill: [
+        { time: 'Morning', icon: '🌅', items: ["It's a Small World — start gentle, the scale of it gets you every time", "Under the Sea: Journey of The Little Mermaid (3.3★), better than it has any right to be", "PeopleMover — best overview of the park, zero wait, essential"] },
+        { time: 'Midday', icon: '☀️', items: ["Haunted Mansion — classic for a reason, find the Doom Buggy and just vibe", "Liberty Belle Riverboat — slow, pretty, genuinely relaxing", "Jungle Cruise (3.5★) — pray for a good Skipper, ceiling is a 5"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Pirates of the Caribbean — the original dark ride, it still holds up", "Enchanted Tiki Room — AC, birds, chaos. You either love it or you don't", "Country Bear Jamboree — absurd in the best way"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy parade (5★) — find your spot 30 minutes early. Non-negotiable.", "Main Street for fireworks — the castle view is worth standing for"] },
+      ],
+      mix: [
+        { time: 'Morning', icon: '🌅', items: ["Seven Dwarfs Mine Train — family coaster sweet spot, get here early", "Jungle Cruise (3.5★) — morning Skippers tend to be better, just a theory", "Big Thunder Mountain Railroad — underrated, back row preferred"] },
+        { time: 'Midday', icon: '☀️', items: ["Haunted Mansion — never skip this", "Under the Sea: Journey of The Little Mermaid (3.3★) — solid midday breather", "Peter Pan's Flight — brutal wait, but it's a classic, worth once"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Buzz Lightyear's Space Ranger Spin — competitive, fun, replay value is real", "PeopleMover — perfect between-rides reset, views are great", "Pirates of the Caribbean — always a good closer before evening"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — no excuses, everyone sees this", "Space Mountain — night queue has better atmosphere, do it late", "Big Thunder Mountain as the last ride — perfect low-key closer"] },
+      ],
+      send: [
+        { time: 'Rope Drop', icon: '⚡', items: ["TRON Lightcycle / Run — get Lightning Lane if you can, standby fills fast", "Seven Dwarfs Mine Train — right after TRON while crowds are thin", "Space Mountain — rope drop window is when the wait is tolerable"] },
+        { time: 'Midday', icon: '☀️', items: ["Big Thunder Mountain Railroad — back row, every time", "Haunted Mansion — mandatory, no debate", "Jungle Cruise (3.5★) — even thrill seekers should do this once per trip"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Peter Pan's Flight — Lightning Lane it or accept the wait", "Buzz Lightyear's Space Ranger Spin — quick and replayable", "Tiana's Bayou Adventure — the new Splash, worth seeing"] },
+        { time: 'Evening', icon: '🌙', items: ["Festival of Fantasy (5★) — mandatory even for thrill seekers, it's a 5-star for a reason", "TRON again if Lightning Lane is still available", "Space Mountain as the final ride — ends the night right"] },
+      ],
+    },
+    epcot: {
+      chill: [
+        { time: 'Morning', icon: '🌅', items: ["Soarin' Around the World — front row if possible, it's a different experience up there", "Living with the Land — boat ride, slow, genuinely good", "The Seas with Nemo & Friends — low key, great AC, zero stress"] },
+        { time: 'Midday', icon: '☀️', items: ["Journey into Imagination with Figment (3★ · ❄️) — nostalgia bait that mostly lands", "Turtle Talk with Crush — great AC, kids love it, adults secretly do too", "Start the World Showcase loop — drinks and food at every pavilion"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Gran Fiesta Tour — perfect AC break, near-zero wait", "Frozen Ever After — short, sweet, well-done", "Remy's Ratatouille Adventure — charming, lower waits in the afternoon"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT Forever nighttime show — stake your spot early", "Late dinner in World Showcase — France or Japan pavilion"] },
+      ],
+      mix: [
+        { time: 'Morning', icon: '🌅', items: ["Mission: Space Orange (4★) — this is the real deal, do it first while you're fresh", "Guardians of the Galaxy: Cosmic Rewind — single rider line is your friend here", "Test Track — single rider makes this effortless"] },
+        { time: 'Midday', icon: '☀️', items: ["Soarin' Around the World — single rider when the afternoon lines peak", "Journey into Imagination with Figment (3★ · ❄️) — solid AC break", "Living with the Land — resets the energy after a morning of rides"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Frozen Ever After — lower waits after 3pm", "Remy's Ratatouille Adventure — charming dark ride, worth it", "World Showcase food and drinks — France, Morocco, Japan in that order"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT Forever nighttime show", "Late dinner in World Showcase to close it out"] },
+      ],
+      send: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Guardians of the Galaxy: Cosmic Rewind — this fills fast, first ride no debate", "Mission: Space Orange (4★) — criminally underridden, do it while lines are short", "Test Track — single rider line, get this done early"] },
+        { time: 'Midday', icon: '☀️', items: ["Soarin' — single rider when the line peaks midday", "Remy's Ratatouille Adventure — afternoon waits drop, good timing", "Frozen Ever After — same logic, afternoon windows are better"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Mission: Space Green (1★) — only if you want the comparison, otherwise skip", "Spaceship Earth — slow, iconic, do it once", "Gran Fiesta Tour — zero wait, good AC, acceptable Guardians cooldown"] },
+        { time: 'Evening', icon: '🌙', items: ["EPCOT Forever — still worth it after a full send day", "World Showcase for food — you've earned the calories"] },
+      ],
+    },
+    hollywood_studios: {
+      chill: [
+        { time: 'Morning', icon: '🌅', items: ["Mickey & Minnie's Runaway Railway — charming, inventive, great first ride energy", "Indiana Jones Epic Stunt Spectacular — get there 10 min early, huge AC show", "Muppet*Vision 3D — absurd and perfect, great AC"] },
+        { time: 'Midday', icon: '☀️', items: ["Star Tours — random routes keep it fresh, always worth a lap", "Toy Story Mania! — competitive, fun, everyone has a good time", "Millennium Falcon: Smugglers Run — pick pilot if you want control, gunner if you don't"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Tower of Terror — you have to do this at least once, it's a masterpiece of theming", "Beauty and the Beast Live on Stage — great afternoon AC show", "Sunset Boulevard walk — the architecture back here is genuinely beautiful"] },
+        { time: 'Evening', icon: '🌙', items: ["Fantasmic! — get seats 30 minutes early, worth every minute of the wait"] },
+      ],
+      mix: [
+        { time: 'Morning', icon: '🌅', items: ["Rise of the Resistance — get Lightning Lane before it sells out, the standby can hit 90+ min", "Mickey & Minnie's Runaway Railway — right after Rise while energy is high", "Millennium Falcon: Smugglers Run — single rider line moves fast"] },
+        { time: 'Midday', icon: '☀️', items: ["Slinky Dog Dash — family-friendly coaster, better than it looks", "Toy Story Mania! — midday waits drop, good timing", "Indiana Jones Epic Stunt Spectacular — AC and entertainment, smart midday choice"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Tower of Terror — iconic, atmospheric, a rite of passage", "Star Tours — quick lap, randomized routes", "Muppet*Vision 3D — underrated afternoon reset"] },
+        { time: 'Evening', icon: '🌙', items: ["Rock 'n' Roller Coaster — last ride of the night energy is perfect for this", "Fantasmic! to close — stake your seats early"] },
+      ],
+      send: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Rise of the Resistance — first ride, no exceptions, nothing else matters at open", "Rock 'n' Roller Coaster — right after Rise before the line builds", "Tower of Terror — the theming hits different with morning light"] },
+        { time: 'Midday', icon: '☀️', items: ["Slinky Dog Dash — Lightning Lane if available, standby moves slow at peak", "Millennium Falcon: Smugglers Run — single rider line is the move", "Star Tours — quick, replayable, no commitment required"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Mickey & Minnie's Runaway Railway — lower waits after 3pm, great ride", "Toy Story Mania! — afternoon lull is the time", "Rise of the Resistance again if Lightning Lane is still available — it holds up on repeat"] },
+        { time: 'Evening', icon: '🌙', items: ["Rock 'n' Roller Coaster as the final ride — ends the night exactly right", "Fantasmic! — even send-mode people stop for this"] },
+      ],
+    },
+    animal_kingdom: {
+      chill: [
+        { time: 'Morning', icon: '🌅', items: ["Kilimanjaro Safaris — animals are most active in the morning, do this first every time", "Gorilla Falls Exploration Trail — slow, beautiful, genuinely excellent", "Maharajah Jungle Trek — same energy, different continent, equally good"] },
+        { time: 'Midday', icon: '☀️', items: ["Na'vi River Journey (1★) — it gets 1 star but the animatronic is stunning, only go if under 20 min", "Festival of the Lion King — great AC show, big crowd-pleaser, get there early", "Dinosaur — surprisingly intense for a chill day, heads up"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Kali River Rapids — if it's hot, this is non-negotiable. You will get soaked.", "Conservation Station — quiet, interesting, almost nobody goes here", "Treetop Trails — walk the canopy paths, deeply underrated"] },
+        { time: 'Evening', icon: '🌙', items: ["Tree of Life Awakening — the projections at dusk are genuinely beautiful, don't miss it"] },
+      ],
+      mix: [
+        { time: 'Morning', icon: '🌅', items: ["Flight of Passage — get Lightning Lane before anything else, it sells out fast", "Kilimanjaro Safaris — right after Flight while morning animal activity is peak", "Na'vi River Journey (1★) — only worth it under 20 min, otherwise skip"] },
+        { time: 'Midday', icon: '☀️', items: ["Expedition Everest — back row for the best experience, always", "Festival of the Lion King — smart midday AC break, surprisingly good show", "Gorilla Falls Exploration Trail — gentle reset after Everest"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Kali River Rapids — afternoon heat makes this mandatory if it's summer", "Dinosaur — often overlooked, genuinely thrilling", "Maharajah Jungle Trek — the tigers alone are worth the walk"] },
+        { time: 'Evening', icon: '🌙', items: ["Tree of Life Awakening at dusk — one of the most underrated moments in all of WDW"] },
+      ],
+      send: [
+        { time: 'Rope Drop', icon: '⚡', items: ["Flight of Passage — first ride of the day, no debate, this changes people", "Expedition Everest — back row, right after Flight before lines form", "Kilimanjaro Safaris — morning is when the animals are out, don't skip this"] },
+        { time: 'Midday', icon: '☀️', items: ["Kali River Rapids — beat the afternoon heat, you're going to get soaked anyway", "Dinosaur — underrated thrill, better than its reputation", "Na'vi River Journey (1★) — only if walk-on, otherwise the math doesn't work"] },
+        { time: 'Afternoon', icon: '🌤️', items: ["Expedition Everest again — it earns the repeat, back row still", "Festival of the Lion King — even send-mode people should see this once", "Gorilla Falls Exploration Trail — the cooldown walk you need after a full send morning"] },
+        { time: 'Evening', icon: '🌙', items: ["Flight of Passage one more time if Lightning Lane is available — it holds up on every single ride", "Tree of Life Awakening — end the night here, the projection show is worth staying for"] },
+      ],
+    },
+  };
+
   document.getElementById('build-day-btn')!.addEventListener('click', () => {
     const who = (document.getElementById('who-coming') as HTMLSelectElement).value;
     const thrill = (document.getElementById('thrill-level') as HTMLSelectElement).value;
+    const origin = (document.getElementById('trip-origin') as HTMLSelectElement).value;
+    const onlyTrip = (document.getElementById('only-trip') as HTMLSelectElement).value;
+    const park = (document.getElementById('which-park') as HTMLSelectElement).value;
+    const passholder = (document.getElementById('passholder') as HTMLSelectElement).value;
+    const resort = (document.getElementById('resort') as HTMLSelectElement).value;
+    const kidsAge = who === 'kids' ? (document.getElementById('kids-age') as HTMLSelectElement).value : '';
+    const visitFreq = (document.getElementById('visit-frequency') as HTMLSelectElement).value;
+    const tripStart = (document.getElementById('trip-start') as HTMLInputElement).value;
+    const tripEnd = (document.getElementById('trip-end') as HTMLInputElement).value;
+
     const key = `${who}-${thrill}`;
     const rec = recommendations[key];
     if (!rec) return;
+    const plan = parkPlans[park]?.[thrill];
+    if (!plan) return;
 
-    const planHTML = rec.plan.map(block => `
+    const weatherTips = getWeatherTips(tripStart, tripEnd);
+    const freqTip: string[] = visitFreq === 'first'
+      ? ["This is your first time — don't try to do everything. Pick a couple of must-do rides and let the rest surprise you. First trips are about feeling it, not completing it."]
+      : visitFreq === '1-5'
+      ? ["You've been a few times but you're still building your Disney IQ. Trust the ratings on this page over the stuff you see on random blogs. Some of the best rides have zero hype."]
+      : visitFreq === '5-20'
+      ? ["You know your way around. Skip the stuff you've already seen enough of and use this trip to finally do the things you always skip. They're probably better than you think."]
+      : ["You're a veteran. You don't need a plan — but a plan still helps. Use today to revisit the stuff that earns its repeat and ignore the rest."];
+    const contextTips = [...weatherTips, ...freqTip, ...buildContextTips(origin, onlyTrip, passholder, resort, who, kidsAge, park)];
+    const contextHTML = contextTips.length > 0 ? `
+      <div class="mb-5 p-4 rounded-xl bg-[#EEF0FF] border border-[#A89FF5]/30">
+        <p class="text-xs font-medium tracking-widest uppercase text-[#6B5CE7]/70 mb-3">Based on your trip</p>
+        <ul class="space-y-2">
+          ${contextTips.map(tip => `
+            <li class="flex items-start gap-2 text-sm font-light text-dark/70">
+              <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#6B5CE7] flex-shrink-0"></span>
+              ${tip}
+            </li>
+          `).join('')}
+        </ul>
+      </div>
+    ` : '';
+
+    const planHTML = plan.map((block: {icon: string; time: string; items: string[]}) => `
       <div class="mb-5">
         <div class="flex items-center gap-2 mb-2">
           <span class="text-lg">${block.icon}</span>
           <span class="text-xs font-medium tracking-widest uppercase text-[#6B5CE7]/70">${block.time}</span>
         </div>
         <ul class="space-y-1.5">
-          ${block.items.map(item => `
+          ${block.items.map((item: string) => `
             <li class="flex items-start gap-2 text-sm font-light text-dark/70">
               <span class="mt-1.5 w-1.5 h-1.5 rounded-full bg-[#A89FF5] flex-shrink-0"></span>
               ${item}
@@ -1325,12 +1606,75 @@ const parks: Record<string, Park> = {
           </div>
         </div>
         <div class="h-px bg-dark/8 my-5"></div>
+        ${contextHTML}
         ${planHTML}
         <div class="mt-4 p-4 rounded-xl bg-[#F5EDD8] border border-[#C4A97A]/30">
           <p class="text-sm font-light text-dark/65 italic">💬 Dino's note: ${rec.note}</p>
         </div>
+        <div class="mt-6 p-6 rounded-2xl bg-[#1A1523] border border-[#A89FF5]/20">
+          <p class="font-display text-lg text-[#FAF9F5] mb-1">Want this sent to your inbox?</p>
+          <p class="text-sm font-light text-[#FAF9F5]/55 mb-4">Drop your email and I'll send you a cleaner version of this plan — plus you can reply directly and I'll give you personal feedback.</p>
+          <div id="save-plan-form" class="flex flex-col sm:flex-row gap-3">
+            <input
+              type="email"
+              id="save-email"
+              placeholder="your@email.com"
+              class="flex-1 px-4 py-2.5 rounded-xl bg-white/10 border border-white/15 text-[#FAF9F5] text-sm placeholder:text-white/30 focus:outline-none focus:border-[#A89FF5]/60"
+            />
+            <button
+              id="save-plan-btn"
+              class="flex-shrink-0 px-5 py-2.5 rounded-xl bg-[#A89FF5] text-[#1A1523] text-sm font-medium hover:bg-[#C0B8FF] transition-colors duration-200"
+            >
+              Save for later →
+            </button>
+          </div>
+          <p id="save-plan-success" class="hidden text-sm text-[#A89FF5] mt-3">Sent to your email! Dino will take a look and let you know what he thinks at his earliest convenience (:</p>
+          <p id="save-plan-error" class="hidden text-sm text-red-400 mt-3">Something went wrong. Try again or email me directly.</p>
+        </div>
       </div>
     `;
+
+    document.getElementById('save-plan-btn')?.addEventListener('click', async () => {
+      const emailInput = document.getElementById('save-email') as HTMLInputElement;
+      const btn = document.getElementById('save-plan-btn') as HTMLButtonElement;
+      const successMsg = document.getElementById('save-plan-success')!;
+      const errorMsg = document.getElementById('save-plan-error')!;
+      const emailVal = emailInput?.value?.trim();
+
+      if (!emailVal || !emailVal.includes('@')) {
+        emailInput.focus();
+        return;
+      }
+
+      btn.textContent = 'Sending…';
+      btn.disabled = true;
+
+      try {
+        const res = await fetch('/api/save-plan', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: emailVal,
+            plan,
+            vibe: rec.vibe,
+            park,
+            thrill,
+          }),
+        });
+
+        if (res.ok) {
+          document.getElementById('save-plan-form')!.classList.add('hidden');
+          successMsg.classList.remove('hidden');
+        } else {
+          throw new Error('non-ok');
+        }
+      } catch {
+        btn.textContent = 'Save for later →';
+        btn.disabled = false;
+        errorMsg.classList.remove('hidden');
+      }
+    });
+
     resultsEl.classList.remove('hidden');
     resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
