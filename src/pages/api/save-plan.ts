@@ -7,13 +7,8 @@ export const POST: APIRoute = async ({ request }) => {
   let email: string, plan: {time: string; icon: string; items: string[]}[], vibe: string, park: string, thrill: string;
   try {
     const text = await request.text();
-    console.log('Raw body length:', text.length);
-    const params = new URLSearchParams(text);
-    email = params.get('email') ?? '';
-    plan = JSON.parse(params.get('plan') ?? '[]');
-    vibe = params.get('vibe') ?? '';
-    park = params.get('park') ?? '';
-    thrill = params.get('thrill') ?? '';
+    const parsed = JSON.parse(text);
+    ({ email, plan, vibe, park, thrill } = parsed);
   } catch (e) {
     console.error('Body parse error:', e);
     return new Response(JSON.stringify({ error: `Parse failed: ${e instanceof Error ? e.message : String(e)}` }), { status: 400 });
