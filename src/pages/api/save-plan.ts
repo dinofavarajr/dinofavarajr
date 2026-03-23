@@ -88,7 +88,7 @@ const parkPlans: Record<string, Record<string, PlanBlock[]>> = {
   },
 };
 
-export const POST: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request }) => {
   const url = new URL(request.url);
   const email = url.searchParams.get('email') ?? '';
   const park  = url.searchParams.get('park')  ?? '';

@@ -1651,7 +1651,7 @@ const parks: Record<string, Park> = {
 
       try {
         const qs = new URLSearchParams({ email: emailVal, park, thrill, vibe: rec.vibe });
-        const res = await fetch(`/api/save-plan?${qs.toString()}`, { method: 'POST' });
+        const res = await fetch(`/api/save-plan?${qs.toString()}`);
 
         const data = await res.json().catch(() => ({}));
         if (res.ok) {
