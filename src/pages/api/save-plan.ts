@@ -6,10 +6,12 @@ export const prerender = false;
 export const POST: APIRoute = async ({ request }) => {
   let email: string, plan: {time: string; icon: string; items: string[]}[], vibe: string, park: string, thrill: string;
   try {
-    const text = await request.text();
-    console.log('Body length:', text.length, '| First 200:', text.slice(0, 200));
-    const parsed = JSON.parse(text);
-    ({ email, plan, vibe, park, thrill } = parsed);
+    const formData = await request.formData();
+    email = formData.get('email') as string;
+    plan = JSON.parse(formData.get('plan') as string);
+    vibe = formData.get('vibe') as string;
+    park = formData.get('park') as string;
+    thrill = formData.get('thrill') as string;
   } catch (e) {
     console.error('Body parse error:', e);
     return new Response(JSON.stringify({ error: `Parse failed: ${e instanceof Error ? e.message : String(e)}` }), { status: 400 });
