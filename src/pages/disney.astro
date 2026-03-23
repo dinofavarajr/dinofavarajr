@@ -1662,15 +1662,17 @@ const parks: Record<string, Park> = {
           }),
         });
 
+        const data = await res.json().catch(() => ({}));
         if (res.ok) {
           document.getElementById('save-plan-form')!.classList.add('hidden');
           successMsg.classList.remove('hidden');
         } else {
-          throw new Error('non-ok');
+          throw new Error(data.error || `HTTP ${res.status}`);
         }
-      } catch {
+      } catch (err) {
         btn.textContent = 'Save for later →';
         btn.disabled = false;
+        errorMsg.textContent = `Error: ${err instanceof Error ? err.message : 'unknown'}`;
         errorMsg.classList.remove('hidden');
       }
     });
