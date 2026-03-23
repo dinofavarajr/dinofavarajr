@@ -5,10 +5,12 @@ export const POST: APIRoute = async ({ request }) => {
   let email: string, plan: {time: string; icon: string; items: string[]}[], vibe: string, park: string, thrill: string;
   try {
     const text = await request.text();
-    ({ email, plan, vibe, park, thrill } = JSON.parse(text));
+    console.log('Body length:', text.length, '| First 200:', text.slice(0, 200));
+    const parsed = JSON.parse(text);
+    ({ email, plan, vibe, park, thrill } = parsed);
   } catch (e) {
     console.error('Body parse error:', e);
-    return new Response(JSON.stringify({ error: 'Invalid request body' }), { status: 400 });
+    return new Response(JSON.stringify({ error: `Parse failed: ${e instanceof Error ? e.message : String(e)}` }), { status: 400 });
   }
 
   if (!email || !plan) {
