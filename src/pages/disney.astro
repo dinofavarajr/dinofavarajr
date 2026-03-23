@@ -1650,11 +1650,8 @@ const parks: Record<string, Park> = {
       btn.disabled = true;
 
       try {
-        const res = await fetch('/api/save-plan', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: emailVal, plan, vibe: rec.vibe, park, thrill }),
-        });
+        const qs = new URLSearchParams({ email: emailVal, park, thrill, vibe: rec.vibe });
+        const res = await fetch(`/api/save-plan?${qs.toString()}`, { method: 'POST' });
 
         const data = await res.json().catch(() => ({}));
         if (res.ok) {
