@@ -182,7 +182,7 @@ export const GET: APIRoute = async ({ request }) => {
   try {
     await resend.emails.send({
       from: 'Disney Planner <dino@dinofavarajr.com>',
-      to: 'dino@dinofavarajr.com',
+      to: 'dinofavarajr@gmail.com',
       replyTo: email,
       subject: `New plan request: ${email} → ${parkName}`,
       html: notifyBody,
