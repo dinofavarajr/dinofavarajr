@@ -1650,16 +1650,17 @@ const parks: Record<string, Park> = {
       btn.disabled = true;
 
       try {
-        const formData = new FormData();
-        formData.append('email', emailVal);
-        formData.append('plan', JSON.stringify(plan));
-        formData.append('vibe', rec.vibe);
-        formData.append('park', park);
-        formData.append('thrill', thrill);
+        const params = new URLSearchParams();
+        params.append('email', emailVal);
+        params.append('plan', JSON.stringify(plan));
+        params.append('vibe', rec.vibe);
+        params.append('park', park);
+        params.append('thrill', thrill);
 
         const res = await fetch('/api/save-plan', {
           method: 'POST',
-          body: formData,
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: params.toString(),
         });
 
         const data = await res.json().catch(() => ({}));
