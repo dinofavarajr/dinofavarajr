@@ -4,10 +4,9 @@ import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
 const stats = [
-  { value: '1000+',   label: 'Videos Created',                   emoji: '🎬' },
-  { value: '81,789',  label: 'Total Followers Across Platforms',  emoji: '👥' },
-  { value: '5000',    label: 'Video Revisions Given (Probably)',  emoji: '✂️' },
-  { value: '???',     label: 'Mistakes Made? Too Many',           emoji: '💀' },
+  { value: '1000+',  label: 'Videos Created',                  emoji: '🎬' },
+  { value: '81,789', label: 'Total Followers Across Platforms', emoji: '👥' },
+  { value: '5000',   label: 'Video Revisions Given (Probably)', emoji: '✂️' },
 ];
 
 const caseStudies = [
@@ -16,7 +15,7 @@ const caseStudies = [
     tag: 'Short-Form Growth',
     tagColor: 'bg-green-500/10 text-green-700',
     client: 'Gary Bird',
-    headline: '1K avg views to 50.5M total views in 86 days.',
+    headline: '1K avg views to <em class="italic text-primary">50.5M total views</em> in <em class="italic text-primary">86 days.</em>',
     description: 'Rebuilt his format strategy across YouTube, TikTok, and Instagram. One video became a 20M+ view mega outlier picked up by Yahoo Finance, New York Post, and more.',
     metric: '50.5M',
     metricLabel: 'Total views in 86 days',
@@ -30,7 +29,7 @@ const caseStudies = [
     tag: 'Brand Growth + Revenue',
     tagColor: 'bg-amber-500/10 text-amber-700',
     client: 'Nick Gray',
-    headline: '7,288 avg views to 1.5M total views in 90 days.',
+    headline: '7,288 avg views to <em class="italic text-primary">1.5M total views</em> in <em class="italic text-primary">90 days.</em>',
     description: 'Rebuilt his TikTok identity around one clear thesis. Drove the most book sales from a single video in his history.',
     metric: '1.54M',
     metricLabel: 'Total views in 90 days',
@@ -44,7 +43,7 @@ const caseStudies = [
     tag: 'Brand Build from Zero',
     tagColor: 'bg-amber-500/10 text-amber-700',
     client: 'Jai Long Co.',
-    headline: '400 avg views to 655K total views in 60 days.',
+    headline: '400 avg views to <em class="italic text-primary">655K total views</em> in <em class="italic text-primary">60 days.</em>',
     description: 'Designed the entire content identity from scratch. Positioning, format library, and a podcast-to-short-form pipeline.',
     metric: '655K',
     metricLabel: 'Total views in 60 days',
@@ -58,7 +57,7 @@ const caseStudies = [
     tag: 'Podcast Outlier Strategy',
     tagColor: 'bg-purple-500/10 text-purple-700',
     client: 'The Jim Coleman Show',
-    headline: 'A 77x outlier video. 80K+ views. 4K new subscribers.',
+    headline: 'A <em class="italic text-primary">77x outlier video.</em> <em class="italic text-primary">80K+ views.</em> 4K new subscribers.',
     description: 'Researched his niche, found the gap, and strategized one concept that outperformed everything on his channel by 77x.',
     metric: '77x',
     metricLabel: 'Outlier multiple',
@@ -72,7 +71,7 @@ const caseStudies = [
     tag: 'Start From Zero',
     tagColor: 'bg-pink-500/10 text-pink-700',
     client: 'Marie Poulin',
-    headline: 'From dabbling to a 300K+ view breakout.',
+    headline: 'From dabbling to a <em class="italic text-primary">300K+ view breakout.</em>',
     description: 'Took her from posting without a strategy to averaging 2K views per video, with multiple 10K+ hits and a 300K+ breakout.',
     metric: '300K+',
     metricLabel: 'Breakout video views',
@@ -86,7 +85,7 @@ const caseStudies = [
     tag: 'Podcast Clips',
     tagColor: 'bg-mint/20 text-dark/70',
     client: 'Upstart Podcast Shorts',
-    headline: 'One concept. 24K views. A clear channel outlier.',
+    headline: 'One concept. <em class="italic text-primary">24K views.</em> A clear channel outlier.',
     description: 'Architected a single video concept that outperformed their typical 1-2K view clips by 12-24x.',
     metric: '24K',
     metricLabel: 'Views on one clip',
@@ -100,7 +99,7 @@ const caseStudies = [
     tag: 'Podcast Production',
     tagColor: 'bg-purple-500/10 text-purple-700',
     client: 'Sweet Fish Media',
-    headline: '100-250 episodes. 250-500 clips. 500K+ views.',
+    headline: '100–250 episodes. 250–500 clips. <em class="italic text-primary">500K+ views.</em>',
     description: 'End-to-end content lifecycle management across multiple B2B podcast clients. Strategy, clips, distribution, and QBRs.',
     metric: '500K+',
     metricLabel: 'Total views generated',
@@ -114,7 +113,7 @@ const caseStudies = [
     tag: 'Personal Channel',
     tagColor: 'bg-blue-500/10 text-blue-700',
     client: 'Dino Favara Jr.',
-    headline: '101M+ views. 36K subs. 7M+ Instagram views.',
+    headline: '<em class="italic text-primary">101M+ views.</em> <em class="italic text-primary">36K subs.</em> 7M+ Instagram views.',
     description: '12+ years of building audiences organically across YouTube, TikTok, and Instagram. Every system I sell, I tested on myself first.',
     metric: '101M+',
     metricLabel: 'Total views across platforms',
@@ -170,43 +169,33 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
           </span>
         </div>
         <h1 class="font-display text-[clamp(2.4rem,5.5vw,4.25rem)] leading-[1.07] tracking-tight text-dark max-w-2xl">
-          Let's make something that actually works.
+          Let's make something that <em class="italic text-primary">actually</em> works.
         </h1>
       </div>
     </section>
 
-    <!-- Stats Bar -->
-    <section class="pb-8 max-w-6xl mx-auto px-6">
-      <div class="relative rounded-2xl overflow-hidden border border-dark/8 bg-white/70 backdrop-blur-sm shadow-sm">
-        <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent"></div>
-        <div class="grid grid-cols-2 md:grid-cols-4">
-          {stats.map((stat, i) => (
-            <div
-              class={[
-                'relative flex flex-col items-center justify-center py-5 px-4 text-center',
-                'hover:bg-primary/4 transition-colors duration-300 group',
-                i < stats.length - 1 ? 'border-r border-dark/8' : '',
-                i < 2 ? 'border-b border-dark/8 md:border-b-0' : '',
-              ].join(' ')}
+    <!-- Floating Stats -->
+    <section id="work-stats" class="pb-8 max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-3 gap-4 md:gap-8 py-6">
+        {stats.map((stat, i) => (
+          <div class="work-stat-float flex flex-col items-center text-center" data-index={i}>
+            <span class="text-2xl mb-3 select-none">{stat.emoji}</span>
+            <span
+              class="work-stat-number font-display text-[clamp(2.4rem,5vw,3.8rem)] leading-none text-dark tabular-nums"
+              data-value={stat.value}
             >
-              <span class="text-[1.5rem] mb-2 group-hover:scale-110 transition-transform duration-200 select-none">
-                {stat.emoji}
-              </span>
-              <span class="font-display text-[2rem] leading-none text-dark tabular-nums">
-                {stat.value}
-              </span>
-              <span class="mt-2 text-[11px] font-medium uppercase tracking-widest text-dark/45">
-                {stat.label}
-              </span>
-            </div>
-          ))}
-        </div>
-        <div class="absolute bottom-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-periwinkle/30 to-transparent"></div>
+              {stat.value}
+            </span>
+            <span class="mt-2 text-[11px] font-medium uppercase tracking-widest text-dark/45">
+              {stat.label}
+            </span>
+          </div>
+        ))}
       </div>
     </section>
 
     <!-- Services -->
-    <section class="py-16 max-w-6xl mx-auto px-6">
+    <section class="pb-8 max-w-6xl mx-auto px-6">
       <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
         <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Services</span>
@@ -233,7 +222,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
     </section>
 
     <!-- Roast Me -->
-    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+    <section class="py-8 max-w-6xl mx-auto px-6">
       <div class="relative rounded-2xl overflow-hidden border border-primary/20 bg-gradient-to-br from-primary/6 to-periwinkle/8 px-8 py-12 flex flex-col md:flex-row items-center justify-between gap-8">
         <div class="pointer-events-none absolute inset-0" aria-hidden="true">
           <div class="absolute -top-20 -left-20 w-[300px] h-[300px] rounded-full bg-primary/10 blur-[80px]"></div>
@@ -244,7 +233,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
             <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
             <span class="text-sm font-medium tracking-widest uppercase text-primary/70">1-Hour Call</span>
           </div>
-          <h2 class="font-display text-3xl text-dark mb-3">Let me roast you.</h2>
+          <h2 class="font-display text-3xl text-dark mb-3">Let's give your content a makeover.</h2>
           <p class="text-[1rem] font-light text-dark/65 leading-relaxed">
             I'll go through your channel, your content, your strategy, and tell you exactly what's working, what's not, and what I'd do differently. No fluff. One hour. $497.
           </p>
@@ -255,13 +244,13 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
           rel="noopener noreferrer"
           class="relative z-10 flex-shrink-0 inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
         >
-          Talk to Me &rarr;
+          Let's do this &rarr;
         </a>
       </div>
     </section>
 
     <!-- Case Studies -->
-    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+    <section class="py-8 max-w-6xl mx-auto px-6">
       <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
         <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Results</span>
@@ -279,7 +268,7 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
               <span class="text-xs font-medium text-dark/40 uppercase tracking-widest">{cs.client}</span>
             </div>
             <div>
-              <h3 class="font-display text-xl text-dark mb-3 group-hover:text-primary transition-colors duration-200">{cs.headline}</h3>
+              <h3 class="font-display text-[1.35rem] leading-snug text-dark mb-3 group-hover:text-primary transition-colors duration-200" set:html={cs.headline} />
               <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
                 {cs.description}
               </p>
@@ -345,3 +334,65 @@ const dreamBrands = ['Notion', 'Kit', 'Ghost Lifestyle', 'Vans', 'Apple'];
 
   <Footer />
 </Layout>
+
+<style>
+  @keyframes work-float-0 {
+    0%, 100% { transform: translateY(0px);   }
+    50%       { transform: translateY(-12px); }
+  }
+  @keyframes work-float-1 {
+    0%, 100% { transform: translateY(0px);   }
+    50%       { transform: translateY(-16px); }
+  }
+  @keyframes work-float-2 {
+    0%, 100% { transform: translateY(0px);  }
+    50%       { transform: translateY(-9px); }
+  }
+
+  .work-stat-float[data-index="0"] { animation: work-float-0 6s   ease-in-out infinite;        }
+  .work-stat-float[data-index="1"] { animation: work-float-1 7.5s ease-in-out infinite 0.8s;   }
+  .work-stat-float[data-index="2"] { animation: work-float-2 5.5s ease-in-out infinite 0.4s;   }
+</style>
+
+<script>
+  function animateNumber(el: HTMLElement) {
+    const target = el.dataset.value ?? '';
+    const hasPlus  = target.includes('+');
+    const hasK     = target.includes('K');
+    const hasM     = target.includes('M');
+    const hasComma = target.includes(',');
+    const raw = parseFloat(target.replace(/[^0-9.]/g, ''));
+    if (isNaN(raw)) return;
+
+    const fmt = (n: number): string => {
+      const r = Math.round(n);
+      if (hasM) return r + 'M' + (hasPlus ? '+' : '');
+      if (hasK) return r + 'K' + (hasPlus ? '+' : '');
+      if (hasComma) return r.toLocaleString();
+      return String(r) + (hasPlus ? '+' : '');
+    };
+
+    const dur   = 6000;
+    const start = performance.now();
+    el.textContent = fmt(0);
+
+    const tick = (now: number) => {
+      const progress = Math.min((now - start) / dur, 1);
+      const eased    = 1 - Math.pow(1 - progress, 3);
+      el.textContent = fmt(eased * raw);
+      if (progress < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  }
+
+  const section = document.getElementById('work-stats');
+  if (section) {
+    const obs = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting) {
+        section.querySelectorAll<HTMLElement>('.work-stat-number').forEach(el => animateNumber(el));
+        obs.disconnect();
+      }
+    }, { threshold: 0.4 });
+    obs.observe(section);
+  }
+</script>

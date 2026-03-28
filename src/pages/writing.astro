@@ -182,53 +182,164 @@ try {
       </div>
     </section>
 
-    <!-- ── Recent Posts ── -->
+    <!-- ── Post List ── -->
     <section class="py-16 max-w-6xl mx-auto px-6">
-      <div class="flex items-center gap-3 mb-10">
+      <div class="flex items-center gap-3 mb-6">
         <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
         <span class="text-sm font-medium tracking-widest uppercase text-primary/70">
-          From the archive
+          All posts
         </span>
       </div>
-      <h2 class="font-display text-3xl text-dark mb-10">Recent posts</h2>
+      <h2 class="font-display text-3xl text-dark mb-8">The archive</h2>
 
-      {posts.length > 0 ? (
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {posts.map(post => (
-            <a
-              href={post.link}
-              target="_blank"
-              rel="noopener noreferrer"
-              class="group rounded-2xl border border-dark/8 bg-white/50 p-6 flex flex-col gap-4 hover:border-primary/25 hover:shadow-md hover:shadow-primary/8 transition-all duration-300"
-            >
-              <span class="inline-block self-start px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary tracking-wide">
-                The Yearbook
-              </span>
-              <h3 class="font-display text-lg text-dark leading-snug group-hover:text-primary transition-colors">
-                {post.title}
-              </h3>
-              {post.description && (
-                <p class="text-sm font-light text-dark/60 leading-relaxed flex-1">
-                  {post.description}
-                </p>
-              )}
-              <div class="flex items-center justify-between mt-auto pt-2">
-                <time class="text-xs text-dark/40 font-medium">{post.pubDate}</time>
-                <span class="text-xs font-medium text-primary group-hover:underline">Read →</span>
-              </div>
-            </a>
-          ))}
+      <!-- Filter Tabs -->
+      <div class="flex flex-wrap gap-2 mb-8" id="filter-tabs" role="tablist" aria-label="Filter posts by category">
+        {[
+          { label: 'All',               value: 'all'              },
+          { label: 'Disney',            value: 'Disney'           },
+          { label: 'YouTube Strategy',  value: 'YouTube Strategy' },
+          { label: 'Personal Growth',   value: 'Personal Growth'  },
+        ].map(tab => (
+          <button
+            role="tab"
+            data-filter={tab.value}
+            aria-selected={tab.value === 'all' ? 'true' : 'false'}
+            class:list={[
+              'filter-tab px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-200 border',
+              tab.value === 'all'
+                ? 'bg-primary text-white border-primary'
+                : 'bg-white/60 text-dark/60 border-dark/10 hover:border-primary/30 hover:text-dark',
+            ]}
+          >
+            {tab.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Post Rows -->
+      <div id="post-list" class="divide-y divide-dark/6 rounded-2xl border border-dark/8 bg-white/50 overflow-hidden">
+
+        <!-- Disney -->
+        <article data-category="Disney" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label="Recommended read">★</span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            Why Walt Disney's "Plus It" Philosophy Changed How I Create
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary flex-shrink-0">Disney</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Mar 10, 2025</time>
+        </article>
+
+        <!-- YouTube Strategy -->
+        <article data-category="YouTube Strategy" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label="Recommended read">★</span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            The Hook Formula That Grew My Channel by 40% in 30 Days
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-mint/20 text-dark/70 flex-shrink-0">YouTube Strategy</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Feb 22, 2025</time>
+        </article>
+
+        <!-- Personal Growth -->
+        <article data-category="Personal Growth" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label="Recommended read">★</span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            What My Kids Are Teaching Me About Starting Things
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-periwinkle/20 text-dark/70 flex-shrink-0">Personal Growth</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Feb 8, 2025</time>
+        </article>
+
+        <!-- Disney -->
+        <article data-category="Disney" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="flex-shrink-0 w-4"></span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            EPCOT and the Lost Dream of Tomorrow
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary flex-shrink-0">Disney</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Jan 29, 2025</time>
+        </article>
+
+        <!-- YouTube Strategy -->
+        <article data-category="YouTube Strategy" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="flex-shrink-0 w-4"></span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            Thumbnail Psychology: Why Your Face Matters More Than Your Title
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-mint/20 text-dark/70 flex-shrink-0">YouTube Strategy</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Jan 14, 2025</time>
+        </article>
+
+        <!-- Personal Growth -->
+        <article data-category="Personal Growth" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="flex-shrink-0 w-4"></span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            The Art of Starting Before You're Ready
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-periwinkle/20 text-dark/70 flex-shrink-0">Personal Growth</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Dec 19, 2024</time>
+        </article>
+
+        <!-- YouTube Strategy -->
+        <article data-category="YouTube Strategy" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="flex-shrink-0 w-4"></span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            How to Write a Short-Form Script in 20 Minutes Flat
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-mint/20 text-dark/70 flex-shrink-0">YouTube Strategy</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Dec 3, 2024</time>
+        </article>
+
+        <!-- Disney -->
+        <article data-category="Disney" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
+          <span class="flex-shrink-0 w-4"></span>
+          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
+            What Imagineers Understood About Storytelling That Most Creators Miss
+          </a>
+          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary flex-shrink-0">Disney</span>
+          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Nov 18, 2024</time>
+        </article>
+
+        <!-- No results fallback (hidden by default) -->
+        <div id="no-results" class="hidden px-5 py-12 text-center text-sm text-dark/40 font-light">
+          No posts in this category yet. Check back soon.
         </div>
-      ) : (
-        <div class="rounded-2xl border border-dark/8 bg-white/40 p-12 text-center">
-          <span class="text-4xl block mb-4">✍️</span>
-          <p class="font-display text-xl text-dark mb-2">Posts coming soon</p>
-          <p class="text-sm font-light text-dark/50">
-            Subscribe above to get the first ones in your inbox.
-          </p>
-        </div>
-      )}
+
+      </div>
     </section>
+
+    <script>
+      const tabs = document.querySelectorAll<HTMLButtonElement>('.filter-tab');
+      const rows = document.querySelectorAll<HTMLElement>('.post-row');
+      const noResults = document.getElementById('no-results')!;
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+          const filter = tab.dataset.filter!;
+
+          // Update tab styles
+          tabs.forEach(t => {
+            const active = t.dataset.filter === filter;
+            t.setAttribute('aria-selected', String(active));
+            t.classList.toggle('bg-primary', active);
+            t.classList.toggle('text-white', active);
+            t.classList.toggle('border-primary', active);
+            t.classList.toggle('bg-white/60', !active);
+            t.classList.toggle('text-dark/60', !active);
+            t.classList.toggle('border-dark/10', !active);
+          });
+
+          // Show / hide rows
+          let visible = 0;
+          rows.forEach(row => {
+            const show = filter === 'all' || row.dataset.category === filter;
+            row.style.display = show ? '' : 'none';
+            if (show) visible++;
+          });
+
+          noResults.classList.toggle('hidden', visible > 0);
+        });
+      });
+    </script>
   </main>
 
   <Footer />

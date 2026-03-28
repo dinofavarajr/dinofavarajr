@@ -28,6 +28,7 @@ const footerLinks = [
   { label: 'Writing',      href: '/writing'  },
   { label: 'Now',          href: '/now'      },
   { label: 'The Yearbook', href: '/yearbook' },
+  { label: 'Disney',       href: '/disney', comingSoon: true },
 ];
 ---
 
@@ -53,9 +54,14 @@ const footerLinks = [
         {footerLinks.map(link => (
           <a
             href={link.href}
-            class="text-sm text-dark/55 hover:text-primary transition-colors duration-200"
+            class="inline-flex items-center gap-1.5 text-sm text-dark/55 hover:text-primary transition-colors duration-200"
           >
             {link.label}
+            {link.comingSoon && (
+              <span class="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-dark/8 text-dark/40 leading-none">
+                soon
+              </span>
+            )}
           </a>
         ))}
       </nav>

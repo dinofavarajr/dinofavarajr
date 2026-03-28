@@ -2,23 +2,24 @@
 const paths = [
   {
     emoji:   '🎢',
-    tag:     'Disney Fan',
-    heading: 'You love the parks',
-    body:    'Park guides, hidden gems, ride rankings, and every bit of magic I\'ve captured across all four parks. This is your home base.',
-    cta:     'Explore Disney content',
+    tag:     'Watch the challenges',
+    heading: 'See the Disney adventures',
+    body:    'I do Disney challenges, ride marathons, and hidden-gem investigations across all four parks. Come for the chaos, stay for the magic.',
+    cta:     'Watch on YouTube',
     href:    'https://www.youtube.com/@dinofavarajr',
+    external: true,
     bg:      'from-primary/8 to-periwinkle/8',
     border:  'border-primary/20',
     tagBg:   'bg-primary/10 text-primary',
     arrow:   '#6B5CE7',
   },
   {
-    emoji:   '🎬',
-    tag:     'Creator or Brand',
-    heading: 'You want to work together',
-    body:    'Brand partnerships, sponsored content, and creative strategy with someone who genuinely loves what they cover. Let\'s make something real.',
-    cta:     'See my work & rates',
-    href:    '/work',
+    emoji:   '📈',
+    tag:     'Learn the strategy',
+    heading: 'Get the content playbook',
+    body:    'I break down what actually works in short-form video — hooks, formats, thumbnails, and the systems behind consistent growth. No fluff.',
+    cta:     'Read the posts',
+    href:    '/writing',
     bg:      'from-dark/5 to-mint/8',
     border:  'border-mint/25',
     tagBg:   'bg-dark text-mint',
@@ -26,12 +27,12 @@ const paths = [
     ctaDark: true,
   },
   {
-    emoji:   '✏️',
-    tag:     'Just Exploring',
-    heading: 'You stumbled in',
-    body:    'Perfect. Wander through the writing, check the about page, or sign up for The Yearbook. You\'ll figure out why you\'re here.',
-    cta:     'Start reading',
-    href:    '/writing',
+    emoji:   '🦕',
+    tag:     'Go deeper with Dino',
+    heading: 'Learn who\'s behind this',
+    body:    'Twelve years of videos, a weird amount of Disney knowledge, and a newsletter written for my kids. If you\'re curious about the person, start here.',
+    cta:     'Read about me',
+    href:    '/about',
     bg:      'from-periwinkle/10 to-periwinkle/4',
     border:  'border-periwinkle/25',
     tagBg:   'bg-periwinkle/20 text-primary',
@@ -55,6 +56,7 @@ const paths = [
     {paths.map((path, i) => (
       <a
         href={path.href}
+        {...(path.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         class={`path-card group relative flex flex-col p-7 rounded-2xl bg-gradient-to-br ${path.bg} border ${path.border}
           hover:-translate-y-2 hover:shadow-xl transition-all duration-300`}
         data-delay={i * 120}

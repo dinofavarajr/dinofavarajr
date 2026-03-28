@@ -1,10 +1,9 @@
 ---
 const navLinks = [
-  { label: 'About',   href: '/about'   },
-  { label: 'Work',    href: '/work'    },
-  { label: 'Writing', href: '/writing' },
-  { label: 'Now',     href: '/now'     },
-  { label: 'Disney',  href: '/disney'  },
+  { label: 'Watch',       href: 'https://youtube.com/@dinofavarajr', external: true },
+  { label: 'Learn',       href: '/writing'                                           },
+  { label: 'About',       href: '/about'                                             },
+  { label: 'Work With Me', href: '/work'                                             },
 ];
 ---
 
@@ -25,6 +24,7 @@ const navLinks = [
       {navLinks.map(link => (
         <a
           href={link.href}
+          {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
           class="px-4 py-2 rounded-lg text-sm font-medium text-dark/70 hover:text-primary hover:bg-primary/8 transition-all duration-200"
         >
           {link.label}
@@ -61,6 +61,7 @@ const navLinks = [
     {navLinks.map(link => (
       <a
         href={link.href}
+        {...(link.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
         class="block py-3 text-sm font-medium text-dark/70 border-b border-dark/6 hover:text-primary transition-colors last:border-0"
       >
         {link.label}

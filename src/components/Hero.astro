@@ -7,6 +7,27 @@ import avatar3 from '../assets/avatar-3.jpg';
 import avatar4 from '../assets/avatar-4.jpg';
 import avatar5 from '../assets/avatar-5.jpg';
 import avatar6 from '../assets/avatar-6.jpg';
+
+const facts = [
+  "outside of that, I've been buying the same pair of black Authentic Vans every two years like clockwork.",
+  "outside of that, I replace my Birkenstocks on a strict two-year rotation.",
+  "outside of that, I'm pretty sure I have undiagnosed ADD.",
+  "outside of that, I've been posting videos since 2010 (starting on Facebook before it was cool).",
+  "outside of that, I do MURPH every Memorial Day.",
+  "outside of that, I run a Thanksgiving 5K every year. Current PR is 25:24.",
+  "outside of that, I've ordered the exact same Blaze Pizza for 10 years straight.",
+  "outside of that, my wife and I got our marriage license signed at the Disney Springs Blaze Pizza.",
+  "outside of that, I once biked 300 miles in under 30 hours for a college fundraiser and survived.",
+  "outside of that, I randomly ran into John Travolta on a street in Savannah in 2022. No security, no explanation.",
+  "outside of that, my left knee is permanently numb from learning back tucks the hard way.",
+  "outside of that, I read the Bible aloud to my son (almost) every day. 23 books and 281 chapters in.",
+  "outside of that, I've read every chapter of One Piece and would love to talk to you about it.",
+  "outside of that, I'm probably making homemade guac and watching Georgia Football.",
+  "outside of that, I make the best Avocado Toast you've ever had in your life.",
+  "outside of that, my wife and I love Survivor.",
+];
+
+const initialFact = facts[Math.floor(Math.random() * facts.length)];
 ---
 
 <section class="relative overflow-hidden pt-12 pb-4 md:pt-20">
@@ -31,18 +52,16 @@ import avatar6 from '../assets/avatar-6.jpg';
           </span>
         </div>
 
-        <!-- Headline — multi-line with italic purple "Disney obsessive." -->
-        <h1 class="font-display text-[clamp(2.2rem,5vw,3.75rem)] leading-[1.07] tracking-tight text-dark">
-          YouTube Creator.<br/>
-          <em class="italic text-primary">Disney Investigator.</em><br/>
-          Video Strategist.
+        <!-- Headline -->
+        <h1 class="font-display text-[clamp(3rem,7vw,5.5rem)] leading-[1.07] tracking-tight text-dark">
+          Hi, I'm <em class="italic text-primary">Dino.</em>
         </h1>
 
-        <!-- Subhead with rotating fun facts -->
-        <div class="min-h-[14rem] lg:min-h-[5.5rem]">
+        <!-- Subhead + rotating fact — fixed height prevents layout shift -->
+        <div class="h-[7rem] sm:h-[6rem] lg:h-[5rem] overflow-hidden">
           <p class="text-[1.05rem] font-light leading-relaxed text-dark/65 max-w-[480px]">
-            I build repeatable (and viral) video formats for brands and creators...
-            <span id="rotating-fact" class="text-dark/80 font-normal transition-opacity duration-500"></span>
+            I make Disney adventure videos&nbsp;… and teach what makes content actually work.
+            <span id="rotating-fact" class="text-dark/50 transition-opacity duration-500">{initialFact}</span>
           </p>
         </div>
 
@@ -128,7 +147,7 @@ import avatar6 from '../assets/avatar-6.jpg';
 </section>
 
 <script>
-  // Rotating fun facts
+  // Rotating fun facts — initial text is server-rendered, JS just rotates
   const facts = [
     "outside of that, I've been buying the same pair of black Authentic Vans every two years like clockwork.",
     "outside of that, I replace my Birkenstocks on a strict two-year rotation.",
@@ -150,17 +169,16 @@ import avatar6 from '../assets/avatar-6.jpg';
 
   const el = document.getElementById('rotating-fact');
   if (el) {
-    let index = Math.floor(Math.random() * facts.length);
+    let index = facts.indexOf(el.textContent?.trim() ?? '') ?? 0;
+    if (index === -1) index = 0;
 
     const show = (text: string) => {
       el.style.opacity = '0';
       setTimeout(() => {
-        el.textContent = text;
+        el.textContent = ' ' + text;
         el.style.opacity = '1';
       }, 500);
     };
-
-    show(facts[index]);
 
     let count = 0;
     const next = () => {

@@ -81,8 +81,8 @@ import Footer from '../../components/Footer.astro';
       </div>
     </section>
 
-    <!-- Body Content -->
-    <section class="max-w-3xl mx-auto px-6 pb-16">
+    <!-- Situation + Approach -->
+    <section class="max-w-3xl mx-auto px-6 pb-10">
       <article class="prose-custom">
         <h3>The Situation</h3>
         <p>Nick Gray is the author of <em>The 2-Hour Cocktail Party</em> and a well-known figure in the networking and event space. He had a TikTok presence with around 6,000 followers, but his content was inconsistent. It was a mix of party tips, food reviews, book promotion, and random vlogs. There was no clear content thesis or repeatable format. Average views sat around 7,288 per video.</p>
@@ -90,23 +90,100 @@ import Footer from '../../components/Footer.astro';
         <h3>The Approach</h3>
         <p>I rebuilt Nick's content strategy around a single thesis: <strong>Nick is the king of party planning, and every video should reinforce that identity.</strong> We developed a pinned video strategy, created recurring formats tied to his book and party expertise, and built a content calendar that balanced personality-driven content with discoverable, format-driven posts.</p>
         <p>Key formats included party formula explainers, "who to invite" advice, event BTS, and the "Met Museum Secrets" series that showcased Nick's natural curiosity in a way that still felt on-brand. We also optimized his bio, pinned videos, and call-to-action flow to drive traffic to his book.</p>
+      </article>
+    </section>
 
+    <!-- Testimonial Video -->
+    <section class="max-w-3xl mx-auto px-6 pb-10">
+      <div class="aspect-video rounded-2xl overflow-hidden border border-dark/8 shadow-sm">
+        <iframe
+          src="https://www.youtube.com/embed/M9hdRTFB8B4"
+          title="Nick Gray testimonial"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          style="width:100%; height:100%; border:0;"
+        ></iframe>
+      </div>
+    </section>
+
+    <!-- The Results -->
+    <section class="max-w-3xl mx-auto px-6 pb-10">
+      <article class="prose-custom">
         <h3>The Results</h3>
         <p>In 90 days, Nick generated 1,541,670 total views. His followers grew from 6,052 to 10,800, a 78% increase. His total likes jumped from 29.3K to 124.1K. Individual videos hit 100K+ views, with one reaching 477.9K.</p>
         <p>The revenue impact was the real win. Nick reported that a single video drove more book page views than anything prior, approximately 50 clicks on his profile link and a measurable bump in daily book sales from an average of 10 to 17 per day.</p>
-
-        <blockquote>
-          <p>"When I posted a video, it goes 2k views. But Mercury Media helped in tweaking the video and it got over 100k+ views!"</p>
-          <cite>Nick Gray, Author of The 2-Hour Cocktail Party</cite>
-        </blockquote>
       </article>
 
-      <div class="mt-12 pt-8 border-t border-dark/8">
+      <div class="mt-10 pt-6 border-t border-dark/8">
         <span class="text-sm font-light text-dark/45">Timeline: 90 days</span>
         <div class="mt-2 h-1.5 w-full rounded-full bg-dark/6 overflow-hidden">
           <div class="h-full rounded-full bg-gradient-to-r from-amber-400 to-primary" style="width: 50%"></div>
         </div>
       </div>
+    </section>
+
+    <!-- Outlier Video Example -->
+    <section class="max-w-5xl mx-auto px-6 pb-16">
+
+      <!-- Two videos + middle text -->
+      <div class="flex flex-col md:flex-row items-start justify-center gap-4 mb-8">
+
+        <!-- Left TikTok (original) + label above -->
+        <div class="flex flex-col gap-3 flex-shrink-0">
+          <div class="flex items-center gap-3">
+            <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+            <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Outlier video example</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-dark/8 shadow-sm" style="width:325px; height:580px;">
+          <iframe
+            src="https://www.tiktok.com/embed/v2/7405960002172701995"
+            title="Original video"
+            allow="autoplay"
+            allowfullscreen
+            style="width:325px; height:740px; border:0;"
+          ></iframe>
+        </div>
+        </div>
+
+        <!-- Middle: text + arrow -->
+        <div class="flex flex-col items-center gap-3 px-4 flex-shrink-0 self-center">
+          <p class="font-display italic text-primary text-center leading-snug" style="font-size:1.05rem;">
+            after Dino<br/>transformed<br/>the video
+          </p>
+          <!-- Arrow pointing right -->
+          <svg width="48" height="20" viewBox="0 0 48 20" fill="none" xmlns="http://www.w3.org/2000/svg" class="text-primary">
+            <path d="M 2 10 C 10 7, 28 7, 40 10" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" fill="none"/>
+            <path d="M 36 5 L 44 10 L 36 15" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+          </svg>
+        </div>
+
+        <!-- Right TikTok (transformed outlier) — spacer matches label height -->
+        <div class="flex flex-col gap-3 flex-shrink-0">
+          <div class="flex items-center gap-3" aria-hidden="true">
+            <div class="h-px w-10 opacity-0 flex-shrink-0"></div>
+            <span class="text-sm font-medium tracking-widest uppercase opacity-0">Outlier video example</span>
+          </div>
+          <div class="rounded-2xl overflow-hidden border border-primary/25 shadow-md" style="width:325px; height:580px;">
+            <iframe
+              src="https://www.tiktok.com/embed/v2/7177477402371624234"
+              title="Outlier video"
+              allow="autoplay"
+              allowfullscreen
+              style="width:325px; height:740px; border:0;"
+            ></iframe>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Blockquote spanning both videos -->
+      <div class="prose-custom">
+        <blockquote>
+          <p>"When I posted a video, it goes 2k views. But Mercury Media helped in tweaking the video and it got over 100k+ views!"</p>
+          <cite>Nick Gray, Author of The 2-Hour Cocktail Party</cite>
+        </blockquote>
+      </div>
+
     </section>
 
     <!-- CTA -->
