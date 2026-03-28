@@ -4,6 +4,7 @@ interface Props {
   buttonText?: string;
   buttonStyle?: 'purple' | 'mint';
   inputDark?: boolean;
+  placeholder?: string;
   instanceId: string;
 }
 
@@ -12,6 +13,7 @@ const {
   buttonText = 'Subscribble Fo Shizzle',
   buttonStyle = 'purple',
   inputDark = false,
+  placeholder = 'your@email.com',
   instanceId,
 } = Astro.props;
 
@@ -34,7 +36,7 @@ const inputClasses = inputDark
     <input
       type="email"
       name="email_address"
-      placeholder="your@email.com"
+      placeholder={placeholder}
       required
       autocomplete="email"
       class={inputClasses}
