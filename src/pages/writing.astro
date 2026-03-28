@@ -113,47 +113,30 @@ try {
     </section>
 
     <!-- ── Newsletter Cards ── -->
-    <section class="py-10 max-w-6xl mx-auto px-6">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <section class="py-6 max-w-6xl mx-auto px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
 
         <!-- Card 1: The Yearbook -->
-        <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm p-8 flex flex-col gap-5 shadow-sm">
-          <!-- Top accent line -->
-          <div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-primary to-periwinkle"></div>
-
-          <div class="flex flex-wrap items-center gap-3">
-            <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-primary/10 text-primary tracking-wide">
-              Personal · Life · Creativity
-            </span>
+        <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm px-6 py-5 flex flex-col gap-3 shadow-sm">
+          <div class="flex items-center gap-3">
+            <div class="h-0.5 w-8 rounded-full bg-gradient-to-r from-primary to-periwinkle flex-shrink-0"></div>
+            <h2 class="font-display text-lg text-dark">The Yearbook</h2>
+            <span class="ml-auto inline-block px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-primary/10 text-primary tracking-wide whitespace-nowrap">Personal · Life · Creativity</span>
           </div>
-
-          <div>
-            <h2 class="font-display text-2xl text-dark mb-2">The Yearbook</h2>
-            <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
-              Lessons on life, creativity, and growing up, written for my kids to find someday.
-            </p>
-          </div>
-
-          <div class="mt-auto space-y-4">
-            <KitForm
-              formId="9211740"
-              buttonStyle="purple"
-              instanceId="yearbook-writing-form"
-            />
-            <a
-              href="https://theyearbook.beehiiv.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="inline-block text-sm text-primary underline underline-offset-4 hover:text-primary/80 transition-colors"
-            >
-              Browse past issues →
-            </a>
-          </div>
+          <p class="text-sm font-light text-dark/60 leading-relaxed">
+            Lessons on life, creativity, and growing up, written for my kids to find someday.
+          </p>
+          <KitForm
+            formId="9211740"
+            buttonText="Get my latest update"
+            buttonStyle="purple"
+            instanceId="yearbook-writing-form"
+          />
         </div>
 
         <!-- Card 2: Short Form Secrets -->
-        <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm p-8 flex flex-col gap-5 shadow-sm">
-          <div class="h-0.5 w-12 rounded-full bg-gradient-to-r from-mint to-periwinkle"></div>
+        <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm px-6 py-5 flex flex-col gap-3 shadow-sm">
+          <div class="h-0.5 w-8 rounded-full bg-gradient-to-r from-mint to-periwinkle"></div>
 
           <div class="flex flex-wrap items-center gap-3">
             <span class="inline-block px-3 py-1 rounded-full text-xs font-medium bg-dark/8 text-dark/70 tracking-wide">
@@ -164,20 +147,19 @@ try {
             </span>
           </div>
 
-          <div>
-            <h2 class="font-display text-2xl text-dark mb-2">Short Form Secrets</h2>
-            <p class="text-[0.95rem] font-light text-dark/65 leading-relaxed">
-              The exact methods to grow your audience with short-form video, no fluff.
-            </p>
+          <div class="flex items-center gap-3">
+            <h2 class="font-display text-lg text-dark">Short Form Secrets</h2>
+            <span class="ml-auto inline-block px-2.5 py-0.5 rounded-full text-[10px] font-medium bg-mint/20 text-dark/70 tracking-wide whitespace-nowrap">470+ subscribers</span>
           </div>
-
-          <div class="mt-auto">
-            <KitForm
-              formId="3880843"
-              buttonStyle="purple"
-              instanceId="sfs-form"
-            />
-          </div>
+          <p class="text-sm font-light text-dark/60 leading-relaxed">
+            The exact methods to grow your audience with short-form video, no fluff.
+          </p>
+          <KitForm
+            formId="3880843"
+            buttonText="Join"
+            buttonStyle="purple"
+            instanceId="sfs-form"
+          />
         </div>
       </div>
     </section>
