@@ -6,6 +6,7 @@ interface Props {
   inputDark?: boolean;
   placeholder?: string;
   instanceId: string;
+  redirectUrl?: string;
 }
 
 const {
@@ -15,6 +16,7 @@ const {
   inputDark = false,
   placeholder = 'your@email.com',
   instanceId,
+  redirectUrl,
 } = Astro.props;
 
 const buttonClasses =
@@ -74,7 +76,7 @@ const inputClasses = inputDark
   </div>
 </div>
 
-<script define:vars={{ instanceId, formId }}>
+<script define:vars={{ instanceId, formId, redirectUrl }}>
   const form = document.getElementById(instanceId);
   const successMsg = document.getElementById(`${instanceId}-success`);
   const errorMsg = document.getElementById(`${instanceId}-error`);
@@ -109,6 +111,9 @@ const inputClasses = inputDark
         if (res.ok) {
           form.classList.add('hidden');
           if (successMsg) successMsg.classList.remove('hidden');
+          if (redirectUrl) {
+            setTimeout(() => { window.location.href = redirectUrl; }, 1500);
+          }
         } else {
           throw new Error(`Status ${res.status}`);
         }
