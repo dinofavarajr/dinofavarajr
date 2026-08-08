@@ -1,83 +1,33 @@
 ---
+import { getCollection } from 'astro:content';
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 import KitForm from '../components/KitForm.astro';
 
-// Fetch and parse the 5 most recent posts from the RSS feed
-interface Post {
-  title: string;
-  link: string;
-  pubDate: string;
-  description: string;
-}
+const allPosts = await getCollection('blog');
+const posts = allPosts.sort((a, b) =>
+  new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime()
+);
 
-let posts: Post[] = [];
+const newsletterColors: Record<string, string> = {
+  'The Yearbook': 'bg-primary/10 text-primary',
+  'Short Form Secrets': 'bg-mint/20 text-dark/70',
+  'General': 'bg-dark/8 text-dark/60',
+};
 
-try {
-  const res = await fetch('https://dinofavarajr.kit.com/posts.rss', {
-    headers: { 'User-Agent': 'Mozilla/5.0 (compatible; Astro/RSS-parser)' },
-  });
-
-  if (res.ok) {
-    const xml = await res.text();
-
-    // Extract <item> blocks
-    const itemMatches = xml.matchAll(/<item>([\s\S]*?)<\/item>/g);
-
-    for (const match of itemMatches) {
-      if (posts.length >= 5) break;
-      const item = match[1];
-
-      // Helper: extract tag content, handling CDATA
-      const extract = (tag: string, src: string): string => {
-        const re = new RegExp(`<${tag}[^>]*>(?:<!\\[CDATA\\[([\\s\\S]*?)\\]\\]>|([^<]*))</${tag}>`, 'i');
-        const m = src.match(re);
-        if (!m) return '';
-        return (m[1] ?? m[2] ?? '').trim();
-      };
-
-      const rawTitle = extract('title', item);
-      const rawLink  = extract('link', item) || (() => {
-        const m = item.match(/<link>(.*?)<\/link>/i);
-        return m ? m[1].trim() : '';
-      })();
-      const rawDate  = extract('pubDate', item);
-      const rawDesc  = extract('description', item) || extract('content:encoded', item);
-
-      // Strip HTML tags and truncate description
-      const stripped = rawDesc
-        .replace(/<[^>]+>/g, ' ')
-        .replace(/\s+/g, ' ')
-        .trim();
-      const excerpt = stripped.length > 160
-        ? stripped.slice(0, 157) + '…'
-        : stripped;
-
-      // Format date
-      let pubDate = '';
-      try {
-        pubDate = new Date(rawDate).toLocaleDateString('en-US', {
-          year: 'numeric',
-          month: 'long',
-          day: 'numeric',
-        });
-      } catch {
-        pubDate = rawDate;
-      }
-
-      posts.push({
-        title: rawTitle,
-        link: rawLink,
-        pubDate,
-        description: excerpt,
-      });
-    }
-  }
-} catch (err) {
-  // Fall back to empty array — handled in template
-  posts = [];
-}
+const tagColors: Record<string, string> = {
+  'Behind The Scenes':  'bg-green-100 text-green-700',
+  'Educational':        'bg-purple-100 text-purple-700',
+  'Actionable':         'bg-blue-100 text-blue-700',
+  'Encouraging':        'bg-yellow-100 text-yellow-800',
+  'Posting Strategies': 'bg-sky-100 text-sky-700',
+  'Viral Growth':       'bg-amber-100 text-amber-700',
+  'YouTube Shorts':     'bg-red-50 text-red-600',
+  'Client Work':        'bg-orange-100 text-orange-700',
+  'Instagram':          'bg-orange-50 text-orange-600',
+  'TikTok':             'bg-gray-100 text-gray-600',
+};
 ---
 
 <Layout
@@ -166,12 +116,11 @@ try {
       <h2 class="font-display text-3xl text-dark mb-8">The archive</h2>
 
       <!-- Filter Tabs -->
-      <div class="flex flex-wrap gap-2 mb-8" id="filter-tabs" role="tablist" aria-label="Filter posts by category">
+      <div class="flex flex-wrap gap-2 mb-8" id="filter-tabs" role="tablist" aria-label="Filter posts by newsletter">
         {[
-          { label: 'All',               value: 'all'              },
-          { label: 'Disney',            value: 'Disney'           },
-          { label: 'YouTube Strategy',  value: 'YouTube Strategy' },
-          { label: 'Personal Growth',   value: 'Personal Growth'  },
+          { label: 'All',                value: 'all'               },
+          { label: 'The Yearbook',       value: 'The Yearbook'      },
+          { label: 'Short Form Secrets', value: 'Short Form Secrets'},
         ].map(tab => (
           <button
             role="tab"
@@ -192,85 +141,40 @@ try {
       <!-- Post Rows -->
       <div id="post-list" class="divide-y divide-dark/6 rounded-2xl border border-dark/8 bg-white/50 overflow-hidden">
 
-        <!-- Disney -->
-        <article data-category="Disney" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label="Recommended read">★</span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            Why Walt Disney's "Plus It" Philosophy Changed How I Create
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary flex-shrink-0">Disney</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Mar 10, 2025</time>
-        </article>
+        {posts.map(post => {
+          const newsletter = post.data.newsletter ?? 'General';
+          const pubDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          });
+          const visibleTags = (post.data.tags ?? []).slice(0, 3);
 
-        <!-- YouTube Strategy -->
-        <article data-category="YouTube Strategy" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label="Recommended read">★</span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            The Hook Formula That Grew My Channel by 40% in 30 Days
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-mint/20 text-dark/70 flex-shrink-0">YouTube Strategy</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Feb 22, 2025</time>
-        </article>
-
-        <!-- Personal Growth -->
-        <article data-category="Personal Growth" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label="Recommended read">★</span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            What My Kids Are Teaching Me About Starting Things
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-periwinkle/20 text-dark/70 flex-shrink-0">Personal Growth</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Feb 8, 2025</time>
-        </article>
-
-        <!-- Disney -->
-        <article data-category="Disney" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="flex-shrink-0 w-4"></span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            EPCOT and the Lost Dream of Tomorrow
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary flex-shrink-0">Disney</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Jan 29, 2025</time>
-        </article>
-
-        <!-- YouTube Strategy -->
-        <article data-category="YouTube Strategy" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="flex-shrink-0 w-4"></span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            Thumbnail Psychology: Why Your Face Matters More Than Your Title
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-mint/20 text-dark/70 flex-shrink-0">YouTube Strategy</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Jan 14, 2025</time>
-        </article>
-
-        <!-- Personal Growth -->
-        <article data-category="Personal Growth" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="flex-shrink-0 w-4"></span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            The Art of Starting Before You're Ready
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-periwinkle/20 text-dark/70 flex-shrink-0">Personal Growth</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Dec 19, 2024</time>
-        </article>
-
-        <!-- YouTube Strategy -->
-        <article data-category="YouTube Strategy" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="flex-shrink-0 w-4"></span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            How to Write a Short-Form Script in 20 Minutes Flat
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-mint/20 text-dark/70 flex-shrink-0">YouTube Strategy</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Dec 3, 2024</time>
-        </article>
-
-        <!-- Disney -->
-        <article data-category="Disney" class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors">
-          <span class="flex-shrink-0 w-4"></span>
-          <a href="#" class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug">
-            What Imagineers Understood About Storytelling That Most Creators Miss
-          </a>
-          <span class="hidden sm:inline-block px-2.5 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary flex-shrink-0">Disney</span>
-          <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">Nov 18, 2024</time>
-        </article>
+          return (
+            <article
+              data-newsletter={newsletter}
+              class="post-row group flex items-center gap-4 px-5 py-4 hover:bg-primary/4 transition-colors"
+            >
+              <span class="text-amber-400 text-sm flex-shrink-0 w-4" aria-label={post.data.featured ? 'Featured' : ''}>
+                {post.data.featured ? '★' : ''}
+              </span>
+              <a
+                href={`/writing/${post.slug}`}
+                class="flex-1 font-medium text-dark group-hover:text-primary transition-colors text-[0.95rem] leading-snug"
+              >
+                {post.data.title}
+              </a>
+              <div class="hidden sm:flex items-center gap-1.5 flex-shrink-0">
+                {visibleTags.map(tag => (
+                  <span class={`px-2 py-0.5 rounded-full text-[10px] font-medium ${tagColors[tag] ?? 'bg-dark/8 text-dark/55'}`}>
+                    {tag}
+                  </span>
+                ))}
+              </div>
+              <time class="text-xs text-dark/40 font-medium flex-shrink-0 tabular-nums">{pubDate}</time>
+            </article>
+          );
+        })}
 
         <!-- No results fallback (hidden by default) -->
         <div id="no-results" class="hidden px-5 py-12 text-center text-sm text-dark/40 font-light">
@@ -289,7 +193,6 @@ try {
         tab.addEventListener('click', () => {
           const filter = tab.dataset.filter!;
 
-          // Update tab styles
           tabs.forEach(t => {
             const active = t.dataset.filter === filter;
             t.setAttribute('aria-selected', String(active));
@@ -301,10 +204,9 @@ try {
             t.classList.toggle('border-dark/10', !active);
           });
 
-          // Show / hide rows
           let visible = 0;
           rows.forEach(row => {
-            const show = filter === 'all' || row.dataset.category === filter;
+            const show = filter === 'all' || row.dataset.newsletter === filter;
             row.style.display = show ? '' : 'none';
             if (show) visible++;
           });

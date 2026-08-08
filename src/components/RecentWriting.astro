@@ -1,33 +1,16 @@
 ---
-const posts = [
-  {
-    category: 'Creativity',
-    tag:      'bg-primary/10 text-primary',
-    title:    'The 10-Year Rule: Why Everything I Made Before 2022 Was Practice',
-    excerpt:  'Every creator I admire has a version of this story. The work you made when no one was watching was the only way to get to the work that mattered.',
-    date:     'March 2026',
-    readTime: '6 min read',
-    href:     '#',
-  },
-  {
-    category: 'Disney',
-    tag:      'bg-periwinkle/20 text-primary',
-    title:    'What 100 Park Visits Taught Me About Storytelling',
-    excerpt:  'Disney doesn\'t build rides. They build emotional arcs with concrete floors. After a hundred visits I finally understand what they\'re actually doing.',
-    date:     'February 2026',
-    readTime: '8 min read',
-    href:     '#',
-  },
-  {
-    category: 'Growth',
-    tag:      'bg-dark/8 text-dark/70',
-    title:    'Going from 0 to 36K Subscribers Without Gaming the Algorithm',
-    excerpt:  'I never posted daily. I never chased trends. Here\'s the slower, messier, more honest version of how a channel actually grows.',
-    date:     'January 2026',
-    readTime: '5 min read',
-    href:     '#',
-  },
-];
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog');
+const posts = allPosts
+  .sort((a, b) => new Date(b.data.pubDate).getTime() - new Date(a.data.pubDate).getTime())
+  .slice(0, 3);
+
+const tagColors: Record<string, string> = {
+  'The Yearbook': 'bg-primary/10 text-primary',
+  'Short Form Secrets': 'bg-mint/20 text-dark/70',
+  'General': 'bg-dark/8 text-dark/60',
+};
 ---
 
 <section id="writing" class="py-8 pb-20 max-w-6xl mx-auto px-6">
@@ -40,7 +23,7 @@ const posts = [
       </h2>
     </div>
     <a
-      href="#writing"
+      href="/writing"
       class="hidden sm:inline-flex items-center gap-1.5 text-sm font-medium text-primary hover:gap-3 transition-all duration-200"
     >
       All posts
@@ -52,45 +35,53 @@ const posts = [
 
   <!-- Post list -->
   <div class="space-y-4" id="writing-list">
-    {posts.map((post, i) => (
-      <a
-        href={post.href}
-        class="writing-item group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 p-6 rounded-2xl border border-dark/8 bg-white/50 hover:bg-white hover:border-primary/20 hover:shadow-md hover:-translate-y-0.5 transition-all duration-250"
-        data-delay={i * 80}
-      >
-        <!-- Left: category + title + excerpt -->
-        <div class="flex-1 min-w-0">
-          <span class={`inline-block text-xs font-medium px-2.5 py-0.5 rounded-full mb-3 ${post.tag}`}>
-            {post.category}
-          </span>
-          <h3 class="font-display text-[1.1rem] leading-snug text-dark mb-2 group-hover:text-primary transition-colors duration-200">
-            {post.title}
-          </h3>
-          <p class="text-sm font-light text-dark/55 leading-relaxed line-clamp-2">
-            {post.excerpt}
-          </p>
-        </div>
+    {posts.map((post, i) => {
+      const newsletter = post.data.newsletter ?? 'General';
+      const tagColor = tagColors[newsletter] ?? 'bg-dark/8 text-dark/60';
+      const pubDate = new Date(post.data.pubDate).toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+      });
 
-        <!-- Right: meta + arrow -->
-        <div class="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-2 flex-shrink-0">
-          <div class="text-right">
-            <p class="text-xs font-medium text-dark/40">{post.date}</p>
-            <p class="text-xs text-dark/30">{post.readTime}</p>
+      return (
+        <a
+          href={`/writing/${post.slug}`}
+          class="writing-item group flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 p-6 rounded-2xl border border-dark/8 bg-white/50 hover:bg-white hover:border-primary/20 hover:shadow-md hover:-translate-y-0.5 transition-all duration-250"
+          data-delay={i * 80}
+        >
+          <div class="flex-1 min-w-0">
+            <span class={`inline-block text-xs font-medium px-2.5 py-0.5 rounded-full mb-3 ${tagColor}`}>
+              {newsletter}
+            </span>
+            <h3 class="font-display text-[1.1rem] leading-snug text-dark mb-2 group-hover:text-primary transition-colors duration-200">
+              {post.data.title}
+            </h3>
+            {post.data.headline && post.data.headline !== post.data.title && (
+              <p class="text-sm font-light text-dark/55 leading-relaxed line-clamp-2">
+                {post.data.headline}
+              </p>
+            )}
           </div>
-          <div class="w-9 h-9 rounded-full border border-dark/12 flex items-center justify-center text-dark/30 group-hover:border-primary group-hover:text-primary group-hover:bg-primary/5 transition-all duration-200">
-            <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
+
+          <div class="flex sm:flex-col items-center sm:items-end gap-4 sm:gap-2 flex-shrink-0">
+            <div class="text-right">
+              <p class="text-xs font-medium text-dark/40">{pubDate}</p>
+            </div>
+            <div class="w-9 h-9 rounded-full border border-dark/12 flex items-center justify-center text-dark/30 group-hover:border-primary group-hover:text-primary group-hover:bg-primary/5 transition-all duration-200">
+              <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 8h10M9 4l4 4-4 4"/>
+              </svg>
+            </div>
           </div>
-        </div>
-      </a>
-    ))}
+        </a>
+      );
+    })}
   </div>
 
   <!-- Mobile "all posts" -->
   <div class="mt-6 text-center sm:hidden">
     <a
-      href="#writing"
+      href="/writing"
       class="inline-flex items-center gap-2 text-sm font-medium text-primary"
     >
       See all posts

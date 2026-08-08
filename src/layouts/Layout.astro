@@ -2,12 +2,53 @@
 interface Props {
   title?: string;
   description?: string;
+  ogType?: string;
+  canonicalUrl?: string;
 }
 
 const {
-  title = 'Dino Favara Jr.. Storyteller, Creator, Disney Nerd',
-  description = 'Disney content creator, storyteller, and digital creative with 101M+ views and 12+ years making things that feel like something.',
+  title = 'Dino Favara Jr. | Central Florida YouTube Creator & Content Strategist',
+  description = 'Dino Favara Jr. is a Central Florida content creator and YouTube strategist with 101M+ views. Disney storyteller, short-form video coach, and founder of Mercury Social Media.',
+  ogType = 'website',
+  canonicalUrl,
 } = Astro.props;
+
+const siteUrl = 'https://dinofavarajr.com';
+const canonical = canonicalUrl ?? (siteUrl + Astro.url.pathname);
+
+const personSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Dino Favara Jr.',
+  url: siteUrl,
+  sameAs: [
+    'https://www.youtube.com/@dinofavarajr',
+    'https://www.instagram.com/dinofavarajr',
+    'https://www.tiktok.com/@dinofavarajr',
+  ],
+  jobTitle: 'YouTube Creator & Content Strategist',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Mercury Social Media',
+  },
+  description: 'Central Florida YouTube creator and content strategist specializing in Disney storytelling, short-form video strategy, and helping creators get more views.',
+  knowsAbout: [
+    'YouTube Strategy',
+    'Short-Form Video',
+    'Central Florida Content Creation',
+    'Disney YouTube',
+    'Content Creator Coaching',
+  ],
+};
+
+const websiteSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Dino Favara Jr.',
+  url: siteUrl,
+  description: 'Central Florida YouTube creator and content strategist — essays, newsletters, and video strategy from Dino Favara Jr.',
+  author: { '@type': 'Person', name: 'Dino Favara Jr.' },
+};
 ---
 
 <!doctype html>
@@ -16,17 +57,29 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content={description} />
+    <meta name="keywords" content="Central Florida YouTube strategy, Central Florida content creator, YouTube creator Orlando, Disney YouTube channel, short-form video strategy, content creator coaching, Dino Favara Jr., Mercury Social Media" />
+    <meta name="author" content="Dino Favara Jr." />
+    <link rel="canonical" href={canonical} />
+
     <meta property="og:title" content={title} />
-    <meta property="og:description" content="YouTube Creator, Disney Investigator, Video Strategist" />
-    <meta property="og:image" content="https://dinofavarajr.com/dinofavaralinkimage.png" />
-    <meta property="og:url" content="https://dinofavarajr.com" />
-    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${siteUrl}/dinofavaralinkimage.png`} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:site_name" content="Dino Favara Jr." />
+
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content="https://dinofavarajr.com/dinofavaralinkimage.png" />
+    <meta name="twitter:image" content={`${siteUrl}/dinofavaralinkimage.png`} />
     <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content="YouTube Creator, Disney Investigator, Video Strategist" />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:creator" content="@dinofavarajr" />
+
     <title>{title}</title>
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+    <script type="application/ld+json" set:html={JSON.stringify(personSchema)} />
+    <script type="application/ld+json" set:html={JSON.stringify(websiteSchema)} />
+    <slot name="head" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link

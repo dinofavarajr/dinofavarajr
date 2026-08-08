@@ -10,9 +10,43 @@ import Footer from '../components/Footer.astro';
 ---
 
 <Layout
-  title="Dino Favara Jr. | YouTube Creator, Disney Obsessive, Video Strategist"
-  description="I help brands and creators grow on video. and occasionally survive every ride at Walt Disney World. 101M+ views, 12+ years, 36K subscribers."
+  title="Dino Favara Jr. | Central Florida YouTube Creator & Content Strategist"
+  description="Dino Favara Jr. is a Central Florida YouTube creator and content strategist based in Orlando, FL. 101M+ views, 12+ years growing channels for brands and creators."
 >
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'LocalBusiness',
+      name: 'Mercury Social Media',
+      founder: { '@type': 'Person', name: 'Dino Favara Jr.' },
+      url: 'https://dinofavarajr.com',
+      description: 'Central Florida YouTube strategy and content creation agency. Helping brands and creators grow on video without paid ads.',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Orlando',
+        addressRegion: 'FL',
+        addressCountry: 'US',
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Orlando' },
+        { '@type': 'State', name: 'Florida' },
+        'Central Florida',
+        'United States',
+      ],
+      knowsAbout: [
+        'YouTube Strategy',
+        'Short-Form Video',
+        'Content Creator Coaching',
+        'Podcast Repurposing',
+        'Central Florida Content Creation',
+      ],
+      sameAs: [
+        'https://www.youtube.com/@dinofavarajr',
+        'https://www.instagram.com/dinofavarajr',
+        'https://www.tiktok.com/@dinofavarajr',
+      ],
+    })} />
+  </Fragment>
   <Nav />
   <main>
     <Hero />

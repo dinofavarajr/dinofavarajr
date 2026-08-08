@@ -1,0 +1,297 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const siteUrl = 'https://dinofavarajr.com';
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfessionalService',
+  name: 'Dino Favara Jr. — YouTube Strategy & Content Creation',
+  url: `${siteUrl}/services`,
+  description: 'Central Florida YouTube strategy and content creation services. Channel audits, short-form video systems, and creator coaching from Dino Favara Jr. in Orlando, FL.',
+  provider: {
+    '@type': 'Person',
+    name: 'Dino Favara Jr.',
+    url: siteUrl,
+    jobTitle: 'YouTube Creator & Content Strategist',
+  },
+  areaServed: [
+    { '@type': 'City', name: 'Orlando' },
+    'Central Florida',
+    'United States',
+  ],
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Content Strategy Services',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'YouTube Channel Audit & Strategy Session',
+          description: 'A 1-hour deep dive into your channel. Dino reviews your content, format, thumbnails, and positioning and tells you exactly what to fix.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Short-Form Video Strategy',
+          description: 'Build a repeatable system for TikTok, YouTube Shorts, and Instagram Reels that generates consistent growth.',
+        },
+      },
+      {
+        '@type': 'Offer',
+        itemOffered: {
+          '@type': 'Service',
+          name: 'Podcast Content Repurposing',
+          description: 'Turn long-form podcast episodes into high-performing short-form clips across all platforms.',
+        },
+      },
+    ],
+  },
+};
+
+const services = [
+  {
+    tag: 'Most Popular',
+    tagColor: 'bg-primary/10 text-primary',
+    title: 'YouTube Channel Audit',
+    subtitle: '1-Hour Strategy Session · $497',
+    description: `You've been posting but the views aren't coming. I'll go through your entire channel — content, format, thumbnails, titles, positioning — and tell you exactly what's working, what's not, and what I'd do differently if it were my channel. No fluff. Just the honest truth and a clear path forward.`,
+    bullets: [
+      'Full channel review before the call',
+      '1 hour live on Zoom',
+      'Specific action items you can implement immediately',
+      'Recording sent after',
+    ],
+    cta: 'Book the Call',
+    ctaHref: 'https://calendar.app.google/LyEqSqs9SBQK6EmE6',
+    accentFrom: 'from-primary',
+    accentTo: 'to-periwinkle',
+  },
+  {
+    tag: 'For Creators',
+    tagColor: 'bg-periwinkle/20 text-primary',
+    title: 'Short-Form Video Strategy',
+    subtitle: 'Custom Engagement · Ongoing',
+    description: `Most creators know they need to post short-form but they have no system for it. I build the entire framework: what to post, how often, what format to use, and how to repurpose your existing content so you're not starting from scratch every week.`,
+    bullets: [
+      'Platform-specific content strategy (TikTok, Reels, Shorts)',
+      'Format library and posting cadence',
+      'Hook and script frameworks',
+      'Monthly check-ins and refinement',
+    ],
+    cta: 'Let\'s Talk',
+    ctaHref: 'mailto:dino@mercurysocialmedia.com',
+    accentFrom: 'from-periwinkle',
+    accentTo: 'to-mint',
+  },
+  {
+    tag: 'For Podcasters',
+    tagColor: 'bg-mint/20 text-dark/70',
+    title: 'Podcast Content Repurposing',
+    subtitle: 'Per Episode or Retainer',
+    description: `You're already producing long-form content — don't let it die in a feed. I clip, format, and distribute your best moments into short-form videos that actually get watched. Built for podcast hosts who want to grow without making an entirely new show.`,
+    bullets: [
+      'Clip selection from full episodes',
+      'Editing direction and captions',
+      'Platform-optimized formatting',
+      'Strategy for which clips to push',
+    ],
+    cta: 'See the Work',
+    ctaHref: '/work',
+    accentFrom: 'from-mint',
+    accentTo: 'to-primary',
+  },
+];
+
+const results = [
+  { client: 'Gary Bird',          result: '50.5M views in 86 days' },
+  { client: 'Nick Gray',          result: '1.54M views in 90 days' },
+  { client: 'Jai Long Co.',       result: '655K views in 60 days'  },
+  { client: 'Jim Coleman Show',   result: '77x outlier video'      },
+  { client: 'Marie Poulin',       result: '300K+ breakout video'   },
+  { client: 'Sweet Fish Media',   result: '500K+ views generated'  },
+];
+---
+
+<Layout
+  title="Services | Dino Favara Jr. — Central Florida YouTube Strategist"
+  description="YouTube strategy, short-form video systems, and content creator coaching from Dino Favara Jr. — Central Florida's go-to YouTube strategist. Based in Orlando, FL."
+  canonicalUrl={`${siteUrl}/services`}
+>
+  <Fragment slot="head">
+    <script type="application/ld+json" set:html={JSON.stringify(serviceSchema)} />
+  </Fragment>
+
+  <Nav />
+
+  <main>
+    <!-- Hero -->
+    <section class="relative overflow-hidden pt-14 pb-10">
+      <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+        <div class="absolute -top-32 -left-32 w-[520px] h-[520px] rounded-full bg-primary/10 blur-[100px]"></div>
+        <div class="absolute top-40 -right-20 w-[400px] h-[400px] rounded-full bg-periwinkle/15 blur-[80px]"></div>
+        <div class="absolute bottom-0 left-1/3 w-[260px] h-[260px] rounded-full bg-mint/8 blur-[72px]"></div>
+      </div>
+
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="flex items-center gap-3 mb-5">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/80">
+            Orlando, FL · Central Florida
+          </span>
+        </div>
+        <h1 class="font-display text-[clamp(2.6rem,6vw,4.5rem)] leading-[1.06] tracking-tight text-dark max-w-2xl">
+          YouTube strategy that <em class="italic text-primary">actually</em> works.
+        </h1>
+        <p class="mt-4 text-[1.05rem] font-light text-dark/60 max-w-xl leading-relaxed">
+          I'm Dino Favara Jr. — a Central Florida YouTube creator and content strategist with 101M+ views and 12+ years of building audiences from scratch. I help brands and creators grow on video without guesswork or paid ads.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          <a
+            href="https://calendar.app.google/LyEqSqs9SBQK6EmE6"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+          >
+            Book a Strategy Call →
+          </a>
+          <a
+            href="/work"
+            class="inline-flex items-center gap-2 px-7 py-3.5 rounded-full border border-dark/15 text-dark/70 font-medium text-sm hover:border-primary/30 hover:text-primary transition-all duration-200"
+          >
+            See Case Studies
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick proof bar -->
+    <section class="py-6 max-w-6xl mx-auto px-6">
+      <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm px-6 py-5">
+        <p class="text-xs font-medium tracking-widest uppercase text-dark/40 mb-4">Recent results</p>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-4">
+          {results.map(r => (
+            <div class="flex flex-col gap-0.5">
+              <span class="text-[11px] font-medium text-dark/40 uppercase tracking-wide">{r.client}</span>
+              <span class="text-sm font-medium text-dark">{r.result}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Services -->
+    <section class="py-16 max-w-6xl mx-auto px-6">
+      <div class="flex items-center gap-3 mb-6">
+        <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+        <span class="text-sm font-medium tracking-widest uppercase text-primary/70">What I offer</span>
+      </div>
+      <h2 class="font-display text-3xl text-dark mb-10">Services</h2>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {services.map(s => (
+          <div class="rounded-2xl border border-dark/8 bg-white/60 backdrop-blur-sm p-7 flex flex-col gap-5 shadow-sm">
+            <div class={`h-0.5 w-12 rounded-full bg-gradient-to-r ${s.accentFrom} ${s.accentTo}`}></div>
+            <div>
+              <span class={`inline-block px-2.5 py-0.5 rounded-full text-[10px] font-medium tracking-wide mb-3 ${s.tagColor}`}>{s.tag}</span>
+              <h3 class="font-display text-xl text-dark mb-1">{s.title}</h3>
+              <p class="text-xs font-medium text-dark/40 tracking-wide">{s.subtitle}</p>
+            </div>
+            <p class="text-sm font-light text-dark/65 leading-relaxed flex-1">{s.description}</p>
+            <ul class="space-y-2">
+              {s.bullets.map(b => (
+                <li class="flex items-start gap-2 text-sm font-light text-dark/65">
+                  <span class="text-primary flex-shrink-0 mt-0.5">✓</span>
+                  {b}
+                </li>
+              ))}
+            </ul>
+            <a
+              href={s.ctaHref}
+              {...(s.ctaHref.startsWith('http') || s.ctaHref.startsWith('mailto') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+              class="mt-2 inline-flex items-center justify-center gap-2 px-5 py-3 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-lg hover:shadow-primary/30 transition-all duration-200 active:scale-95"
+            >
+              {s.cta} →
+            </a>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- Who I work with -->
+    <section class="py-16 max-w-6xl mx-auto px-6 border-t border-dark/6">
+      <div class="max-w-2xl">
+        <div class="flex items-center gap-3 mb-6">
+          <div class="h-px w-10 bg-primary/40 flex-shrink-0"></div>
+          <span class="text-sm font-medium tracking-widest uppercase text-primary/70">Who this is for</span>
+        </div>
+        <h2 class="font-display text-3xl text-dark mb-6">The people I work best with</h2>
+        <div class="space-y-4 text-[1.05rem] font-light text-dark/70 leading-relaxed">
+          <p>
+            Brands and creators who are already producing content but not seeing the growth they expected. Business owners in Central Florida and across the US who know video is the answer but don't know what they're doing wrong. Podcasters sitting on hundreds of hours of great content that nobody is watching.
+          </p>
+          <p>
+            You don't need more content. You need better strategy. That's what I do.
+          </p>
+        </div>
+
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 gap-4">
+          {[
+            { label: 'Coaches & course creators', desc: 'Turn your expertise into content that builds trust at scale.' },
+            { label: 'Local businesses (Orlando / Central FL)', desc: 'Stand out in your market with video that converts.' },
+            { label: 'Personal brands & creators', desc: 'Build the audience and business model you actually want.' },
+            { label: 'Podcasters', desc: 'Get more from the content you\'re already making.' },
+          ].map(item => (
+            <div class="rounded-xl border border-dark/8 bg-white/50 p-5">
+              <h3 class="font-medium text-dark text-sm mb-1">{item.label}</h3>
+              <p class="text-sm font-light text-dark/55 leading-relaxed">{item.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="py-20">
+      <div class="max-w-6xl mx-auto px-6">
+        <div class="relative rounded-2xl overflow-hidden bg-dark text-center px-8 py-16">
+          <div class="pointer-events-none absolute inset-0" aria-hidden="true">
+            <div class="absolute -top-20 left-1/4 w-[350px] h-[350px] rounded-full bg-primary/25 blur-[80px]"></div>
+            <div class="absolute -bottom-20 right-1/4 w-[300px] h-[300px] rounded-full bg-periwinkle/20 blur-[80px]"></div>
+          </div>
+          <div class="relative z-10 space-y-5">
+            <h2 class="font-display text-[clamp(1.8rem,4vw,3rem)] text-off-white leading-tight">
+              Ready to actually grow?
+            </h2>
+            <p class="text-[1rem] font-light text-off-white/60 max-w-md mx-auto leading-relaxed">
+              Book a 1-hour channel audit and walk away with a clear plan. Or email me if you want to talk through something first.
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-4 mt-2">
+              <a
+                href="https://calendar.app.google/LyEqSqs9SBQK6EmE6"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-primary text-off-white font-medium text-sm hover:bg-primary/90 hover:shadow-xl hover:shadow-primary/40 hover:-translate-y-0.5 transition-all duration-200 active:scale-95"
+              >
+                Book the Audit — $497 →
+              </a>
+              <a
+                href="mailto:dino@mercurysocialmedia.com"
+                class="inline-flex items-center gap-2 px-8 py-4 rounded-full border border-off-white/20 text-off-white/80 font-medium text-sm hover:border-off-white/40 hover:text-off-white transition-all duration-200"
+              >
+                Email me first
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+</Layout>
