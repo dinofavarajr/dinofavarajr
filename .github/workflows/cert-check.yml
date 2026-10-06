@@ -1,0 +1,100 @@
+name: Certificate expiry check
+
+# Watches the TLS certs for the live site and warns before one lapses.
+# Added after dinofavarajr.com served an expired cert for ~11 weeks in 2026
+# without anything reporting it.
+
+on:
+  schedule:
+    - cron: '0 14 * * 1'   # Mondays, 14:00 UTC
+  workflow_dispatch:        # plus a manual "Run workflow" button
+
+permissions:
+  issues: write
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check certificates
+        id: check
+        run: |
+          WARN_DAYS=21
+          PROBLEMS=""
+
+          for HOST in dinofavarajr.com www.dinofavarajr.com; do
+            END=$(echo | openssl s_client -servername "$HOST" -connect "$HOST":443 2>/dev/null \
+                  | openssl x509 -noout -enddate 2>/dev/null | cut -d= -f2)
+
+            if [ -z "$END" ]; then
+              echo "$HOST: could not read certificate"
+              PROBLEMS="${PROBLEMS}- **${HOST}** — could not read a certificate at all (host down, or TLS failing)."$'\n'
+              continue
+            fi
+
+            LEFT=$(( ( $(date -d "$END" +%s) - $(date +%s) ) / 86400 ))
+            echo "$HOST: $LEFT days left (expires $END)"
+
+            if [ "$LEFT" -lt 0 ]; then
+              PROBLEMS="${PROBLEMS}- **${HOST}** — certificate EXPIRED ${LEFT#-} days ago (${END}). Visitors are seeing a security warning right now."$'\n'
+            elif [ "$LEFT" -lt "$WARN_DAYS" ]; then
+              PROBLEMS="${PROBLEMS}- **${HOST}** — expires in ${LEFT} days (${END})."$'\n'
+            fi
+          done
+
+          # Multi-line output for the next step
+          {
+            echo "problems<<EOF"
+            printf '%s' "$PROBLEMS"
+            echo
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Open an issue if anything is wrong
+        if: steps.check.outputs.problems != ''
+        uses: actions/github-script@v7
+        env:
+          PROBLEMS: ${{ steps.check.outputs.problems }}
+        with:
+          script: |
+            const title = 'TLS certificate needs attention';
+
+            const body = [
+              'The weekly certificate check found a problem:',
+              '',
+              process.env.PROBLEMS,
+              '',
+              '### How to fix',
+              'Vercel renews these automatically **as long as the domain is attached to a project**.',
+              'If a cert has lapsed, the usual cause is that the domain came detached.',
+              '',
+              'Check: Vercel → project `dinofavarajr-sdie` → Settings → Domains.',
+              'Both `dinofavarajr.com` and `www.dinofavarajr.com` should be listed.',
+              'If one is missing, re-add it with **Add Existing** (tick "Redirect apex domains to www").',
+              '',
+              '_Opened automatically by `.github/workflows/cert-check.yml`._',
+            ].join('\n');
+
+            // Reuse the existing open issue instead of stacking duplicates every week.
+            const { data: open } = await github.rest.issues.listForRepo({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              state: 'open',
+            });
+            const existing = open.find(i => i.title === title);
+
+            if (existing) {
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: existing.number,
+                body,
+              });
+            } else {
+              await github.rest.issues.create({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                title,
+                body,
+              });
+            }

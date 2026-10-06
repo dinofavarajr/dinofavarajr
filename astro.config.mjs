@@ -5,7 +5,7 @@ import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   integrations: [tailwind(), sitemap()],
-  site: 'https://dinofavarajr.com',
+  site: 'https://www.dinofavarajr.com',
   output: 'static',
   adapter: vercel(),
 });
